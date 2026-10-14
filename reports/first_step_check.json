@@ -1,0 +1,77 @@
+{
+  "network_on_environment": {
+    "n": 50,
+    "mean_gap_px": 30.104680036669816,
+    "median_gap_px": 30.61495387510275,
+    "near_copy_fraction": 0.0
+  },
+  "network_on_dataset": {
+    "n": 41,
+    "mean_gap_px": 24.92939963032593,
+    "median_gap_px": 22.272313789759583,
+    "near_copy_fraction": 0.0
+  },
+  "human_on_dataset": {
+    "n": 41,
+    "mean_gap_px": 28.783450714573913,
+    "median_gap_px": 29.154759474226502,
+    "near_copy_fraction": 0.0
+  },
+  "gap_ratio_environment_over_dataset": 1.2075974745917386,
+  "image_stats": {
+    "environment_reset_frames": {
+      "exact_white_fraction": 0.8617165798611112,
+      "small_step_fraction": 0.009296052631578948,
+      "edge_fraction": 0.042895833333333334,
+      "sharp_edge_share": 0.24830653613148948,
+      "frames": 50
+    },
+    "dataset_every_25th_frame": {
+      "exact_white_fraction": 0.7650940985759151,
+      "small_step_fraction": 0.06117886700181252,
+      "edge_fraction": 0.04449392548134469,
+      "sharp_edge_share": 0.11816565986525274,
+      "frames": 1026
+    }
+  },
+  "degradations": [
+    {
+      "kind": "blur",
+      "mean_change_px": 7.175114548845261,
+      "median_change_px": 5.987431088235335,
+      "change_share_of_gap": 0.2383388410076247,
+      "mean_gap_px": 29.089436778173972,
+      "exact_white_fraction": 0.7949913194444445,
+      "small_step_fraction": 0.07818640350877193,
+      "edge_fraction": 0.0378640350877193,
+      "sharp_edge_share": 0.0,
+      "frames": 50
+    },
+    {
+      "kind": "noise",
+      "mean_change_px": 0.753671207263325,
+      "median_change_px": 0.7053397629035107,
+      "change_share_of_gap": 0.025035018021958563,
+      "mean_gap_px": 30.079072121337603,
+      "exact_white_fraction": 0.1615190972222222,
+      "small_step_fraction": 0.8806688596491228,
+      "edge_fraction": 0.04566118421052632,
+      "sharp_edge_share": 0.22966645054390894,
+      "frames": 50
+    },
+    {
+      "kind": "blur+noise",
+      "mean_change_px": 7.211032201273822,
+      "median_change_px": 6.201820457121583,
+      "change_share_of_gap": 0.23953193299148937,
+      "mean_gap_px": 29.181446271695965,
+      "exact_white_fraction": 0.1492947048611111,
+      "small_step_fraction": 0.8796940789473684,
+      "edge_fraction": 0.03773135964912281,
+      "sharp_edge_share": 0.0,
+      "frames": 50
+    }
+  ],
+  "noise_level": 3,
+  "checkpoint": "checkpoints/bc_cnn.pt"
+}
