@@ -8,12 +8,27 @@ import evaluate as ev
 
 
 class FakeEnv:
-    """Scripted environment: coverage after step t comes from trace_for(seed)."""
+    """Scripted environment: coverage after step t comes from trace_for(seed).
 
-    def __init__(self, trace_for, limit=300, info_keys=("coverage", "is_success")):
+    start_for(seed), if given, is the coverage reported in the reset info. With
+    share_info=True the same dict object is reused by reset and every step, the way
+    the real environment does.
+    """
+
+    def __init__(
+        self,
+        trace_for,
+        limit=300,
+        info_keys=("coverage", "is_success"),
+        start_for=None,
+        share_info=False,
+    ):
         self.trace_for = trace_for
         self.limit = limit
         self.info_keys = info_keys
+        self.start_for = start_for
+        self.share_info = share_info
+        self._shared = {}
         self.action_space = gym.spaces.Box(0, 512, (2,), np.float32)
         self.seed = None
         self.t = 0
@@ -21,7 +36,11 @@ class FakeEnv:
 
     def reset(self, seed=None):
         self.seed, self.t = seed, 0
-        return {"obs": seed}, {}
+        info = self._shared if self.share_info else {}
+        info.clear()
+        if self.start_for is not None:
+            info["coverage"] = self.start_for(seed)
+        return {"obs": seed}, info
 
     def step(self, action):
         trace = self.trace_for(self.seed)
@@ -30,20 +49,43 @@ class FakeEnv:
         success = coverage > 0.95
         info = {"coverage": coverage, "is_success": success}
         info = {k: v for k, v in info.items() if k in self.info_keys}
+        if self.share_info:
+            self._shared.clear()
+            self._shared.update(info)
+            info = self._shared
         return {"obs": self.t}, 0.0, success, self.t >= self.limit, info
 
     def close(self):
         self.closed = True
 
 
+class Inner:
+    """Stands in for the unwrapped environment, which can report its own coverage."""
+
+    def __init__(self, value):
+        self.value = value
+
+    def _get_coverage(self):
+        return self.value
+
+
+class FakeWrapped(FakeEnv):
+    """Like FakeEnv, but the starting coverage is only reachable through .unwrapped."""
+
+    def __init__(self, trace_for, inner_value=0.42, **kwargs):
+        super().__init__(trace_for, **kwargs)
+        self.unwrapped = Inner(inner_value)
+
+
 def zero_policy(obs):
     return np.zeros(2, dtype=np.float32)
 
 
-def ep(seed, max_cov, final_cov, success, steps=300):
+def ep(seed, max_cov, final_cov, success, steps=300, start=None):
     return {
         "seed": seed,
         "steps": steps,
+        "start_coverage": start,
         "max_coverage": max_cov,
         "final_coverage": final_cov,
         "success": success,
@@ -148,6 +190,54 @@ def test_coverage_trace_is_recorded_rounded_to_four_places():
     env = FakeEnv(lambda s: [0.123456, 0.5], limit=2)
     r = ev.run_episode(env, zero_policy, seed=1)
     assert r["coverage_trace"] == [0.1235, 0.5]
+
+
+def test_run_episode_records_start_coverage_from_reset():
+    env = FakeEnv(lambda s: [0.1, 0.5], limit=2, start_for=lambda s: 0.3)
+    r = ev.run_episode(env, zero_policy, seed=1)
+    assert r["start_coverage"] == pytest.approx(0.3)
+
+
+def test_run_episode_without_start_coverage_records_none():
+    env = FakeEnv(lambda s: [0.1, 0.5], limit=2)
+    assert ev.run_episode(env, zero_policy, seed=1)["start_coverage"] is None
+
+
+def test_start_coverage_is_read_before_the_environment_reuses_its_info():
+    env = FakeEnv(
+        lambda s: [0.7, 0.8], limit=2, start_for=lambda s: 0.25, share_info=True
+    )
+    r = ev.run_episode(env, zero_policy, seed=1)
+    assert r["start_coverage"] == pytest.approx(0.25)
+    assert r["max_coverage"] == pytest.approx(0.8)
+    assert r["coverage_trace"] == [0.7, 0.8]
+
+
+def test_read_start_coverage_prefers_the_reset_info():
+    env = FakeWrapped(lambda s: [0.1], inner_value=0.9)
+    assert ev.read_start_coverage(env, {"coverage": 0.2}) == pytest.approx(0.2)
+
+
+def test_read_start_coverage_falls_back_to_the_environment_itself():
+    env = FakeWrapped(lambda s: [0.1], inner_value=0.42)
+    assert ev.read_start_coverage(env, {}) == pytest.approx(0.42)
+
+
+def test_read_start_coverage_is_none_when_unavailable():
+    assert ev.read_start_coverage(FakeEnv(lambda s: [0.1]), {}) is None
+
+
+def test_read_start_coverage_ignores_a_non_callable_attribute():
+    env = FakeEnv(lambda s: [0.1])
+    env.unwrapped = type("Odd", (), {"_get_coverage": 0.5})()
+    assert ev.read_start_coverage(env, {}) is None
+
+
+def test_run_episode_uses_the_environment_fallback_for_start_coverage():
+    env = FakeWrapped(lambda s: [0.1, 0.5], limit=2, inner_value=0.42)
+    assert ev.run_episode(env, zero_policy, seed=1)["start_coverage"] == pytest.approx(
+        0.42
+    )
 
 
 # -------------------------------------------------------------------- Wilson
@@ -269,6 +359,33 @@ def test_summarize_known_values():
     assert lo <= s["success_rate"] <= hi
 
 
+def test_summarize_gain_over_start_known_values():
+    results = [
+        ep(10000, 0.2, 0.1, False, start=0.0),
+        ep(10001, 0.4, 0.2, False, start=0.1),
+        ep(10002, 0.2, 0.3, False, start=0.2),
+    ]
+    s = ev.summarize(results)
+    assert s["mean_start_coverage"] == pytest.approx(0.1)
+    assert s["mean_gain_over_start"] == pytest.approx((0.2 + 0.3 + 0.0) / 3)
+    lo, hi = s["mean_gain_over_start_ci95"]
+    assert lo <= s["mean_gain_over_start"] <= hi
+
+
+def test_gain_over_start_can_be_negative():
+    s = ev.summarize([ep(10000, 0.3, 0.1, False, start=0.5)])
+    assert s["mean_gain_over_start"] == pytest.approx(-0.2)
+
+
+def test_summarize_omits_gain_when_any_start_coverage_is_missing():
+    s = ev.summarize(
+        [ep(10000, 0.3, 0.1, False, start=0.5), ep(10001, 0.3, 0.1, False)]
+    )
+    assert s["mean_start_coverage"] is None
+    assert s["mean_gain_over_start"] is None
+    assert s["mean_gain_over_start_ci95"] is None
+
+
 def test_summarize_flags_too_few_episodes():
     s = ev.summarize([ep(10000 + i, 0.1, 0.1, False) for i in range(3)])
     assert s["meets_minimum_episodes"] is False
@@ -302,6 +419,17 @@ def test_format_has_no_warning_at_the_minimum():
     assert "WARNING" not in ev.format_summary("x", s)
 
 
+def test_format_shows_start_coverage_and_gain_when_available():
+    s = ev.summarize([ep(10000, 0.4, 0.1, False, start=0.1)])
+    text = ev.format_summary("x", s)
+    assert "mean start coverage" in text and "mean gain over start" in text
+
+
+def test_format_omits_gain_when_start_coverage_is_unavailable():
+    s = ev.summarize([ep(10000, 0.4, 0.1, False)])
+    assert "gain over start" not in ev.format_summary("x", s)
+
+
 def test_write_report_round_trips(tmp_path):
     report = ev.build_report(
         "x", [ep(10000, 0.2, 0.1, False), ep(10001, 0.4, 0.2, True)]
@@ -312,7 +440,7 @@ def test_write_report_round_trips(tmp_path):
 
 
 def test_main_writes_a_traceable_report(tmp_path, capsys):
-    fake = FakeEnv(lambda s: [0.1, 0.2], limit=3)
+    fake = FakeEnv(lambda s: [0.1, 0.2], limit=3, start_for=lambda s: 0.05)
     out = tmp_path / "eval.json"
     code = ev.main(
         ["--policy", "random", "--episodes", "3", "--out", str(out)],
@@ -324,6 +452,7 @@ def test_main_writes_a_traceable_report(tmp_path, capsys):
     assert saved["protocol"]["max_steps"] == 300
     assert saved["protocol"]["eval_seed_start"] == 10000
     assert saved["summary"]["n_episodes"] == 3
+    assert saved["summary"]["mean_start_coverage"] == pytest.approx(0.05)
     assert [e["seed"] for e in saved["episodes"]] == [10000, 10001, 10002]
     assert len(saved["episodes"][0]["coverage_trace"]) == 3
     assert "WARNING" in capsys.readouterr().out
@@ -347,15 +476,31 @@ def test_seeded_random_policy_is_reproducible_per_seed():
     assert np.array_equal(a, b) and not np.array_equal(a, c)
 
 
+def test_hold_policy_commands_the_current_agent_position():
+    action = ev.HoldStillPolicy()(
+        {"agent_pos": np.array([116.0, 256.0]), "pixels": None}
+    )
+    assert action.dtype == np.float32
+    assert np.array_equal(action, np.array([116.0, 256.0], dtype=np.float32))
+
+
+def test_policy_registry_offers_random_and_hold():
+    assert set(ev.POLICIES) == {"random", "hold"}
+
+
 # --------------------------------------------------- the real environment
 
 
-def _real_random_results(n):
+def _real_results(policy_factory, n):
     env = ev.make_eval_env()
     try:
-        return ev.evaluate_policy(ev.SeededRandomPolicy(env.action_space), env, n)
+        return ev.evaluate_policy(policy_factory(env), env, n)
     finally:
         env.close()
+
+
+def _real_random_results(n):
+    return _real_results(lambda env: ev.SeededRandomPolicy(env.action_space), n)
 
 
 def test_random_policy_on_the_real_environment():
@@ -370,3 +515,48 @@ def test_random_policy_on_the_real_environment():
 
 def test_real_evaluation_is_reproducible():
     assert _real_random_results(2) == _real_random_results(2)
+
+
+def test_hold_policy_does_nothing_on_the_real_environment():
+    for r in _real_results(lambda env: ev.HoldStillPolicy(), 3):
+        assert r["start_coverage"] is not None
+        assert abs(r["max_coverage"] - r["start_coverage"]) < 1e-3
+        assert abs(r["final_coverage"] - r["start_coverage"]) < 1e-3
+
+
+def test_start_coverage_depends_only_on_the_seed():
+    random_starts = [r["start_coverage"] for r in _real_random_results(2)]
+    hold_starts = [
+        r["start_coverage"] for r in _real_results(lambda env: ev.HoldStillPolicy(), 2)
+    ]
+    assert random_starts == hold_starts
+    assert all(s is not None for s in random_starts)
+
+
+def test_real_start_coverage_for_seed_10000():
+    # Observed on the pinned gym-pusht 0.1.6: the block starts mostly on the goal.
+    r = _real_results(lambda env: ev.HoldStillPolicy(), 1)[0]
+    assert r["start_coverage"] == pytest.approx(0.6339, abs=1e-3)
+
+
+def test_reading_start_coverage_does_not_change_the_episode():
+    seed, steps = 10003, 40
+    env = ev.make_eval_env()
+    try:
+        with_helper = ev.run_episode(
+            env, ev.SeededRandomPolicy(env.action_space), seed, max_steps=steps
+        )
+        policy = ev.SeededRandomPolicy(env.action_space)
+        obs, _ = env.reset(
+            seed=seed
+        )  # the same rollout, never asking for start coverage
+        policy.reset(seed)
+        trace = []
+        for _ in range(steps):
+            obs, _, terminated, truncated, info = env.step(policy(obs))
+            trace.append(round(float(info["coverage"]), 4))
+            if terminated or truncated:
+                break
+    finally:
+        env.close()
+    assert with_helper["coverage_trace"] == trace

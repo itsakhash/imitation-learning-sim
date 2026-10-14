@@ -8,7 +8,15 @@ Per episode: seeded reset, at most 300 steps, coverage recorded after every step
 Evaluation seeds are 10000 + episode number, the same for every policy. There is no
 option to change them, so training and evaluation seeds cannot be mixed up by accident.
 
+Reference numbers, added after seeing the random baseline (they do not change the
+protocol above): the coverage right after reset (start coverage), the gain of the
+maximum over it, and a do-nothing policy. Start coverage depends only on the seed, so
+every policy starts from the same overlap, and doing nothing scores exactly that.
+gym-pusht does not report the start coverage in its reset info, so it is read from the
+environment itself (see read_start_coverage).
+
 Run:  python evaluate.py --policy random --episodes 50
+      python evaluate.py --policy hold --episodes 50
 """
 
 from __future__ import annotations
@@ -59,12 +67,35 @@ class SeededRandomPolicy:
         return self.action_space.sample()
 
 
+class HoldStillPolicy:
+    """Commands the agent's current position, so the agent stays put. The block is
+    never touched, which makes this the do-nothing reference level."""
+
+    def __call__(self, obs):
+        return np.asarray(obs["agent_pos"], dtype=np.float32)
+
+
+def read_start_coverage(env, reset_info: dict):
+    """Coverage right after reset, or None if it cannot be determined.
+
+    gym-pusht's reset info does not include it, so ask the environment directly: its
+    _get_coverage() only measures the overlap of the block with the goal. That is a
+    private method of the pinned gym-pusht 0.1.6, so if it is missing the answer is
+    None instead of a guess.
+    """
+    if "coverage" in reset_info:
+        return float(reset_info["coverage"])
+    getter = getattr(getattr(env, "unwrapped", env), "_get_coverage", None)
+    return float(getter()) if callable(getter) else None
+
+
 def run_episode(env, policy, seed: int, max_steps: int = MAX_STEPS) -> dict:
     """Run one seeded episode. A policy is a callable obs -> action; if it has a
     reset(seed) method, that is called right after the environment is reset."""
     if max_steps < 1:
         raise ValueError("max_steps must be at least 1")
-    obs, _ = env.reset(seed=seed)
+    obs, reset_info = env.reset(seed=seed)
+    start_coverage = read_start_coverage(env, reset_info)  # read now, before any step
     if hasattr(policy, "reset"):
         policy.reset(seed)
     trace = []
@@ -79,6 +110,7 @@ def run_episode(env, policy, seed: int, max_steps: int = MAX_STEPS) -> dict:
     return {
         "seed": int(seed),
         "steps": len(trace),
+        "start_coverage": start_coverage,
         "max_coverage": max(trace),
         "final_coverage": trace[-1],
         "success": success,
@@ -143,7 +175,7 @@ def summarize(results: list) -> dict:
     successes = sum(1 for r in results if r["success"])
     cov_lo, cov_hi = bootstrap_ci(max_cov)
     suc_lo, suc_hi = wilson_ci(successes, n)
-    return {
+    summary = {
         "n_episodes": n,
         "seed_start": min(seeds),
         "seed_end": max(seeds),
@@ -155,7 +187,21 @@ def summarize(results: list) -> dict:
         "success_rate_ci95": [suc_lo, suc_hi],
         "mean_final_coverage": float(final_cov.mean()),
         "mean_steps": float(np.mean([r["steps"] for r in results])),
+        "mean_start_coverage": None,
+        "mean_gain_over_start": None,
+        "mean_gain_over_start_ci95": None,
     }
+    starts = [r.get("start_coverage") for r in results]
+    if all(s is not None for s in starts):
+        start_arr = np.array(starts, dtype=np.float64)
+        gains = (
+            max_cov - start_arr
+        )  # can be negative: the policy lost overlap it started with
+        gain_lo, gain_hi = bootstrap_ci(gains)
+        summary["mean_start_coverage"] = float(start_arr.mean())
+        summary["mean_gain_over_start"] = float(gains.mean())
+        summary["mean_gain_over_start_ci95"] = [gain_lo, gain_hi]
+    return summary
 
 
 def build_report(name: str, results: list) -> dict:
@@ -164,6 +210,7 @@ def build_report(name: str, results: list) -> dict:
         "protocol": {
             "primary_metric": "mean over episodes of the maximum info['coverage'] reached",
             "success": "info['is_success'] (coverage above 0.95) at any step",
+            "start_coverage": "coverage right after reset (reference number)",
             "eval_seed_start": EVAL_SEED_START,
             "max_steps": MAX_STEPS,
             "min_episodes": MIN_EPISODES,
@@ -199,6 +246,15 @@ def format_summary(name: str, s: dict) -> str:
         f"mean final coverage: {s['mean_final_coverage']:.4f}",
         f"mean steps: {s['mean_steps']:.1f}",
     ]
+    if s.get("mean_start_coverage") is not None:
+        gain_lo, gain_hi = s["mean_gain_over_start_ci95"]
+        lines.append(
+            f"mean start coverage (do-nothing level): {s['mean_start_coverage']:.4f}"
+        )
+        lines.append(
+            f"mean gain over start: {s['mean_gain_over_start']:+.4f}  "
+            f"95% CI [{gain_lo:+.4f}, {gain_hi:+.4f}] (bootstrap)"
+        )
     if not s["meets_minimum_episodes"]:
         lines.append(
             f"WARNING: fewer than {MIN_EPISODES} episodes. "
@@ -207,7 +263,10 @@ def format_summary(name: str, s: dict) -> str:
     return "\n".join(lines)
 
 
-POLICIES = {"random": lambda env: SeededRandomPolicy(env.action_space)}
+POLICIES = {
+    "random": lambda env: SeededRandomPolicy(env.action_space),
+    "hold": lambda env: HoldStillPolicy(),
+}
 
 
 def main(argv=None, *, env_factory=make_eval_env) -> int:
