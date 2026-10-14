@@ -1,0 +1,37 @@
+{
+  "dataset": "lerobot/pusht",
+  "revision": "7628202a2180972f291ba1bc6723834921e72c19",
+  "episodes": 206,
+  "frames": 25650,
+  "episode_length_min": 49,
+  "episode_length_median": 122.0,
+  "episode_length_max": 246,
+  "action_min": [
+    12.0,
+    25.0
+  ],
+  "action_max": [
+    511.0,
+    511.0
+  ],
+  "state_min": [
+    13.45642375946045,
+    32.93829345703125
+  ],
+  "state_max": [
+    496.14617919921875,
+    510.9578857421875
+  ],
+  "mean_abs_action_minus_state": 14.747636795043945,
+  "reward_max_per_episode_min": 0.8131517767906189,
+  "reward_max_per_episode_median": 0.8958717584609985,
+  "reward_max_per_episode_max": 0.9488797187805176,
+  "success_flags": 0,
+  "done_flags": 412,
+  "image_mean_rgb": [
+    247.85642614928526,
+    250.0491537896632,
+    249.2720868571651
+  ],
+  "image_white_pixel_fraction": 0.8541703893220706
+}

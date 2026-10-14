@@ -1,5 +1,5 @@
-# Install with:
-#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu132
+# Direct dependencies, pinned. For a fully reproducible install use the lock file:
+#   pip install -r requirements-lock.txt --extra-index-url https://download.pytorch.org/whl/cu132
 torch==2.14.1+cu132
 torchvision==0.29.1+cu132
 numpy==2.5.2
@@ -7,4 +7,7 @@ gymnasium==1.4.0
 gym-pusht==0.1.6
 pymunk==6.11.1  # gym-pusht 0.1.6 calls the pymunk 6.x collision API; pymunk 7 breaks it
 pillow==12.3.0
+huggingface_hub==2.2.0
+pyarrow==26.0.0
+av==19.0.1
 pytest==9.1.1
