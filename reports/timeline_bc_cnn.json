@@ -1,0 +1,1857 @@
+{
+  "policy": "bc_cnn",
+  "summary": {
+    "episodes": 50,
+    "n_phases": 4,
+    "frozen_tail_min": 50,
+    "stalled_by_phase_mean": [
+      0.4146666666666667,
+      0.7802666666666667,
+      0.8320000000000001,
+      0.8501333333333335
+    ],
+    "gap_by_phase_mean": [
+      10.823546819225497,
+      2.4483260501453246,
+      1.9857944288613165,
+      1.9224264251910812
+    ],
+    "contact_by_phase_mean": [
+      0.14960000000000004,
+      0.059733333333333326,
+      0.04,
+      0.04
+    ],
+    "ends_frozen": 30,
+    "never_moved": 0,
+    "starts_in_contact": 5,
+    "median_frozen_tail_steps": 207.5,
+    "median_last_move_step": 92.5,
+    "median_first_contact_step": 22.0,
+    "table": {
+      "frozen_engaged": {
+        "episodes": 12,
+        "mean_gain_over_start": 0.05970749642766126
+      },
+      "frozen_not_engaged": {
+        "episodes": 15,
+        "mean_gain_over_start": 0.0
+      },
+      "active_engaged": {
+        "episodes": 11,
+        "mean_gain_over_start": 0.16463927769572517
+      },
+      "active_not_engaged": {
+        "episodes": 7,
+        "mean_gain_over_start": 0.0
+      }
+    }
+  },
+  "replay_matches": {
+    "yes": 50,
+    "no": 0,
+    "unchecked": 0
+  },
+  "per_episode": [
+    {
+      "seed": 10000,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 299,
+      "frozen_tail_steps": 1,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 6,
+      "last_contact_step": 99,
+      "contact_steps": 42,
+      "stalled_by_phase": [
+        0.013333333333333334,
+        0.76,
+        0.72,
+        0.7066666666666667
+      ],
+      "gap_by_phase": [
+        13.837410230486332,
+        1.9001157620713283,
+        2.077595915087377,
+        2.0993917554332544
+      ],
+      "contact_by_phase": [
+        0.48,
+        0.08,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.6338959747469222,
+      "max_coverage": 0.6338959747469222,
+      "final_coverage": 0.06663639045523435,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10001,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 261,
+      "frozen_tail_steps": 39,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 5,
+      "last_contact_step": 42,
+      "contact_steps": 23,
+      "stalled_by_phase": [
+        0.17333333333333334,
+        0.9866666666666667,
+        0.9733333333333334,
+        0.9866666666666667
+      ],
+      "gap_by_phase": [
+        12.820811848554738,
+        0.5360828285378817,
+        1.0289640167275054,
+        0.5314459900694378
+      ],
+      "contact_by_phase": [
+        0.30666666666666664,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0501659052407952,
+      "final_coverage": 0.0501659052407952,
+      "gain_over_start": 0.0501659052407952
+    },
+    {
+      "seed": 10002,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 56,
+      "frozen_tail_steps": 244,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.25333333333333335,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        20.863953955189988,
+        0.7171238065455372,
+        0.7176928686407874,
+        0.7126953264625779
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10003,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 24,
+      "frozen_tail_steps": 276,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 7,
+      "last_contact_step": 16,
+      "contact_steps": 8,
+      "stalled_by_phase": [
+        0.68,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        5.48721103681882,
+        0.9905678927529529,
+        1.032596551374998,
+        1.0077189688234813
+      ],
+      "contact_by_phase": [
+        0.10666666666666667,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.08525706652833812,
+      "max_coverage": 0.08525706652833812,
+      "final_coverage": 0.04382295516771866,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10004,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 247,
+      "frozen_tail_steps": 53,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 29,
+      "last_contact_step": 37,
+      "contact_steps": 9,
+      "stalled_by_phase": [
+        0.44,
+        1.0,
+        0.9866666666666667,
+        0.9866666666666667
+      ],
+      "gap_by_phase": [
+        12.071413331163228,
+        0.809310504659217,
+        0.88585240498152,
+        0.808044342906068
+      ],
+      "contact_by_phase": [
+        0.12,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.00497712614946592,
+      "max_coverage": 0.03205936585966605,
+      "final_coverage": 0.03205936585966605,
+      "gain_over_start": 0.027082239710200132
+    },
+    {
+      "seed": 10005,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 47,
+      "frozen_tail_steps": 253,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.4266666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        6.846841981623537,
+        1.1336471779765385,
+        1.1547081775715746,
+        1.1328127876503427
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.40542330961095463,
+      "max_coverage": 0.40542330961095463,
+      "final_coverage": 0.40542330961095463,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10006,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 22,
+      "last_contact_step": 24,
+      "contact_steps": 3,
+      "stalled_by_phase": [
+        0.06666666666666667,
+        0.21333333333333335,
+        0.21333333333333335,
+        0.17333333333333334
+      ],
+      "gap_by_phase": [
+        12.796886972433002,
+        5.622207994626727,
+        5.6728977428374305,
+        5.795914795288119
+      ],
+      "contact_by_phase": [
+        0.04,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10007,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.38666666666666666,
+        0.8533333333333334,
+        0.8533333333333334,
+        0.8533333333333334
+      ],
+      "gap_by_phase": [
+        17.736730405664137,
+        1.4336323646072548,
+        1.4310846966098223,
+        1.4315957088158304
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10008,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 54,
+      "frozen_tail_steps": 246,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 2,
+      "last_contact_step": 55,
+      "contact_steps": 27,
+      "stalled_by_phase": [
+        0.4266666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        9.69898649533401,
+        0.9716925281153351,
+        0.9544914014986025,
+        0.9617007255410402
+      ],
+      "contact_by_phase": [
+        0.36,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.06986657152189994,
+      "max_coverage": 0.08165929704485808,
+      "final_coverage": 0.008491912846826004,
+      "gain_over_start": 0.011792725522958139
+    },
+    {
+      "seed": 10009,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 284,
+      "frozen_tail_steps": 16,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.5866666666666667,
+        0.7733333333333333,
+        0.6933333333333334,
+        0.7866666666666666
+      ],
+      "gap_by_phase": [
+        7.814691274710652,
+        3.200205700785644,
+        3.429730863371755,
+        3.1407316425024394
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.38867711482818124,
+      "max_coverage": 0.38867711482818124,
+      "final_coverage": 0.38867711482818124,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10010,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 19,
+      "frozen_tail_steps": 281,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.8266666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        5.82950650989465,
+        1.695409710215524,
+        1.6955384211901754,
+        1.6659914871344013
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10011,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 46,
+      "last_contact_step": 84,
+      "contact_steps": 39,
+      "stalled_by_phase": [
+        0.0,
+        0.48,
+        0.56,
+        0.5733333333333334
+      ],
+      "gap_by_phase": [
+        17.026598448893655,
+        5.420578353444923,
+        2.5885320440125,
+        2.604127239689938
+      ],
+      "contact_by_phase": [
+        0.4,
+        0.12,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.38789910306753367,
+      "final_coverage": 0.3675961273298472,
+      "gain_over_start": 0.38789910306753367
+    },
+    {
+      "seed": 10012,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 296,
+      "frozen_tail_steps": 4,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.5066666666666667,
+        0.64,
+        0.64,
+        0.64
+      ],
+      "gap_by_phase": [
+        6.028444121345944,
+        3.699855085458243,
+        3.6319212685298847,
+        3.6886583761558116
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.1086676660615065,
+      "max_coverage": 0.1086676660615065,
+      "final_coverage": 0.1086676660615065,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10013,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 23,
+      "frozen_tail_steps": 277,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 2,
+      "last_contact_step": 15,
+      "contact_steps": 7,
+      "stalled_by_phase": [
+        0.7333333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        5.620825719496257,
+        2.2598670616622627,
+        2.259548571944617,
+        2.259287200158087
+      ],
+      "contact_by_phase": [
+        0.09333333333333334,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.14444709162817543,
+      "max_coverage": 0.14444709162817543,
+      "final_coverage": 0.05822215936061728,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10014,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 15,
+      "frozen_tail_steps": 285,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.8,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        4.771777868914631,
+        1.702792912818044,
+        1.7027775944073047,
+        1.7028861931986115
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10015,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 27,
+      "frozen_tail_steps": 273,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 15,
+      "contact_steps": 15,
+      "stalled_by_phase": [
+        0.7066666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        3.3916978536051876,
+        0.19850166503605995,
+        0.19817812510798713,
+        0.19815959186229629
+      ],
+      "contact_by_phase": [
+        0.2,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10016,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 37,
+      "frozen_tail_steps": 263,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.52,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        13.353432947856968,
+        0.5299831637695074,
+        0.5346639524841524,
+        0.5422583342382115
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10017,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.6533333333333333,
+        0.7066666666666667,
+        0.6933333333333334,
+        0.7066666666666667
+      ],
+      "gap_by_phase": [
+        3.714563499005194,
+        2.9324138729719196,
+        2.9785867303455893,
+        2.9059455325346235
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10018,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 20,
+      "contact_steps": 14,
+      "stalled_by_phase": [
+        0.38666666666666666,
+        0.6133333333333333,
+        0.6133333333333333,
+        0.6133333333333333
+      ],
+      "gap_by_phase": [
+        6.2546267897117325,
+        3.12770825167708,
+        3.1425550492528656,
+        3.1281881044119295
+      ],
+      "contact_by_phase": [
+        0.18666666666666668,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10019,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 36,
+      "frozen_tail_steps": 264,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 2,
+      "last_contact_step": 33,
+      "contact_steps": 9,
+      "stalled_by_phase": [
+        0.5466666666666666,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        9.96370991636084,
+        1.601653726518704,
+        1.6139761839829303,
+        1.6217725867189903
+      ],
+      "contact_by_phase": [
+        0.12,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.3737011368543275,
+      "max_coverage": 0.3737011368543275,
+      "final_coverage": 0.2408867821892298,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10020,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 38,
+      "frozen_tail_steps": 262,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.6133333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        6.3261068176237485,
+        0.7752204415445493,
+        0.8487694736367207,
+        0.7953007137687592
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10021,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 298,
+      "frozen_tail_steps": 2,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.25333333333333335,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "gap_by_phase": [
+        6.8061112086841105,
+        6.078104984160916,
+        6.2540754109482934,
+        6.410034940440054
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.008213866723833327,
+      "max_coverage": 0.008213866723833327,
+      "final_coverage": 0.008213866723833327,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10022,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 32,
+      "last_contact_step": 142,
+      "contact_steps": 65,
+      "stalled_by_phase": [
+        0.0,
+        0.2,
+        0.37333333333333335,
+        0.37333333333333335
+      ],
+      "gap_by_phase": [
+        15.77693961456851,
+        9.700169004234553,
+        4.778090216919958,
+        4.967031815782654
+      ],
+      "contact_by_phase": [
+        0.4266666666666667,
+        0.44,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.00045880102303398986,
+      "max_coverage": 0.8482939935450379,
+      "final_coverage": 0.3294305530434782,
+      "gain_over_start": 0.8478351925220039
+    },
+    {
+      "seed": 10023,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 141,
+      "frozen_tail_steps": 159,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 63,
+      "last_contact_step": 71,
+      "contact_steps": 7,
+      "stalled_by_phase": [
+        0.02666666666666667,
+        0.3466666666666667,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        12.516705084625626,
+        4.0498191658594545,
+        0.6377312340595995,
+        0.6567830213211139
+      ],
+      "contact_by_phase": [
+        0.09333333333333334,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10024,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 45,
+      "frozen_tail_steps": 255,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 28,
+      "last_contact_step": 37,
+      "contact_steps": 10,
+      "stalled_by_phase": [
+        0.4266666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        11.812411263913834,
+        1.093261169169102,
+        1.085272292551511,
+        1.0946198140531267
+      ],
+      "contact_by_phase": [
+        0.13333333333333333,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10025,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 299,
+      "frozen_tail_steps": 1,
+      "ends_frozen": false,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 300,
+      "contact_steps": 300,
+      "stalled_by_phase": [
+        0.8133333333333334,
+        0.8666666666666667,
+        0.8533333333333334,
+        0.8666666666666667
+      ],
+      "gap_by_phase": [
+        1.8914537168921461,
+        1.3486419043016311,
+        1.4239959340590191,
+        1.3415131253956332
+      ],
+      "contact_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10026,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 293,
+      "frozen_tail_steps": 7,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 40,
+      "last_contact_step": 79,
+      "contact_steps": 28,
+      "stalled_by_phase": [
+        0.12,
+        0.4533333333333333,
+        0.9733333333333334,
+        0.96
+      ],
+      "gap_by_phase": [
+        20.98182880031364,
+        3.756531280465734,
+        1.0465453156578035,
+        1.0368962036143932
+      ],
+      "contact_by_phase": [
+        0.32,
+        0.05333333333333334,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.5213824257258604,
+      "final_coverage": 0.5213824257258604,
+      "gain_over_start": 0.5213824257258604
+    },
+    {
+      "seed": 10027,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 300,
+      "frozen_tail_steps": 0,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 3,
+      "last_contact_step": 10,
+      "contact_steps": 8,
+      "stalled_by_phase": [
+        0.14666666666666667,
+        0.09333333333333334,
+        0.09333333333333334,
+        0.09333333333333334
+      ],
+      "gap_by_phase": [
+        8.295465617960966,
+        5.822715370066449,
+        5.831897385604746,
+        5.819556450139552
+      ],
+      "contact_by_phase": [
+        0.10666666666666667,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10028,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 43,
+      "frozen_tail_steps": 257,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.44,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        14.52398884599699,
+        0.6616980653393055,
+        0.6178473718917332,
+        0.6134167314349845
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.002069591603713389,
+      "max_coverage": 0.002069591603713389,
+      "final_coverage": 0.002069591603713389,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10029,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 67,
+      "frozen_tail_steps": 233,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.5066666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        7.768140931542597,
+        1.0938853202305288,
+        1.079697799522888,
+        1.0825372419241521
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10030,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 24,
+      "frozen_tail_steps": 276,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.68,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        7.926578965212984,
+        0.00011471041434379033,
+        2.8642893384395576e-13,
+        2.8642893384395576e-13
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.024257934389059526,
+      "max_coverage": 0.024257934389059526,
+      "final_coverage": 0.024257934389059526,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10031,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 50,
+      "frozen_tail_steps": 250,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.6533333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        6.951387944486337,
+        1.1930664884523006,
+        1.1932141943864412,
+        1.1931041406150245
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10032,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 202,
+      "frozen_tail_steps": 98,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.49333333333333335,
+        0.37333333333333335,
+        0.6666666666666666,
+        1.0
+      ],
+      "gap_by_phase": [
+        14.009974081714729,
+        3.832383218147663,
+        2.948488475826263,
+        2.2293273811948073
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10033,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 97,
+      "frozen_tail_steps": 203,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 47,
+      "last_contact_step": 51,
+      "contact_steps": 5,
+      "stalled_by_phase": [
+        0.14666666666666667,
+        0.8133333333333334,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        15.93716108494357,
+        1.3802592885656282,
+        0.6101024773671706,
+        0.5985844312536642
+      ],
+      "contact_by_phase": [
+        0.06666666666666667,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.06678761304933127,
+      "max_coverage": 0.06678761304933127,
+      "final_coverage": 0.06426010111125331,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10034,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 79,
+      "frozen_tail_steps": 221,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 39,
+      "last_contact_step": 83,
+      "contact_steps": 32,
+      "stalled_by_phase": [
+        0.0,
+        0.9466666666666667,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        16.882127016847484,
+        1.5441253030417939,
+        0.9171785981640725,
+        0.9171244257069731
+      ],
+      "contact_by_phase": [
+        0.32,
+        0.10666666666666667,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.09587120349129057,
+      "max_coverage": 0.6695433614260579,
+      "final_coverage": 0.6695433614260579,
+      "gain_over_start": 0.5736721579347673
+    },
+    {
+      "seed": 10035,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 293,
+      "frozen_tail_steps": 7,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 58,
+      "last_contact_step": 145,
+      "contact_steps": 10,
+      "stalled_by_phase": [
+        0.17333333333333334,
+        0.28,
+        0.6533333333333333,
+        0.6266666666666667
+      ],
+      "gap_by_phase": [
+        12.60747250421134,
+        3.069947437263974,
+        2.3528370617474597,
+        2.4212002144662597
+      ],
+      "contact_by_phase": [
+        0.09333333333333334,
+        0.04,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10036,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 294,
+      "frozen_tail_steps": 6,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.4666666666666667,
+        0.7333333333333333,
+        0.76,
+        0.76
+      ],
+      "gap_by_phase": [
+        12.157428565454744,
+        2.623815398533253,
+        2.537375053969766,
+        2.4988790259776215
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.1585205372778351,
+      "max_coverage": 0.1585205372778351,
+      "final_coverage": 0.1585205372778351,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10037,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 296,
+      "frozen_tail_steps": 4,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.02666666666666667,
+        0.52,
+        0.56,
+        0.5733333333333334
+      ],
+      "gap_by_phase": [
+        20.65238116544961,
+        2.8110138524556447,
+        2.7784723180457926,
+        2.7569533797045462
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10038,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 298,
+      "frozen_tail_steps": 2,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 15,
+      "last_contact_step": 24,
+      "contact_steps": 10,
+      "stalled_by_phase": [
+        0.24,
+        0.49333333333333335,
+        0.49333333333333335,
+        0.5066666666666667
+      ],
+      "gap_by_phase": [
+        13.320702394083218,
+        4.3823420301078375,
+        4.307787209493719,
+        4.307092633459163
+      ],
+      "contact_by_phase": [
+        0.13333333333333333,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10039,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 17,
+      "frozen_tail_steps": 283,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.7733333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        6.985640977510963,
+        2.172187312292334,
+        2.174056326156349,
+        2.171749569902977
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10040,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 6,
+      "frozen_tail_steps": 294,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.92,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        1.424028007263338,
+        1.0953506767189738,
+        1.0754118208094334,
+        1.1086471780229552
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10041,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 43,
+      "frozen_tail_steps": 257,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 24,
+      "last_contact_step": 35,
+      "contact_steps": 6,
+      "stalled_by_phase": [
+        0.44,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        9.187320480213266,
+        1.466697322516483,
+        1.4820508814606321,
+        1.466804093744308
+      ],
+      "contact_by_phase": [
+        0.08,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10042,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 88,
+      "frozen_tail_steps": 212,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 58,
+      "contact_steps": 10,
+      "stalled_by_phase": [
+        0.04,
+        0.8266666666666667,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        15.145274453849257,
+        2.803505411932508,
+        1.5512027223090763,
+        1.5502628493346222
+      ],
+      "contact_by_phase": [
+        0.13333333333333333,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10043,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 290,
+      "frozen_tail_steps": 10,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 22,
+      "last_contact_step": 22,
+      "contact_steps": 1,
+      "stalled_by_phase": [
+        0.5866666666666667,
+        0.9466666666666667,
+        0.96,
+        0.9466666666666667
+      ],
+      "gap_by_phase": [
+        5.743320463966473,
+        1.2104562445729827,
+        1.1452709844981155,
+        1.2126144892159987
+      ],
+      "contact_by_phase": [
+        0.013333333333333334,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.022044506257617166,
+      "max_coverage": 0.02579393435440064,
+      "final_coverage": 0.02579393435440064,
+      "gain_over_start": 0.0037494280967834727
+    },
+    {
+      "seed": 10044,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 53,
+      "frozen_tail_steps": 247,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 11,
+      "last_contact_step": 43,
+      "contact_steps": 28,
+      "stalled_by_phase": [
+        0.41333333333333333,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        7.708334919170908,
+        0.575729904069437,
+        0.5910921329259643,
+        0.5747773776027135
+      ],
+      "contact_by_phase": [
+        0.37333333333333335,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.07601228139078564,
+      "max_coverage": 0.17963691148593913,
+      "final_coverage": 0.1445827739564462,
+      "gain_over_start": 0.10362463009515349
+    },
+    {
+      "seed": 10045,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 298,
+      "frozen_tail_steps": 2,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 7,
+      "last_contact_step": 300,
+      "contact_steps": 294,
+      "stalled_by_phase": [
+        0.3333333333333333,
+        0.6266666666666667,
+        0.64,
+        0.6533333333333333
+      ],
+      "gap_by_phase": [
+        11.03934597346862,
+        3.1490915957795136,
+        3.075358712176654,
+        3.1486753047256246
+      ],
+      "contact_by_phase": [
+        0.92,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10046,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 19,
+      "frozen_tail_steps": 281,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.7466666666666667,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        9.775954157291643,
+        1.248912658957257,
+        1.2675414422965907,
+        1.2676421842706294
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10047,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 39,
+      "frozen_tail_steps": 261,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": true,
+      "first_contact_step": 15,
+      "last_contact_step": 20,
+      "contact_steps": 6,
+      "stalled_by_phase": [
+        0.48,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        14.595142468112329,
+        0.6963697766942057,
+        0.7190455066227636,
+        0.6991705254950453
+      ],
+      "contact_by_phase": [
+        0.08,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.02375502136050766,
+      "max_coverage": 0.024073225229363556,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0003182038688558965
+    },
+    {
+      "seed": 10048,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 27,
+      "frozen_tail_steps": 273,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        0.64,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        19.308944080364583,
+        2.1058946433525896,
+        2.1192707054657762,
+        2.1227948776427716
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10049,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": 1,
+      "last_move_step": 244,
+      "frozen_tail_steps": 56,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 108,
+      "contact_steps": 69,
+      "stalled_by_phase": [
+        0.0,
+        0.13333333333333333,
+        0.29333333333333333,
+        0.7866666666666666
+      ],
+      "gap_by_phase": [
+        17.189548148473754,
+        10.191642163774603,
+        4.108149804531869,
+        2.118900429748173
+      ],
+      "contact_by_phase": [
+        0.7733333333333333,
+        0.14666666666666667,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.23112268304610292,
+      "max_coverage": 0.39308011137860177,
+      "final_coverage": 0.3726148214626861,
+      "gain_over_start": 0.16195742833249885
+    }
+  ]
+}

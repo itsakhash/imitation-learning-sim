@@ -1,0 +1,1857 @@
+{
+  "policy": "hold",
+  "summary": {
+    "episodes": 50,
+    "n_phases": 4,
+    "frozen_tail_min": 50,
+    "stalled_by_phase_mean": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "gap_by_phase_mean": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "contact_by_phase_mean": [
+      0.08,
+      0.08,
+      0.08,
+      0.08
+    ],
+    "ends_frozen": 50,
+    "never_moved": 50,
+    "starts_in_contact": 4,
+    "median_frozen_tail_steps": 300.0,
+    "median_last_move_step": null,
+    "median_first_contact_step": null,
+    "table": {
+      "frozen_engaged": {
+        "episodes": 0,
+        "mean_gain_over_start": null
+      },
+      "frozen_not_engaged": {
+        "episodes": 46,
+        "mean_gain_over_start": 0.0
+      },
+      "active_engaged": {
+        "episodes": 0,
+        "mean_gain_over_start": null
+      },
+      "active_not_engaged": {
+        "episodes": 0,
+        "mean_gain_over_start": null
+      }
+    }
+  },
+  "replay_matches": {
+    "yes": 50,
+    "no": 0,
+    "unchecked": 0
+  },
+  "per_episode": [
+    {
+      "seed": 10000,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.6338959747469222,
+      "max_coverage": 0.6338959747469222,
+      "final_coverage": 0.6338959747469222,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10001,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10002,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10003,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.08525706652833812,
+      "max_coverage": 0.08525706652833812,
+      "final_coverage": 0.08525706652833812,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10004,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.00497712614946592,
+      "max_coverage": 0.00497712614946592,
+      "final_coverage": 0.00497712614946592,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10005,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.40542330961095463,
+      "max_coverage": 0.40542330961095463,
+      "final_coverage": 0.40542330961095463,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10006,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10007,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10008,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.06986657152189994,
+      "max_coverage": 0.06986657152189994,
+      "final_coverage": 0.06986657152189994,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10009,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.3886771148281811,
+      "max_coverage": 0.3886771148281811,
+      "final_coverage": 0.3886771148281811,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10010,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10011,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10012,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.1086676660615065,
+      "max_coverage": 0.1086676660615065,
+      "final_coverage": 0.1086676660615065,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10013,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.14444709162817543,
+      "max_coverage": 0.14444709162817543,
+      "final_coverage": 0.14444709162817543,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10014,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10015,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 300,
+      "contact_steps": 300,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10016,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10017,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10018,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 300,
+      "contact_steps": 300,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10019,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.3737011368543275,
+      "max_coverage": 0.3737011368543275,
+      "final_coverage": 0.3737011368543275,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10020,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10021,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.008213866723833327,
+      "max_coverage": 0.008213866723833327,
+      "final_coverage": 0.008213866723833327,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10022,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.00045880102303398986,
+      "max_coverage": 0.00045880102303398986,
+      "final_coverage": 0.00045880102303398986,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10023,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10024,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10025,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 300,
+      "contact_steps": 300,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10026,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10027,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10028,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.002069591603713389,
+      "max_coverage": 0.002069591603713389,
+      "final_coverage": 0.002069591603713389,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10029,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10030,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.024257934389059526,
+      "max_coverage": 0.024257934389059526,
+      "final_coverage": 0.024257934389059526,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10031,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10032,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10033,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.06678761304933127,
+      "max_coverage": 0.06678761304933127,
+      "final_coverage": 0.06678761304933127,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10034,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.09587120349129057,
+      "max_coverage": 0.09587120349129057,
+      "final_coverage": 0.09587120349129057,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10035,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10036,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.1585205372778351,
+      "max_coverage": 0.1585205372778351,
+      "final_coverage": 0.1585205372778351,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10037,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10038,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10039,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10040,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10041,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10042,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "engaged": null,
+      "first_contact_step": 1,
+      "last_contact_step": 300,
+      "contact_steps": 300,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10043,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.022044506257617166,
+      "max_coverage": 0.022044506257617166,
+      "final_coverage": 0.022044506257617166,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10044,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.07601228139078571,
+      "max_coverage": 0.07601228139078571,
+      "final_coverage": 0.07601228139078571,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10045,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10046,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10047,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.02375502136050766,
+      "max_coverage": 0.02375502136050766,
+      "final_coverage": 0.02375502136050766,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10048,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.0,
+      "max_coverage": 0.0,
+      "final_coverage": 0.0,
+      "gain_over_start": 0.0
+    },
+    {
+      "seed": 10049,
+      "steps": 300,
+      "tail_min": 50,
+      "first_move_step": null,
+      "last_move_step": null,
+      "frozen_tail_steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "engaged": false,
+      "first_contact_step": null,
+      "last_contact_step": null,
+      "contact_steps": 0,
+      "stalled_by_phase": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gap_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "contact_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "start_coverage": 0.23112268304610292,
+      "max_coverage": 0.23112268304610292,
+      "final_coverage": 0.23112268304610292,
+      "gain_over_start": 0.0
+    }
+  ]
+}
