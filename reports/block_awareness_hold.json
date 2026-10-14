@@ -1,0 +1,1499 @@
+{
+  "policy": "hold",
+  "summary": {
+    "episodes": 50,
+    "n_phases": 4,
+    "cosine_by_phase": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "cosine_steps_by_phase": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "median_distance_by_phase": [
+      160.38560454938778,
+      160.38560454938778,
+      160.38560454938778,
+      160.38560454938778
+    ],
+    "first_step_cosine_mean": null,
+    "first_step_cosine_median": null,
+    "first_step_cosine_episodes": 0,
+    "frozen": {
+      "episodes": 50,
+      "median_start_px": 160.38560454938778,
+      "median_final_px": 160.38560454938778,
+      "approached": 0,
+      "not_closer": 50
+    },
+    "active": {
+      "episodes": 0,
+      "median_start_px": null,
+      "median_final_px": null,
+      "approached": 0,
+      "not_closer": 0
+    }
+  },
+  "replay_matches": {
+    "yes": 50,
+    "no": 0,
+    "unchecked": 0
+  },
+  "per_episode": [
+    {
+      "seed": 10000,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 126.57938573280519,
+      "final_distance_px": 126.57938573280519,
+      "min_distance_px": 126.57938573280519,
+      "dist_by_phase": [
+        126.57938573280516,
+        126.57938573280516,
+        126.57938573280516,
+        126.57938573280516
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10001,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 151.4279039965068,
+      "final_distance_px": 151.4279039965068,
+      "min_distance_px": 151.4279039965068,
+      "dist_by_phase": [
+        151.4279039965068,
+        151.4279039965068,
+        151.4279039965068,
+        151.4279039965068
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10002,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 325.0247555159918,
+      "final_distance_px": 325.0247555159918,
+      "min_distance_px": 325.0247555159918,
+      "dist_by_phase": [
+        325.0247555159918,
+        325.0247555159918,
+        325.0247555159918,
+        325.0247555159918
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10003,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 98.75379753857132,
+      "final_distance_px": 98.75379753857132,
+      "min_distance_px": 98.75379753857132,
+      "dist_by_phase": [
+        98.75379753857133,
+        98.75379753857133,
+        98.75379753857133,
+        98.75379753857133
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10004,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 202.73378384551793,
+      "final_distance_px": 202.73378384551793,
+      "min_distance_px": 202.73378384551793,
+      "dist_by_phase": [
+        202.733783845518,
+        202.733783845518,
+        202.733783845518,
+        202.733783845518
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10005,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 162.3082496905118,
+      "final_distance_px": 162.3082496905118,
+      "min_distance_px": 162.3082496905118,
+      "dist_by_phase": [
+        162.30824969051176,
+        162.30824969051176,
+        162.30824969051176,
+        162.30824969051176
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10006,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 249.48545794192964,
+      "final_distance_px": 249.48545794192964,
+      "min_distance_px": 249.48545794192964,
+      "dist_by_phase": [
+        249.48545794192964,
+        249.48545794192964,
+        249.48545794192964,
+        249.48545794192964
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10007,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 292.37036188450753,
+      "final_distance_px": 292.37036188450753,
+      "min_distance_px": 292.37036188450753,
+      "dist_by_phase": [
+        292.3703618845075,
+        292.3703618845075,
+        292.3703618845075,
+        292.3703618845075
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10008,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 61.710340767805306,
+      "final_distance_px": 61.710340767805306,
+      "min_distance_px": 61.710340767805306,
+      "dist_by_phase": [
+        61.71034076780529,
+        61.71034076780529,
+        61.71034076780529,
+        61.71034076780529
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10009,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 138.04771098042968,
+      "final_distance_px": 138.04771098042968,
+      "min_distance_px": 138.04771098042968,
+      "dist_by_phase": [
+        138.0477109804297,
+        138.0477109804297,
+        138.0477109804297,
+        138.0477109804297
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10010,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 122.31056626772455,
+      "final_distance_px": 122.31056626772455,
+      "min_distance_px": 122.31056626772455,
+      "dist_by_phase": [
+        122.31056626772455,
+        122.31056626772455,
+        122.31056626772455,
+        122.31056626772455
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10011,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 174.77084400918108,
+      "final_distance_px": 174.77084400918108,
+      "min_distance_px": 174.77084400918108,
+      "dist_by_phase": [
+        174.77084400918105,
+        174.77084400918105,
+        174.77084400918105,
+        174.77084400918105
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10012,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 148.9083711691893,
+      "final_distance_px": 148.9083711691893,
+      "min_distance_px": 148.9083711691893,
+      "dist_by_phase": [
+        148.90837116918928,
+        148.90837116918928,
+        148.90837116918928,
+        148.90837116918928
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10013,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 97.55827540601022,
+      "final_distance_px": 97.55827540601022,
+      "min_distance_px": 97.55827540601022,
+      "dist_by_phase": [
+        97.55827540601024,
+        97.55827540601024,
+        97.55827540601024,
+        97.55827540601024
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10014,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 299.6457522567166,
+      "final_distance_px": 299.6457522567166,
+      "min_distance_px": 299.6457522567166,
+      "dist_by_phase": [
+        299.64575225671666,
+        299.64575225671666,
+        299.64575225671666,
+        299.64575225671666
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10015,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 56.15346107429461,
+      "final_distance_px": 61.89929546207477,
+      "min_distance_px": 56.15346107429461,
+      "dist_by_phase": [
+        61.70551775954677,
+        61.89929546207475,
+        61.89929546207475,
+        61.89929546207475
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10016,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 317.49281896980534,
+      "final_distance_px": 317.49281896980534,
+      "min_distance_px": 317.49281896980534,
+      "dist_by_phase": [
+        317.4928189698053,
+        317.4928189698053,
+        317.4928189698053,
+        317.4928189698053
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10017,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 96.68836754508298,
+      "final_distance_px": 96.68836754508298,
+      "min_distance_px": 96.68836754508298,
+      "dist_by_phase": [
+        96.68836754508297,
+        96.68836754508297,
+        96.68836754508297,
+        96.68836754508297
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10018,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 44.83849989463393,
+      "final_distance_px": 44.50122219453067,
+      "min_distance_px": 44.50122219453067,
+      "dist_by_phase": [
+        44.51046197917519,
+        44.501222194530676,
+        44.501222194530676,
+        44.501222194530676
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10019,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 151.70938809688695,
+      "final_distance_px": 151.70938809688695,
+      "min_distance_px": 151.70938809688695,
+      "dist_by_phase": [
+        151.70938809688698,
+        151.70938809688698,
+        151.70938809688698,
+        151.70938809688698
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10020,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 324.4726185135125,
+      "final_distance_px": 324.4726185135125,
+      "min_distance_px": 324.4726185135125,
+      "dist_by_phase": [
+        324.47261851351243,
+        324.47261851351243,
+        324.47261851351243,
+        324.47261851351243
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10021,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 266.5759302534253,
+      "final_distance_px": 266.5759302534253,
+      "min_distance_px": 266.5759302534253,
+      "dist_by_phase": [
+        266.5759302534252,
+        266.5759302534252,
+        266.5759302534252,
+        266.5759302534252
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10022,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 85.15801938200363,
+      "final_distance_px": 85.15801938200363,
+      "min_distance_px": 85.15801938200363,
+      "dist_by_phase": [
+        85.15801938200364,
+        85.15801938200364,
+        85.15801938200364,
+        85.15801938200364
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10023,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 264.32386217552624,
+      "final_distance_px": 264.32386217552624,
+      "min_distance_px": 264.32386217552624,
+      "dist_by_phase": [
+        264.32386217552624,
+        264.32386217552624,
+        264.32386217552624,
+        264.32386217552624
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10024,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 268.3753182049605,
+      "final_distance_px": 268.3753182049605,
+      "min_distance_px": 268.3753182049605,
+      "dist_by_phase": [
+        268.37531820496054,
+        268.37531820496054,
+        268.37531820496054,
+        268.37531820496054
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10025,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 154.8428478872264,
+      "final_distance_px": 147.89588928048818,
+      "min_distance_px": 147.89588928048818,
+      "dist_by_phase": [
+        148.09315784056204,
+        147.89588928048815,
+        147.89588928048815,
+        147.89588928048815
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10026,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 226.6678862754283,
+      "final_distance_px": 226.6678862754283,
+      "min_distance_px": 226.6678862754283,
+      "dist_by_phase": [
+        226.66788627542826,
+        226.66788627542826,
+        226.66788627542826,
+        226.66788627542826
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10027,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 108.6461102888472,
+      "final_distance_px": 108.6461102888472,
+      "min_distance_px": 108.6461102888472,
+      "dist_by_phase": [
+        108.64611028884721,
+        108.64611028884721,
+        108.64611028884721,
+        108.64611028884721
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10028,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 266.0124557375751,
+      "final_distance_px": 266.0124557375751,
+      "min_distance_px": 266.0124557375751,
+      "dist_by_phase": [
+        266.0124557375752,
+        266.0124557375752,
+        266.0124557375752,
+        266.0124557375752
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10029,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 394.4524329541251,
+      "final_distance_px": 394.4524329541251,
+      "min_distance_px": 394.4524329541251,
+      "dist_by_phase": [
+        394.452432954125,
+        394.452432954125,
+        394.452432954125,
+        394.452432954125
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10030,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 227.92826287068868,
+      "final_distance_px": 227.92826287068868,
+      "min_distance_px": 227.92826287068868,
+      "dist_by_phase": [
+        227.92826287068874,
+        227.92826287068874,
+        227.92826287068874,
+        227.92826287068874
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10031,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 260.1760878039803,
+      "final_distance_px": 260.1760878039803,
+      "min_distance_px": 260.1760878039803,
+      "dist_by_phase": [
+        260.1760878039803,
+        260.1760878039803,
+        260.1760878039803,
+        260.1760878039803
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10032,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 329.37745650954054,
+      "final_distance_px": 329.37745650954054,
+      "min_distance_px": 329.37745650954054,
+      "dist_by_phase": [
+        329.37745650954054,
+        329.37745650954054,
+        329.37745650954054,
+        329.37745650954054
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10033,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 312.92172905280756,
+      "final_distance_px": 312.92172905280756,
+      "min_distance_px": 312.92172905280756,
+      "dist_by_phase": [
+        312.9217290528076,
+        312.9217290528076,
+        312.9217290528076,
+        312.9217290528076
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10034,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 205.75211893613977,
+      "final_distance_px": 205.75211893613977,
+      "min_distance_px": 205.75211893613977,
+      "dist_by_phase": [
+        205.7521189361398,
+        205.7521189361398,
+        205.7521189361398,
+        205.7521189361398
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10035,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 232.73235770509348,
+      "final_distance_px": 232.73235770509348,
+      "min_distance_px": 232.73235770509348,
+      "dist_by_phase": [
+        232.73235770509336,
+        232.73235770509336,
+        232.73235770509336,
+        232.73235770509336
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10036,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 225.41104320396124,
+      "final_distance_px": 225.41104320396124,
+      "min_distance_px": 225.41104320396124,
+      "dist_by_phase": [
+        225.4110432039612,
+        225.4110432039612,
+        225.4110432039612,
+        225.4110432039612
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10037,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 295.5053993495454,
+      "final_distance_px": 295.5053993495454,
+      "min_distance_px": 295.5053993495454,
+      "dist_by_phase": [
+        295.50539934954537,
+        295.50539934954537,
+        295.50539934954537,
+        295.50539934954537
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10038,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 125.19283459316614,
+      "final_distance_px": 125.19283459316614,
+      "min_distance_px": 125.19283459316614,
+      "dist_by_phase": [
+        125.19283459316614,
+        125.19283459316614,
+        125.19283459316614,
+        125.19283459316614
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10039,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 133.2404355702416,
+      "final_distance_px": 133.2404355702416,
+      "min_distance_px": 133.2404355702416,
+      "dist_by_phase": [
+        133.2404355702416,
+        133.2404355702416,
+        133.2404355702416,
+        133.2404355702416
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10040,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 299.0595945934104,
+      "final_distance_px": 299.0595945934104,
+      "min_distance_px": 299.0595945934104,
+      "dist_by_phase": [
+        299.05959459341045,
+        299.05959459341045,
+        299.05959459341045,
+        299.05959459341045
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10041,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 149.79271451727053,
+      "final_distance_px": 149.79271451727053,
+      "min_distance_px": 149.79271451727053,
+      "dist_by_phase": [
+        149.79271451727053,
+        149.79271451727053,
+        149.79271451727053,
+        149.79271451727053
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10042,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 38.82570893453949,
+      "final_distance_px": 53.944601210659016,
+      "min_distance_px": 38.82570893453949,
+      "dist_by_phase": [
+        53.51266123624226,
+        53.94460121065902,
+        53.94460121065902,
+        53.94460121065902
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10043,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 81.49346928356405,
+      "final_distance_px": 81.49346928356405,
+      "min_distance_px": 81.49346928356405,
+      "dist_by_phase": [
+        81.49346928356407,
+        81.49346928356407,
+        81.49346928356407,
+        81.49346928356407
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10044,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 90.2275116967804,
+      "final_distance_px": 90.2275116967804,
+      "min_distance_px": 90.2275116967804,
+      "dist_by_phase": [
+        90.22751169678041,
+        90.22751169678041,
+        90.22751169678041,
+        90.22751169678041
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10045,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 125.16944133511821,
+      "final_distance_px": 125.16944133511821,
+      "min_distance_px": 125.16944133511821,
+      "dist_by_phase": [
+        125.1694413351182,
+        125.1694413351182,
+        125.1694413351182,
+        125.1694413351182
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10046,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 153.63572404067466,
+      "final_distance_px": 153.63572404067466,
+      "min_distance_px": 153.63572404067466,
+      "dist_by_phase": [
+        153.63572404067463,
+        153.63572404067463,
+        153.63572404067463,
+        153.63572404067463
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10047,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 158.4629594082638,
+      "final_distance_px": 158.4629594082638,
+      "min_distance_px": 158.4629594082638,
+      "dist_by_phase": [
+        158.46295940826377,
+        158.46295940826377,
+        158.46295940826377,
+        158.46295940826377
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10048,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 376.7895871104464,
+      "final_distance_px": 376.7895871104464,
+      "min_distance_px": 376.7895871104464,
+      "dist_by_phase": [
+        376.7895871104464,
+        376.7895871104464,
+        376.7895871104464,
+        376.7895871104464
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    },
+    {
+      "seed": 10049,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 112.93289752886163,
+      "final_distance_px": 112.93289752886163,
+      "min_distance_px": 112.93289752886163,
+      "dist_by_phase": [
+        112.9328975288616,
+        112.9328975288616,
+        112.9328975288616,
+        112.9328975288616
+      ],
+      "cos_sum_by_phase": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": null
+    }
+  ]
+}

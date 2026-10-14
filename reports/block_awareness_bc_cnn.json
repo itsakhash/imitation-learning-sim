@@ -1,0 +1,1499 @@
+{
+  "policy": "bc_cnn",
+  "summary": {
+    "episodes": 50,
+    "n_phases": 4,
+    "cosine_by_phase": [
+      0.1732142878189388,
+      -0.0017872805980793085,
+      -0.0036634681473477473,
+      0.005966480888997578
+    ],
+    "cosine_steps_by_phase": [
+      3119,
+      2388,
+      2327,
+      2271
+    ],
+    "median_distance_by_phase": [
+      115.72406560243219,
+      101.75691878436459,
+      100.3148482149779,
+      100.33044010069139
+    ],
+    "first_step_cosine_mean": 0.5604121132405564,
+    "first_step_cosine_median": 0.6996335989172509,
+    "first_step_cosine_episodes": 50,
+    "frozen": {
+      "episodes": 30,
+      "median_start_px": 204.24295139082886,
+      "median_final_px": 101.13100804502344,
+      "approached": 12,
+      "not_closer": 11
+    },
+    "active": {
+      "episodes": 20,
+      "median_start_px": 150.16813758284806,
+      "median_final_px": 93.11624593080144,
+      "approached": 6,
+      "not_closer": 8
+    }
+  },
+  "replay_matches": {
+    "yes": 50,
+    "no": 0,
+    "unchecked": 0
+  },
+  "per_episode": [
+    {
+      "seed": 10000,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 126.57938573280519,
+      "final_distance_px": 37.104517858626586,
+      "min_distance_px": 36.50839445657746,
+      "dist_by_phase": [
+        76.72767107484695,
+        37.895159770190006,
+        38.088398996956954,
+        38.06848549453427
+      ],
+      "cos_sum_by_phase": [
+        25.36917058731109,
+        -4.613447301517306,
+        -10.517423711651793,
+        -6.593507506820034
+      ],
+      "cos_count_by_phase": [
+        74,
+        57,
+        63,
+        62
+      ],
+      "first_step_cosine": 0.8565026466571757
+    },
+    {
+      "seed": 10001,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0501659052407952,
+      "start_distance_px": 151.4279039965068,
+      "final_distance_px": 113.14591241391598,
+      "min_distance_px": 74.53661485726576,
+      "dist_by_phase": [
+        96.50133176055019,
+        113.18069185394413,
+        113.19224905297051,
+        113.18926826119244
+      ],
+      "cos_sum_by_phase": [
+        11.20822507613388,
+        -0.28758821538766854,
+        -0.5745860635962359,
+        -0.2872838943109528
+      ],
+      "cos_count_by_phase": [
+        66,
+        18,
+        36,
+        18
+      ],
+      "first_step_cosine": 0.5861502396033273
+    },
+    {
+      "seed": 10002,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 325.0247555159918,
+      "final_distance_px": 103.98336859902578,
+      "min_distance_px": 103.76133912921118,
+      "dist_by_phase": [
+        145.81451091032616,
+        104.0090976944622,
+        104.0024461705313,
+        104.00285299075982
+      ],
+      "cos_sum_by_phase": [
+        12.690397946508151,
+        -9.253493728105978,
+        -9.9938605826095,
+        -9.993897223389475
+      ],
+      "cos_count_by_phase": [
+        60,
+        13,
+        14,
+        14
+      ],
+      "first_step_cosine": 0.8714544511147148
+    },
+    {
+      "seed": 10003,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 98.75379753857132,
+      "final_distance_px": 75.99529408894877,
+      "min_distance_px": 75.5621760617888,
+      "dist_by_phase": [
+        78.25263240172629,
+        75.90024691259767,
+        75.88895258160879,
+        75.88589846056415
+      ],
+      "cos_sum_by_phase": [
+        12.939194968668442,
+        4.218051736311959,
+        4.634218370194718,
+        4.027125951142138
+      ],
+      "cos_count_by_phase": [
+        50,
+        38,
+        41,
+        39
+      ],
+      "first_step_cosine": 0.4116830133172123
+    },
+    {
+      "seed": 10004,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.027082239710200132,
+      "start_distance_px": 202.73378384551793,
+      "final_distance_px": 24.9406594292054,
+      "min_distance_px": 24.051590027774516,
+      "dist_by_phase": [
+        70.77743369193719,
+        24.801195323695282,
+        24.816553797404243,
+        24.799142787324435
+      ],
+      "cos_sum_by_phase": [
+        28.75124557251998,
+        4.704764109539066,
+        5.520075608556938,
+        4.706019571276963
+      ],
+      "cos_count_by_phase": [
+        52,
+        18,
+        21,
+        18
+      ],
+      "first_step_cosine": 0.23983581222197217
+    },
+    {
+      "seed": 10005,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 162.3082496905118,
+      "final_distance_px": 252.9470383287485,
+      "min_distance_px": 156.6955012238095,
+      "dist_by_phase": [
+        219.12890744509025,
+        253.26554601218686,
+        253.26123381489967,
+        253.26258871728035
+      ],
+      "cos_sum_by_phase": [
+        -32.135393028081324,
+        -17.57291552678594,
+        -18.495932535457264,
+        -17.571193608409153
+      ],
+      "cos_count_by_phase": [
+        57,
+        19,
+        20,
+        19
+      ],
+      "first_step_cosine": 0.43743135235955244
+    },
+    {
+      "seed": 10006,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 249.48545794192964,
+      "final_distance_px": 49.82120713542021,
+      "min_distance_px": 40.75076056449058,
+      "dist_by_phase": [
+        71.73212971579396,
+        50.29041694289047,
+        50.34454253885375,
+        50.418616717307344
+      ],
+      "cos_sum_by_phase": [
+        12.009287968449026,
+        4.392374727399724,
+        4.951784170461367,
+        4.661071421464251
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.9759849368044835
+    },
+    {
+      "seed": 10007,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 292.37036188450753,
+      "final_distance_px": 118.59072147132032,
+      "min_distance_px": 99.79791912699956,
+      "dist_by_phase": [
+        137.59664050969943,
+        118.28799684073523,
+        118.27545389532308,
+        118.26923960700412
+      ],
+      "cos_sum_by_phase": [
+        6.195021579696869,
+        -7.32205051578042,
+        -7.32263987833199,
+        -7.32263987849984
+      ],
+      "cos_count_by_phase": [
+        50,
+        11,
+        11,
+        11
+      ],
+      "first_step_cosine": 0.9650009345538687
+    },
+    {
+      "seed": 10008,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.011792725522958139,
+      "start_distance_px": 61.710340767805306,
+      "final_distance_px": 80.71192221395566,
+      "min_distance_px": 58.18406755652011,
+      "dist_by_phase": [
+        88.54146751402888,
+        80.8177730466709,
+        80.81101184052605,
+        80.81143574546613
+      ],
+      "cos_sum_by_phase": [
+        3.7386858739052187,
+        -1.3764506022715008,
+        -1.1047280895971237,
+        -1.796115422882663
+      ],
+      "cos_count_by_phase": [
+        60,
+        45,
+        43,
+        44
+      ],
+      "first_step_cosine": 0.5069955169622661
+    },
+    {
+      "seed": 10009,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 138.04771098042968,
+      "final_distance_px": 83.50525236655061,
+      "min_distance_px": 81.51672132199914,
+      "dist_by_phase": [
+        90.45467626020651,
+        83.99363453099832,
+        84.04983751647818,
+        83.96338546991821
+      ],
+      "cos_sum_by_phase": [
+        5.543152842597048,
+        0.056013693692455846,
+        -1.6515417176320035,
+        0.5787106944945949
+      ],
+      "cos_count_by_phase": [
+        65,
+        62,
+        64,
+        61
+      ],
+      "first_step_cosine": 0.850950063113994
+    },
+    {
+      "seed": 10010,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 122.31056626772455,
+      "final_distance_px": 132.23787798419613,
+      "min_distance_px": 104.53968292273277,
+      "dist_by_phase": [
+        130.24976590084364,
+        132.56032786810516,
+        132.56061983126912,
+        132.5674974387512
+      ],
+      "cos_sum_by_phase": [
+        18.224001532579738,
+        21.63208838790238,
+        21.632367967296386,
+        22.804788183989164
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.3931171877820261
+    },
+    {
+      "seed": 10011,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.3878991030675337,
+      "start_distance_px": 174.77084400918108,
+      "final_distance_px": 63.38526492902908,
+      "min_distance_px": 53.652627576539416,
+      "dist_by_phase": [
+        115.72459014240961,
+        62.06248908160625,
+        63.230162526136716,
+        63.21549898256368
+      ],
+      "cos_sum_by_phase": [
+        45.19101898384077,
+        1.1260594396585666,
+        0.6211669502236432,
+        -2.4949237828629847
+      ],
+      "cos_count_by_phase": [
+        75,
+        60,
+        51,
+        53
+      ],
+      "first_step_cosine": 0.4870146502121139
+    },
+    {
+      "seed": 10012,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 148.9083711691893,
+      "final_distance_px": 204.49941482754267,
+      "min_distance_px": 148.9083711691893,
+      "dist_by_phase": [
+        201.713438590104,
+        204.6878764054604,
+        204.67915588521123,
+        204.7004176578163
+      ],
+      "cos_sum_by_phase": [
+        -3.017680224402144,
+        1.3462589948672314,
+        2.1574428219253496,
+        3.0870320174369716
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": -0.5258723247240832
+    },
+    {
+      "seed": 10013,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 97.55827540601022,
+      "final_distance_px": 44.15638894297311,
+      "min_distance_px": 43.51904650668894,
+      "dist_by_phase": [
+        50.9988569012881,
+        44.26372305967861,
+        44.24058853951008,
+        44.23598636321638
+      ],
+      "cos_sum_by_phase": [
+        20.575882485082502,
+        19.580345547608925,
+        19.602675940444264,
+        19.60761898656801
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.9343271307210995
+    },
+    {
+      "seed": 10014,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 299.6457522567166,
+      "final_distance_px": 212.71008928297803,
+      "min_distance_px": 212.24944085136337,
+      "dist_by_phase": [
+        219.56317191692753,
+        213.05070199147227,
+        213.0526399211911,
+        213.05303314642686
+      ],
+      "cos_sum_by_phase": [
+        29.419083646697626,
+        22.792349118116483,
+        22.762341031136305,
+        22.795517042739814
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.7639667982919214
+    },
+    {
+      "seed": 10015,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 56.15346107429461,
+      "final_distance_px": 66.77750031782571,
+      "min_distance_px": 53.65998900657237,
+      "dist_by_phase": [
+        63.93845019434938,
+        66.78819249261397,
+        66.78348179312964,
+        66.78346073766355
+      ],
+      "cos_sum_by_phase": [
+        -1.4509882447047984,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        27,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": 0.5409026331235985
+    },
+    {
+      "seed": 10016,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 317.49281896980534,
+      "final_distance_px": 110.47942369556263,
+      "min_distance_px": 110.0009281786925,
+      "dist_by_phase": [
+        151.4246270302955,
+        110.36250581584754,
+        110.36441258976352,
+        110.35840926216055
+      ],
+      "cos_sum_by_phase": [
+        17.274414353772872,
+        -9.805894172107001,
+        -10.698726299652773,
+        -10.698726299653153
+      ],
+      "cos_count_by_phase": [
+        44,
+        11,
+        12,
+        12
+      ],
+      "first_step_cosine": 0.685957845426673
+    },
+    {
+      "seed": 10017,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 96.68836754508298,
+      "final_distance_px": 69.83652162954562,
+      "min_distance_px": 68.67771366563957,
+      "dist_by_phase": [
+        70.88590288622134,
+        69.60304101868914,
+        69.60091394045487,
+        69.59328227170887
+      ],
+      "cos_sum_by_phase": [
+        28.884038606164683,
+        26.071697027833988,
+        24.533895795220506,
+        26.475689069114598
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.8733962687481914
+    },
+    {
+      "seed": 10018,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 44.83849989463393,
+      "final_distance_px": 50.27921348757505,
+      "min_distance_px": 16.03010978200363,
+      "dist_by_phase": [
+        40.017279230819135,
+        49.79188190238084,
+        49.785357980983356,
+        49.795391024904866
+      ],
+      "cos_sum_by_phase": [
+        11.591557738870394,
+        4.807345943059373,
+        5.697711464538516,
+        4.81752892228534
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.991682614105629
+    },
+    {
+      "seed": 10019,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 151.70938809688695,
+      "final_distance_px": 86.66129654367721,
+      "min_distance_px": 74.94933659276086,
+      "dist_by_phase": [
+        94.9785899402422,
+        86.658133172338,
+        86.64889089976572,
+        86.64631002232407
+      ],
+      "cos_sum_by_phase": [
+        5.050436586624145,
+        -19.4998746025737,
+        -17.936034719328976,
+        -18.778350715239977
+      ],
+      "cos_count_by_phase": [
+        68,
+        56,
+        56,
+        57
+      ],
+      "first_step_cosine": 0.9939194853167019
+    },
+    {
+      "seed": 10020,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 324.4726185135125,
+      "final_distance_px": 257.9970488405789,
+      "min_distance_px": 255.4916938713217,
+      "dist_by_phase": [
+        265.4762964297477,
+        256.96947962623756,
+        257.00366165218185,
+        256.99869007024074
+      ],
+      "cos_sum_by_phase": [
+        12.136818487982644,
+        0.14684251904801093,
+        0.17078267971585792,
+        -1.775796851501474
+      ],
+      "cos_count_by_phase": [
+        54,
+        24,
+        28,
+        26
+      ],
+      "first_step_cosine": 0.882635998945503
+    },
+    {
+      "seed": 10021,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 266.5759302534253,
+      "final_distance_px": 297.4307085269131,
+      "min_distance_px": 266.5759302534253,
+      "dist_by_phase": [
+        295.21006826532636,
+        297.29097489555267,
+        297.2587150413656,
+        297.29096303013137
+      ],
+      "cos_sum_by_phase": [
+        -18.16240378762968,
+        -18.650568175209038,
+        -18.503991775117242,
+        -19.42106812865663
+      ],
+      "cos_count_by_phase": [
+        71,
+        71,
+        71,
+        72
+      ],
+      "first_step_cosine": -0.9163376643874336
+    },
+    {
+      "seed": 10022,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.8478351925220039,
+      "start_distance_px": 85.15801938200363,
+      "final_distance_px": 82.52674303896477,
+      "min_distance_px": 53.794688732959386,
+      "dist_by_phase": [
+        90.20119877872268,
+        101.03959848729542,
+        82.03693378786292,
+        82.24372168118528
+      ],
+      "cos_sum_by_phase": [
+        15.33842967736525,
+        20.9873470860389,
+        -11.757676332049122,
+        -8.639543202463297
+      ],
+      "cos_count_by_phase": [
+        75,
+        70,
+        75,
+        75
+      ],
+      "first_step_cosine": -0.526047919206787
+    },
+    {
+      "seed": 10023,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 264.32386217552624,
+      "final_distance_px": 97.26668824109919,
+      "min_distance_px": 85.21207203207273,
+      "dist_by_phase": [
+        147.15372813242467,
+        94.91139239862002,
+        97.04024626036149,
+        97.03721653439817
+      ],
+      "cos_sum_by_phase": [
+        28.711465200843826,
+        -9.669876802554775,
+        -4.5863552134124905,
+        -5.258446576704276
+      ],
+      "cos_count_by_phase": [
+        75,
+        67,
+        25,
+        26
+      ],
+      "first_step_cosine": 0.6812127058058521
+    },
+    {
+      "seed": 10024,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 268.3753182049605,
+      "final_distance_px": 32.77998561914197,
+      "min_distance_px": 17.015780968763945,
+      "dist_by_phase": [
+        66.76660656585146,
+        32.857844859171095,
+        32.85724361182618,
+        32.85895124731246
+      ],
+      "cos_sum_by_phase": [
+        19.38063620960607,
+        -9.200921171698823,
+        -8.76456503156342,
+        -8.480004266269164
+      ],
+      "cos_count_by_phase": [
+        58,
+        37,
+        36,
+        38
+      ],
+      "first_step_cosine": 0.7653680435393251
+    },
+    {
+      "seed": 10025,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 154.8428478872264,
+      "final_distance_px": 146.85324298829585,
+      "min_distance_px": 144.92331169074535,
+      "dist_by_phase": [
+        147.31001264808475,
+        147.2834051473667,
+        147.32079527277182,
+        147.31705576133214
+      ],
+      "cos_sum_by_phase": [
+        -8.379846094865407,
+        -9.264901175453744,
+        -8.37876531734941,
+        -8.73025147172369
+      ],
+      "cos_count_by_phase": [
+        35,
+        34,
+        34,
+        32
+      ],
+      "first_step_cosine": 0.5978325416521812
+    },
+    {
+      "seed": 10026,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.5213824257258604,
+      "start_distance_px": 226.6678862754283,
+      "final_distance_px": 123.87841784140635,
+      "min_distance_px": 53.56349048006027,
+      "dist_by_phase": [
+        102.94893466408199,
+        106.61104217933845,
+        123.83702159627964,
+        123.88045127862242
+      ],
+      "cos_sum_by_phase": [
+        27.14227655223752,
+        -24.939980037474648,
+        -0.031935941574493976,
+        1.6476183662905874
+      ],
+      "cos_count_by_phase": [
+        71,
+        54,
+        24,
+        22
+      ],
+      "first_step_cosine": 0.7831095384476536
+    },
+    {
+      "seed": 10027,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 108.6461102888472,
+      "final_distance_px": 111.60315853541684,
+      "min_distance_px": 76.65417337475165,
+      "dist_by_phase": [
+        108.64476088437537,
+        112.93565899595129,
+        112.90493586070787,
+        112.94215772680126
+      ],
+      "cos_sum_by_phase": [
+        -9.020469447716835,
+        0.9605834228677554,
+        -1.3907034570398407,
+        0.967118696630344
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.12002062032891493
+    },
+    {
+      "seed": 10028,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 266.0124557375751,
+      "final_distance_px": 89.127379472067,
+      "min_distance_px": 76.013912198451,
+      "dist_by_phase": [
+        109.98813898629487,
+        89.03024395669591,
+        89.00008408719341,
+        89.00055773787643
+      ],
+      "cos_sum_by_phase": [
+        24.65713082676668,
+        10.908261457531987,
+        12.010159533389974,
+        12.007866185848744
+      ],
+      "cos_count_by_phase": [
+        54,
+        26,
+        23,
+        23
+      ],
+      "first_step_cosine": 0.878125455115257
+    },
+    {
+      "seed": 10029,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 394.4524329541251,
+      "final_distance_px": 254.7585830784014,
+      "min_distance_px": 249.4325003249014,
+      "dist_by_phase": [
+        266.83733757195444,
+        254.96136272600984,
+        254.9490156585513,
+        254.95757403890266
+      ],
+      "cos_sum_by_phase": [
+        10.945270037538968,
+        20.692212608850408,
+        20.21056056975005,
+        21.233729563407184
+      ],
+      "cos_count_by_phase": [
+        62,
+        41,
+        39,
+        40
+      ],
+      "first_step_cosine": 0.9510637944538167
+    },
+    {
+      "seed": 10030,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 227.92826287068868,
+      "final_distance_px": 228.3611801128776,
+      "min_distance_px": 225.10444350608358,
+      "dist_by_phase": [
+        231.3822933516646,
+        228.36146149584462,
+        228.36118011287772,
+        228.36118011287772
+      ],
+      "cos_sum_by_phase": [
+        -0.6326163530919491,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "cos_count_by_phase": [
+        28,
+        0,
+        0,
+        0
+      ],
+      "first_step_cosine": 0.07273655493283654
+    },
+    {
+      "seed": 10031,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 260.1760878039803,
+      "final_distance_px": 170.13378014581193,
+      "min_distance_px": 167.70791163595283,
+      "dist_by_phase": [
+        180.17938086940475,
+        169.95503356516292,
+        169.95413830601908,
+        169.95480877993683
+      ],
+      "cos_sum_by_phase": [
+        17.178129756606282,
+        12.449591932794782,
+        12.450333619242869,
+        12.449705087613758
+      ],
+      "cos_count_by_phase": [
+        39,
+        13,
+        13,
+        13
+      ],
+      "first_step_cosine": 0.5541565398237277
+    },
+    {
+      "seed": 10032,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 329.37745650954054,
+      "final_distance_px": 98.2786474910211,
+      "min_distance_px": 92.54534390913739,
+      "dist_by_phase": [
+        139.98256022968548,
+        100.43106100786108,
+        98.16742084914416,
+        98.21764083161206
+      ],
+      "cos_sum_by_phase": [
+        22.000903433826412,
+        6.322746735245675,
+        0.8211601054938937,
+        -0.8415370659489233
+      ],
+      "cos_count_by_phase": [
+        66,
+        70,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.921845364243219
+    },
+    {
+      "seed": 10033,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 312.92172905280756,
+      "final_distance_px": 132.58790497231118,
+      "min_distance_px": 79.92125185427717,
+      "dist_by_phase": [
+        140.81910207967437,
+        128.59153682309577,
+        132.33433483156088,
+        132.32800389016415
+      ],
+      "cos_sum_by_phase": [
+        9.541419976737648,
+        -6.78575939854645,
+        15.072014091656511,
+        13.341371087963708
+      ],
+      "cos_count_by_phase": [
+        75,
+        35,
+        22,
+        21
+      ],
+      "first_step_cosine": 0.9874361692991926
+    },
+    {
+      "seed": 10034,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.5736721579347673,
+      "start_distance_px": 205.75211893613977,
+      "final_distance_px": 55.922949513175155,
+      "min_distance_px": 53.69821772916984,
+      "dist_by_phase": [
+        117.51463225539858,
+        55.50673499116589,
+        55.74779456235422,
+        55.747933046801165
+      ],
+      "cos_sum_by_phase": [
+        35.20201851341561,
+        14.858232798967544,
+        14.555153406915963,
+        14.554818721052698
+      ],
+      "cos_count_by_phase": [
+        75,
+        20,
+        15,
+        15
+      ],
+      "first_step_cosine": 0.99994773394947
+    },
+    {
+      "seed": 10035,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 232.73235770509348,
+      "final_distance_px": 76.20819768214767,
+      "min_distance_px": 74.81434377372656,
+      "dist_by_phase": [
+        101.11437396961848,
+        77.39849572118369,
+        78.12308670718916,
+        78.05028189282912
+      ],
+      "cos_sum_by_phase": [
+        26.830906836026664,
+        1.9188055861832511,
+        22.493191469914176,
+        17.487108367661467
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        70,
+        71
+      ],
+      "first_step_cosine": 0.7709560983635815
+    },
+    {
+      "seed": 10036,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 225.41104320396124,
+      "final_distance_px": 145.78431223673584,
+      "min_distance_px": 143.64244906716348,
+      "dist_by_phase": [
+        153.86124567193866,
+        144.79557806489333,
+        144.75174836068277,
+        144.79582363405254
+      ],
+      "cos_sum_by_phase": [
+        4.2758884472697165,
+        -12.462597844552057,
+        -13.819830116181365,
+        -12.392786470304932
+      ],
+      "cos_count_by_phase": [
+        57,
+        44,
+        44,
+        42
+      ],
+      "first_step_cosine": 0.6020433393136753
+    },
+    {
+      "seed": 10037,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 295.5053993495454,
+      "final_distance_px": 81.38835721338305,
+      "min_distance_px": 79.62046444584001,
+      "dist_by_phase": [
+        177.11309700609982,
+        80.78697652798935,
+        80.83548410741105,
+        80.85114908591162
+      ],
+      "cos_sum_by_phase": [
+        30.892086734657923,
+        -8.957446898746014,
+        -8.842408302835612,
+        -9.545507285895042
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.47727655032858896
+    },
+    {
+      "seed": 10038,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 125.19283459316614,
+      "final_distance_px": 178.60080128445924,
+      "min_distance_px": 105.7032426770439,
+      "dist_by_phase": [
+        154.44631446872086,
+        178.99719521482248,
+        179.0097860598226,
+        179.021480682105
+      ],
+      "cos_sum_by_phase": [
+        -9.539206609613075,
+        -16.976385113079562,
+        -16.97036748165654,
+        -14.977357209253094
+      ],
+      "cos_count_by_phase": [
+        74,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.34946400614304113
+    },
+    {
+      "seed": 10039,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 133.2404355702416,
+      "final_distance_px": 130.30289010385124,
+      "min_distance_px": 124.95422334449458,
+      "dist_by_phase": [
+        130.20462004301257,
+        130.3807833797119,
+        130.37956650839615,
+        130.37741975534232
+      ],
+      "cos_sum_by_phase": [
+        -2.5935100835375113,
+        -5.725323522158017,
+        -6.059294944628144,
+        -5.752371263038567
+      ],
+      "cos_count_by_phase": [
+        48,
+        43,
+        43,
+        43
+      ],
+      "first_step_cosine": -0.29554060674858745
+    },
+    {
+      "seed": 10040,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 299.0595945934104,
+      "final_distance_px": 292.00777538139124,
+      "min_distance_px": 290.3969870721902,
+      "dist_by_phase": [
+        291.9186880507947,
+        291.6565952920258,
+        291.62737428325914,
+        291.60308782080546
+      ],
+      "cos_sum_by_phase": [
+        1.6916461087214596,
+        -3.3913132945960687,
+        -4.05595884353558,
+        -3.3918007421950223
+      ],
+      "cos_count_by_phase": [
+        36,
+        36,
+        35,
+        36
+      ],
+      "first_step_cosine": 0.5950575370243815
+    },
+    {
+      "seed": 10041,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 149.79271451727053,
+      "final_distance_px": 130.4927256351572,
+      "min_distance_px": 115.22432952707723,
+      "dist_by_phase": [
+        130.82118217520906,
+        130.61499745497758,
+        130.617958513771,
+        130.61340938881452
+      ],
+      "cos_sum_by_phase": [
+        -3.563664085296243,
+        -8.492727622721139,
+        -7.412929472261529,
+        -8.50268148950409
+      ],
+      "cos_count_by_phase": [
+        62,
+        53,
+        53,
+        53
+      ],
+      "first_step_cosine": 0.7133093524078288
+    },
+    {
+      "seed": 10042,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.0,
+      "start_distance_px": 38.82570893453949,
+      "final_distance_px": 87.11665459244792,
+      "min_distance_px": 38.82570893453949,
+      "dist_by_phase": [
+        106.56712721660288,
+        87.72987408668212,
+        87.24251557765292,
+        87.26873049732339
+      ],
+      "cos_sum_by_phase": [
+        -2.9983496742065054,
+        6.678356066309668,
+        3.3324312602967288,
+        4.8597564896900085
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": -0.7629465561535902
+    },
+    {
+      "seed": 10043,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0037494280967834727,
+      "start_distance_px": 81.49346928356405,
+      "final_distance_px": 55.03262589209008,
+      "min_distance_px": 28.22340327538822,
+      "dist_by_phase": [
+        52.912365134320545,
+        54.69330045075514,
+        54.749964542498915,
+        54.742381144931
+      ],
+      "cos_sum_by_phase": [
+        -6.544298315815618,
+        -14.984687945694144,
+        -15.043640183209883,
+        -14.790897959209222
+      ],
+      "cos_count_by_phase": [
+        44,
+        26,
+        24,
+        26
+      ],
+      "first_step_cosine": 0.7947436118513024
+    },
+    {
+      "seed": 10044,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.10362463009515342,
+      "start_distance_px": 90.2275116967804,
+      "final_distance_px": 36.420399875247256,
+      "min_distance_px": 14.746975358663539,
+      "dist_by_phase": [
+        34.77597705717428,
+        36.58050130500413,
+        36.584706139730784,
+        36.58655257897646
+      ],
+      "cos_sum_by_phase": [
+        2.6815975243085144,
+        -1.6925598946118992,
+        -1.9307363157024073,
+        -1.7017691378508584
+      ],
+      "cos_count_by_phase": [
+        50,
+        7,
+        8,
+        7
+      ],
+      "first_step_cosine": 0.9905894577553083
+    },
+    {
+      "seed": 10045,
+      "steps": 300,
+      "ends_frozen": false,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 125.16944133511821,
+      "final_distance_px": 102.72723949505227,
+      "min_distance_px": 99.41960961799509,
+      "dist_by_phase": [
+        112.94821859375394,
+        102.47423908143375,
+        102.46227558081165,
+        102.44323936977072
+      ],
+      "cos_sum_by_phase": [
+        14.818207269451122,
+        -15.04718648913363,
+        -20.07712593131674,
+        -17.24118404377725
+      ],
+      "cos_count_by_phase": [
+        64,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.3242916805062308
+    },
+    {
+      "seed": 10046,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 153.63572404067466,
+      "final_distance_px": 236.60084197946648,
+      "min_distance_px": 143.03716926031737,
+      "dist_by_phase": [
+        221.93649626548572,
+        236.64390609043087,
+        236.65321366837492,
+        236.6504176534661
+      ],
+      "cos_sum_by_phase": [
+        -8.639831838447918,
+        -3.264301650867527,
+        -3.031633935813779,
+        -3.2965664686456604
+      ],
+      "cos_count_by_phase": [
+        71,
+        67,
+        68,
+        67
+      ],
+      "first_step_cosine": 0.22807044822552833
+    },
+    {
+      "seed": 10047,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0003182038688558965,
+      "start_distance_px": 158.4629594082638,
+      "final_distance_px": 142.66930006387162,
+      "min_distance_px": 15.308599145868104,
+      "dist_by_phase": [
+        115.72354106245477,
+        142.52726942834917,
+        142.52298952318822,
+        142.52523263337284
+      ],
+      "cos_sum_by_phase": [
+        6.30028669203451,
+        8.017463540955069,
+        8.785348872481038,
+        8.015951020550553
+      ],
+      "cos_count_by_phase": [
+        52,
+        18,
+        20,
+        18
+      ],
+      "first_step_cosine": 0.751427656961751
+    },
+    {
+      "seed": 10048,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": false,
+      "gain_over_start": 0.0,
+      "start_distance_px": 376.7895871104464,
+      "final_distance_px": 65.44793843761514,
+      "min_distance_px": 53.192671438565775,
+      "dist_by_phase": [
+        96.23209955725518,
+        64.64144774387168,
+        64.65170669017363,
+        64.63821019393315
+      ],
+      "cos_sum_by_phase": [
+        20.133474868696307,
+        2.7020678077721096,
+        3.776798414193779,
+        2.01449518644067
+      ],
+      "cos_count_by_phase": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "first_step_cosine": 0.9518362623109
+    },
+    {
+      "seed": 10049,
+      "steps": 300,
+      "ends_frozen": true,
+      "starts_in_contact": true,
+      "gain_over_start": 0.16195742833249885,
+      "start_distance_px": 112.93289752886163,
+      "final_distance_px": 71.98579244954782,
+      "min_distance_px": 55.884313590355355,
+      "dist_by_phase": [
+        112.50807042723257,
+        82.99383911740306,
+        77.83519844874954,
+        73.71154646470569
+      ],
+      "cos_sum_by_phase": [
+        22.42021199116362,
+        17.600365344858353,
+        -5.363112328821783,
+        11.685445430261357
+      ],
+      "cos_count_by_phase": [
+        75,
+        74,
+        75,
+        47
+      ],
+      "first_step_cosine": 0.9365200910827116
+    }
+  ]
+}
