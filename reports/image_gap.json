@@ -1,0 +1,69 @@
+{
+  "settings": {
+    "dataset_step": 25,
+    "env_episodes": 100,
+    "seed_start": 10000,
+    "small_step_max": 8,
+    "edge_min": 20,
+    "sharp_min": 100,
+    "near_white": 250
+  },
+  "dataset": {
+    "frames": 1026,
+    "mean_rgb": [
+      247.84943529855695,
+      250.04857293274176,
+      249.2682034676535
+    ],
+    "exact_white_fraction": 0.7650940985759151,
+    "near_white_fraction": 0.8543884396320662,
+    "small_step_fraction": 0.06117886700181252,
+    "edge_fraction": 0.04449392548134469,
+    "sharp_edge_share": 0.11816565986525274
+  },
+  "environment": {
+    "frames": 300,
+    "mean_rgb": [
+      247.33149522569445,
+      250.20203016493056,
+      248.873037109375
+    ],
+    "exact_white_fraction": 0.8613425925925926,
+    "near_white_fraction": 0.8616261574074074,
+    "small_step_fraction": 0.009367507309941521,
+    "edge_fraction": 0.04269152046783626,
+    "sharp_edge_share": 0.2495762131433855
+  },
+  "comparison": {
+    "exact_white_fraction": {
+      "dataset": 0.7650940985759151,
+      "environment": 0.8613425925925926,
+      "difference": -0.09624849401667745
+    },
+    "near_white_fraction": {
+      "dataset": 0.8543884396320662,
+      "environment": 0.8616261574074074,
+      "difference": -0.0072377177753412125
+    },
+    "small_step_fraction": {
+      "dataset": 0.06117886700181252,
+      "environment": 0.009367507309941521,
+      "difference": 0.051811359691871
+    },
+    "edge_fraction": {
+      "dataset": 0.04449392548134469,
+      "environment": 0.04269152046783626,
+      "difference": 0.0018024050135084305
+    },
+    "sharp_edge_share": {
+      "dataset": 0.11816565986525274,
+      "environment": 0.2495762131433855,
+      "difference": -0.13141055327813275
+    },
+    "mean_rgb_difference": [
+      0.5179400728625012,
+      -0.15345723218879925,
+      0.3951663582785159
+    ]
+  }
+}
