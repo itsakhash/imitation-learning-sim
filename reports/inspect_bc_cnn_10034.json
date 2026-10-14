@@ -1,0 +1,31 @@
+{
+  "policy": "bc_cnn",
+  "stats": {
+    "seed": 10034,
+    "steps": 300,
+    "start_coverage": 0.09587120349129057,
+    "max_coverage": 0.6695433614260579,
+    "step_of_max": 83,
+    "final_coverage": 0.6695433614260579,
+    "drop_from_peak": 0.0,
+    "gain_over_start": 0.5736721579347673,
+    "agent_path_px": 592.9140815654573,
+    "stalled_fraction": 0.7366666666666667,
+    "mean_action_gap_px": 5.065138835940081,
+    "border_action_fraction": 0.0,
+    "block_net_displacement_px": 70.25513160446415,
+    "block_path_px": 77.69378386227541,
+    "contact_step_fraction": 0.10666666666666667
+  },
+  "replay_matches_saved_trace": true,
+  "frame_steps": [
+    0,
+    25,
+    50,
+    100,
+    150,
+    200,
+    250,
+    300
+  ]
+}
