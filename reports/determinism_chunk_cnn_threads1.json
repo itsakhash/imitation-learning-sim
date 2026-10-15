@@ -1,0 +1,84 @@
+{
+  "policy": "chunk_cnn",
+  "checkpoint": "checkpoints/chunk_cnn.pt",
+  "settings": {
+    "torch_threads": 1,
+    "deterministic_algorithms": false,
+    "torch": "2.14.1+cu132"
+  },
+  "repeatability": {
+    "calls": 20,
+    "fresh_loads": 3,
+    "repeated_calls_max_abs_diff": 0.0,
+    "fresh_loads_max_abs_diff": 0.0,
+    "seed": 10000
+  },
+  "seeds": [
+    {
+      "seed": 10000,
+      "run_a_vs_run_b": {
+        "steps_a": 300,
+        "steps_b": 300,
+        "identical": true,
+        "first_difference": {
+          "pixel_hash": null,
+          "agent_pos": null,
+          "block_pose": null,
+          "action": null,
+          "coverage": null
+        },
+        "first_state_difference": null,
+        "first_action_difference": null,
+        "cause": null
+      },
+      "replay_of_a_actions_vs_run_a": {
+        "steps_a": 300,
+        "steps_b": 300,
+        "identical": false,
+        "first_difference": {
+          "pixel_hash": null,
+          "agent_pos": null,
+          "block_pose": null,
+          "action": null,
+          "coverage": 11
+        },
+        "first_state_difference": null,
+        "first_action_difference": null,
+        "cause": "environment"
+      }
+    },
+    {
+      "seed": 10001,
+      "run_a_vs_run_b": {
+        "steps_a": 300,
+        "steps_b": 300,
+        "identical": true,
+        "first_difference": {
+          "pixel_hash": null,
+          "agent_pos": null,
+          "block_pose": null,
+          "action": null,
+          "coverage": null
+        },
+        "first_state_difference": null,
+        "first_action_difference": null,
+        "cause": null
+      },
+      "replay_of_a_actions_vs_run_a": {
+        "steps_a": 300,
+        "steps_b": 300,
+        "identical": false,
+        "first_difference": {
+          "pixel_hash": null,
+          "agent_pos": null,
+          "block_pose": null,
+          "action": null,
+          "coverage": 111
+        },
+        "first_state_difference": null,
+        "first_action_difference": null,
+        "cause": "environment"
+      }
+    }
+  ]
+}

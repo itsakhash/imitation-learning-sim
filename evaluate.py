@@ -15,6 +15,15 @@ every policy starts from the same overlap, and doing nothing scores exactly that
 gym-pusht does not report the start coverage in its reset info, so it is read from the
 environment itself (see read_start_coverage).
 
+Precision of the stored coverage values, added after seeing results: gym-pusht's coverage
+occasionally differs in its last bit (5.55e-17 in the observed cases) between runs whose
+simulated states and actions are identical, which made exact comparisons of two evaluations
+fail from time to time. The start, max and final coverage stored per episode are therefore
+rounded to COVERAGE_DECIMALS = 9 decimals, a change of at most 5e-10: far below the 4 decimals
+reported and below the 1e-6 tolerance used to compare runs and policies. This changes no
+definition in the protocol. Success always comes from the environment's own flag, never from a
+rounded value.
+
 Run:  python evaluate.py --policy random --episodes 50
       python evaluate.py --policy hold --episodes 50
 """
@@ -37,6 +46,7 @@ MIN_EPISODES = 50
 CONFIDENCE = 0.95
 BOOTSTRAP_RESAMPLES = 10_000
 BOOTSTRAP_SEED = 0
+COVERAGE_DECIMALS = 9
 
 
 def eval_seeds(n_episodes: int) -> list:
@@ -44,6 +54,11 @@ def eval_seeds(n_episodes: int) -> list:
     if n_episodes < 1:
         raise ValueError("n_episodes must be at least 1")
     return list(range(EVAL_SEED_START, EVAL_SEED_START + n_episodes))
+
+
+def round_coverage(value):
+    """Round a coverage value (or None) to COVERAGE_DECIMALS decimals."""
+    return None if value is None else round(float(value), COVERAGE_DECIMALS)
 
 
 def make_eval_env(obs_type: str = "pixels_agent_pos"):
@@ -110,9 +125,9 @@ def run_episode(env, policy, seed: int, max_steps: int = MAX_STEPS) -> dict:
     return {
         "seed": int(seed),
         "steps": len(trace),
-        "start_coverage": start_coverage,
-        "max_coverage": max(trace),
-        "final_coverage": trace[-1],
+        "start_coverage": round_coverage(start_coverage),
+        "max_coverage": round_coverage(max(trace)),
+        "final_coverage": round_coverage(trace[-1]),
         "success": success,
         "terminated": bool(terminated),
         "truncated": bool(truncated),
