@@ -1,0 +1,27 @@
+{
+  "policy": "chunk_cnn_n20_s1",
+  "episodes": 50,
+  "seed_start": 10000,
+  "seed_end": 10049,
+  "tolerance": 1e-06,
+  "reproduced": true,
+  "steps_mismatches": 0,
+  "success_mismatches": 0,
+  "missing_value_mismatches": 0,
+  "episodes_beyond_tolerance": 0,
+  "episodes_with_any_exact_difference": 0,
+  "max_abs_difference": {
+    "start_coverage": 0.0,
+    "max_coverage": 0.0,
+    "final_coverage": 0.0
+  },
+  "flagged_seeds": [],
+  "mean_max_coverage": [
+    0.0714328736,
+    0.0714328736
+  ],
+  "mean_final_coverage": [
+    0.032810736859999995,
+    0.032810736859999995
+  ]
+}
