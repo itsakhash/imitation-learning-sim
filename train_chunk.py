@@ -1,8 +1,8 @@
 """Action-chunking behavior cloning: predict the next CHUNK_LEN commanded targets at once.
 
 The baseline (train_bc.py) predicts one commanded target per frame. Here the same convolutional
-trunk predicts the targets for steps t .. t+CHUNK_LEN-1 from the frame at step t. At run time
-the policy (chunk_policy.py) will execute the first N_EXEC of them before predicting again.
+trunk predicts the targets for steps t .. t+CHUNK_LEN-1 from the frame at step t. At run time the
+policy (chunk_policy.py) executes the first N_EXEC of them before predicting again.
 
 Design fixed before any result (see PROJECT_CONTEXT.md and the message that introduced this):
   - same trunk, same split, same optimizer as the baseline; only the last layer differs
@@ -10,6 +10,9 @@ Design fixed before any result (see PROJECT_CONTEXT.md and the message that intr
     loss ignores the padded positions (they carry no information about what the human did)
   - CHUNK_LEN = 16 and N_EXEC = 8, taken from memory of the Diffusion Policy PushT setup and
     not checked; they are not to be tuned on the evaluation seeds
+
+--train-episodes N keeps N of the training episodes, chosen by --subset-seed (default: the split
+seed) independently of the training seed (--seed), exactly as in train_bc.py.
 
 The number comparable with the baseline is the validation mean absolute error of the FIRST
 action of the chunk (history key "val_mae_px"). The error averaged over the whole chunk is
@@ -243,6 +246,13 @@ def main(argv=None, *, arrays_loader=pusht_data.load_arrays) -> int:
     parser.add_argument("--split-seed", type=int, default=0)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--train-episodes", type=int, default=None)
+    parser.add_argument(
+        "--subset-seed",
+        type=int,
+        default=None,
+        help="seed for choosing which training episodes --train-episodes keeps "
+        "(default: the split seed)",
+    )
     parser.add_argument("--chunk-len", type=int, default=CHUNK_LEN)
     parser.add_argument("--n-exec", type=int, default=N_EXEC)
     parser.add_argument("--device", default="auto")
@@ -267,10 +277,9 @@ def main(argv=None, *, arrays_loader=pusht_data.load_arrays) -> int:
         arrays.n_episodes, args.val_fraction, args.split_seed
     )
     available = len(train_ids)
+    subset_seed = args.split_seed if args.subset_seed is None else args.subset_seed
     if args.train_episodes is not None:
-        train_ids = tb.subsample_episodes(
-            train_ids, args.train_episodes, args.split_seed
-        )
+        train_ids = tb.subsample_episodes(train_ids, args.train_episodes, subset_seed)
     train_ds = ChunkDataset(arrays, train_ids, args.chunk_len)
     val_ds = ChunkDataset(arrays, val_ids, args.chunk_len)
     references = tb.reference_maes(arrays, train_ids, val_ids)
@@ -327,6 +336,7 @@ def main(argv=None, *, arrays_loader=pusht_data.load_arrays) -> int:
         "seed": args.seed,
         "train_episodes": len(train_ids),
         "available_train_episodes": available,
+        "subset_seed": subset_seed if args.train_episodes is not None else None,
         "device": str(device),
         "torch": str(torch.__version__),  # a plain str, so the safe loader accepts it
     }
