@@ -64,7 +64,7 @@ The analysis was fixed before training seeds 3 to 9 were trained (seeds 0 to 2 h
 | Mean max coverage | 0.0979 (range 0.0772) | 0.1474 (range 0.2009) | +0.0495 [+0.0149, +0.0891] |
 | Mean final coverage | 0.0666 (range 0.0787) | 0.0448 (range 0.0591) | -0.0218 [-0.0411, -0.0017] |
 
-**Verdict: contradicted.** The final-coverage interval lies entirely below zero, so by the rule fixed in advance the claim that chunking is an improvement is contradicted. What the data show is more specific: the chunked networks reach a higher peak coverage (that interval lies entirely above zero) and finish lower. The final-coverage interval ends only 0.0017 below zero, so the contradiction is weak.
+**Verdict: contradicted.** The final-coverage interval lies entirely below zero, so by the rule fixed in advance the claim that chunking is an improvement is contradicted. What the data show is more specific: the chunked networks reach a higher peak coverage (that interval lies entirely above zero) and finish lower. The final-coverage interval ends only 0.0017 below zero, so the contradiction is weak, and it does not hold on the seven later networks alone (see the robustness check below).
 
 Per network (mean over the 50 episodes):
 
@@ -83,7 +83,14 @@ Per network (mean over the 50 episodes):
 
 Descriptive only (no verdict rule): 6 of 10 baseline networks end above the do-nothing level of final coverage (Wilson 95% [31%, 83%]; mean difference from that level +0.0081, 95% CI [-0.0080, +0.0225]), against 2 of 10 chunked networks (Wilson 95% [6%, 51%]; mean difference -0.0137, 95% CI [-0.0262, -0.0010]). On average a chunked network ends an episode with less coverage than a policy that never moves.
 
-I have not tested why the chunked networks finish lower. The behavior diagnostics below were written for the one-step baseline and do not yet support the chunked policy.
+**Robustness check (post hoc, run after seeing the verdict).** The same analysis on training seeds 3 to 9 alone, the seven networks of each type trained after the analysis was fixed (the tool labels it a pilot and gives no verdict): max coverage +0.0399 [+0.0047, +0.0754]; final coverage -0.0219 [-0.0454, +0.0035]. The point estimates match the ten-network study, but the final-coverage interval now includes zero. Against the do-nothing level, 4 of 7 baseline and 1 of 7 chunked networks end above it, and the chunked networks' mean difference from that level is -0.0153 [-0.0293, -0.0022].
+
+**What I would and would not claim from the seed study:**
+
+- Chunked networks reach a higher peak coverage than the baseline. Both analyses agree, though the seven-network interval's lower end is only +0.0047.
+- Chunked networks end an episode with less coverage than a policy that never moves. Both analyses agree.
+- That chunked networks finish lower than the baseline is fragile: the interval excludes zero only with all ten networks, and by 0.0017.
+- I have not tested why the chunked networks finish lower. The behavior diagnostics below were written for the one-step baseline and do not yet support the chunked policy.
 
 **Offline error on the 41 held-out demonstration episodes** (mean absolute error of the first commanded target, pixels; copying the agent's position scores 15.30, predicting the mean action 84.08): training seeds 0 to 2: baseline 12.83, 13.08, 13.69; chunked 15.17, 14.52, 15.71. Offline error was worse for the chunked networks, which matches their lower final coverage but not their higher peaks; I did not test how well it predicts simulator behavior across networks.
 
@@ -101,6 +108,7 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 ## Limitations
 
 - One training run per seed. The seed study uses ten training seeds per method, but every network was evaluated on the same 50 starting positions, so its intervals describe these starting positions, this recipe (30 epochs for both methods, chunk length 16 with 8 executed) and these training seeds. The three-seed comparison and the exploratory intervals are not corrected for multiple comparisons.
+- The seed study's "contradicted" verdict rests on an interval whose upper end is 0.0017 below zero, and the same difference (-0.0219) on seeds 3 to 9 alone has an interval that includes zero. Ten networks per method are too few to settle a difference of this size. Adding networks to this study after seeing its result would not be valid; a replication would need new training seeds and an analysis fixed in advance.
 - Every policy scores 0 of 50 on success; the coverage metrics carry all the information.
 - The demonstrations do not store the block's pose, so replaying them in the simulator to check the data is impossible. The dataset's starting states are also not stored, so overlap between them and the evaluation seeds cannot be checked.
 - The chunk length (16) and executed length (8) come from memory of another setup and were not tuned or verified. The training recipe is the same for both networks, so the chunked networks, which learn a harder objective, may be undertrained at 30 epochs; I have not tested this.
@@ -112,8 +120,9 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 
 ## Not done yet
 
-- An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch and which the seed study found to peak higher and finish lower than the one-step baseline.
+- An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch and which the seed study found to peak higher than the one-step baseline and to end below a policy that never moves.
 - An explanation of why the chunked networks finish lower: behavior diagnostics for the chunked policy, a systematic categorization of failed episodes, and one targeted fix with before and after numbers.
+- A replication of the seed study on new training seeds (analysis fixed in advance), if the claim that chunked networks finish lower than the baseline is to be settled.
 - Ablations: success versus number of demonstrations (at least three sizes), and at least one other factor such as the chunk length, the number of targets executed, or the training length.
 - A video or GIF of a success and a failure (there are no successes yet).
 - Verification that the lock file reproduces the environment on a fresh clone.
@@ -156,6 +165,12 @@ python seed_study_run.py --seeds 3 4 5 6 7 8 9
 python seed_study.py \
   --baseline reports/eval_bc_cnn.json reports/eval_bc_cnn_s{1..9}.json \
   --chunk reports/eval_chunk_cnn.json reports/eval_chunk_cnn_s{1..9}.json
+
+# the post hoc robustness check on training seeds 3 to 9 alone
+python seed_study.py \
+  --baseline reports/eval_bc_cnn_s{3..9}.json \
+  --chunk reports/eval_chunk_cnn_s{3..9}.json \
+  --out reports/seed_study_seeds3to9.json
 ```
 
 ## Layout
