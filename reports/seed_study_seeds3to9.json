@@ -1,0 +1,120 @@
+{
+  "n_baseline": 7,
+  "n_chunk": 7,
+  "evaluation": {
+    "episodes": 50,
+    "seed_start": 10000,
+    "seed_end": 10049
+  },
+  "baseline_networks": [
+    "bc_cnn_s3",
+    "bc_cnn_s4",
+    "bc_cnn_s5",
+    "bc_cnn_s6",
+    "bc_cnn_s7",
+    "bc_cnn_s8",
+    "bc_cnn_s9"
+  ],
+  "chunk_networks": [
+    "chunk_cnn_s3",
+    "chunk_cnn_s4",
+    "chunk_cnn_s5",
+    "chunk_cnn_s6",
+    "chunk_cnn_s7",
+    "chunk_cnn_s8",
+    "chunk_cnn_s9"
+  ],
+  "primary": {
+    "mean_max_coverage": {
+      "baseline_values": [
+        0.07192742211999999,
+        0.11706597180000002,
+        0.08543352562,
+        0.1417656125,
+        0.06456402532,
+        0.12669779834000003,
+        0.06731118654
+      ],
+      "chunk_values": [
+        0.1018147829,
+        0.16220826768,
+        0.12511867068,
+        0.16564641986,
+        0.07808084446,
+        0.19708892940000003,
+        0.1237967031
+      ],
+      "baseline_mean": 0.09639507746285714,
+      "chunk_mean": 0.1362506597257143,
+      "baseline_range": 0.07720158718,
+      "chunk_range": 0.11900808494000002,
+      "difference": 0.03985558226285715,
+      "ci95": [
+        0.0047389602390714115,
+        0.07541845323842855
+      ]
+    },
+    "mean_final_coverage": {
+      "baseline_values": [
+        0.014554820719999998,
+        0.08803125728,
+        0.07593765748,
+        0.09091792863999998,
+        0.05327012324,
+        0.09323256514,
+        0.03990828372
+      ],
+      "chunk_values": [
+        0.01840926144,
+        0.053727477780000005,
+        0.05656512304,
+        0.06731743946,
+        0.021443412739999997,
+        0.05786617334,
+        0.027181287980000003
+      ],
+      "baseline_mean": 0.06512180517428572,
+      "chunk_mean": 0.04321573939714286,
+      "baseline_range": 0.07867774442,
+      "chunk_range": 0.04890817802,
+      "difference": -0.021906065777142852,
+      "ci95": [
+        -0.04544170313314285,
+        0.0034944509586428774
+      ]
+    }
+  },
+  "verdict": "inconclusive",
+  "secondary": {
+    "baseline": {
+      "networks": 7,
+      "above": 4,
+      "above_wilson95": [
+        0.25045836452765724,
+        0.8417801447485302
+      ],
+      "mean_difference": 0.0066412632142857034,
+      "mean_difference_ci95": [
+        -0.015095048354285724,
+        0.025498695477142848
+      ]
+    },
+    "chunk": {
+      "networks": 7,
+      "above": 1,
+      "above_wilson95": [
+        0.02567962434474355,
+        0.5131278292743188
+      ],
+      "mean_difference": -0.015264802562857147,
+      "mean_difference_ci95": [
+        -0.029277754091428573,
+        -0.002167837334000017
+      ]
+    }
+  },
+  "warnings": [
+    "fewer than 10 networks in a group: this is a pilot, not the pre-registered study"
+  ],
+  "unverified_networks": []
+}
