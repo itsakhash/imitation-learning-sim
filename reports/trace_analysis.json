@@ -1,0 +1,514 @@
+{
+  "n_baseline": 10,
+  "n_chunk": 10,
+  "evaluation": {
+    "episodes": 50,
+    "seed_start": 10000,
+    "seed_end": 10049
+  },
+  "settings": {
+    "big_giveback": 0.1,
+    "window": 8,
+    "abrupt_fraction": 0.5,
+    "empty_coverage": 0.001,
+    "min_big_episodes": 3
+  },
+  "baseline_networks": [
+    {
+      "name": "bc_cnn",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.11227013076,
+      "mean_final_coverage": 0.08182639175999999,
+      "mean_giveback": 0.030443739,
+      "n_big": 3,
+      "big_giveback_share": 0.06,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 1.0,
+      "ended_empty_share": 0.56
+    },
+    {
+      "name": "bc_cnn_s1",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.10160884174000001,
+      "mean_final_coverage": 0.07768284862,
+      "mean_giveback": 0.023925993120000003,
+      "n_big": 2,
+      "big_giveback_share": 0.04,
+      "abrupt_share_of_big": null,
+      "median_peak_step_of_big": 39.0,
+      "ended_empty_share": 0.52
+    },
+    {
+      "name": "bc_cnn_s2",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.09072369922000002,
+      "mean_final_coverage": 0.05042824316,
+      "mean_giveback": 0.04029545606,
+      "n_big": 8,
+      "big_giveback_share": 0.16,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 14.5,
+      "ended_empty_share": 0.7
+    },
+    {
+      "name": "bc_cnn_s3",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.07192742211999999,
+      "mean_final_coverage": 0.014554820719999998,
+      "mean_giveback": 0.0573726014,
+      "n_big": 9,
+      "big_giveback_share": 0.18,
+      "abrupt_share_of_big": 0.5555555555555556,
+      "median_peak_step_of_big": 22.0,
+      "ended_empty_share": 0.82
+    },
+    {
+      "name": "bc_cnn_s4",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.11706597180000002,
+      "mean_final_coverage": 0.08803125728,
+      "mean_giveback": 0.02903471452,
+      "n_big": 5,
+      "big_giveback_share": 0.1,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 44.0,
+      "ended_empty_share": 0.54
+    },
+    {
+      "name": "bc_cnn_s5",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.08543352562,
+      "mean_final_coverage": 0.07593765748,
+      "mean_giveback": 0.009495868139999999,
+      "n_big": 2,
+      "big_giveback_share": 0.04,
+      "abrupt_share_of_big": null,
+      "median_peak_step_of_big": 31.5,
+      "ended_empty_share": 0.6
+    },
+    {
+      "name": "bc_cnn_s6",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.1417656125,
+      "mean_final_coverage": 0.09091792863999998,
+      "mean_giveback": 0.05084768386000001,
+      "n_big": 9,
+      "big_giveback_share": 0.18,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 56.0,
+      "ended_empty_share": 0.56
+    },
+    {
+      "name": "bc_cnn_s7",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.06456402532,
+      "mean_final_coverage": 0.05327012324,
+      "mean_giveback": 0.01129390208,
+      "n_big": 1,
+      "big_giveback_share": 0.02,
+      "abrupt_share_of_big": null,
+      "median_peak_step_of_big": 24.0,
+      "ended_empty_share": 0.7
+    },
+    {
+      "name": "bc_cnn_s8",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.12669779834000003,
+      "mean_final_coverage": 0.09323256514,
+      "mean_giveback": 0.0334652332,
+      "n_big": 6,
+      "big_giveback_share": 0.12,
+      "abrupt_share_of_big": 0.8333333333333334,
+      "median_peak_step_of_big": 47.5,
+      "ended_empty_share": 0.62
+    },
+    {
+      "name": "bc_cnn_s9",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.06731118654,
+      "mean_final_coverage": 0.03990828372,
+      "mean_giveback": 0.027402902820000002,
+      "n_big": 6,
+      "big_giveback_share": 0.12,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 14.5,
+      "ended_empty_share": 0.8
+    }
+  ],
+  "chunk_networks": [
+    {
+      "name": "chunk_cnn",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.27898974102,
+      "mean_final_coverage": 0.07748999438,
+      "mean_giveback": 0.20149974664000003,
+      "n_big": 23,
+      "big_giveback_share": 0.46,
+      "abrupt_share_of_big": 0.7391304347826086,
+      "median_peak_step_of_big": 70.0,
+      "ended_empty_share": 0.64
+    },
+    {
+      "name": "chunk_cnn_s1",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.10614397054,
+      "mean_final_coverage": 0.01921048766,
+      "mean_giveback": 0.08693348288,
+      "n_big": 13,
+      "big_giveback_share": 0.26,
+      "abrupt_share_of_big": 0.6923076923076923,
+      "median_peak_step_of_big": 46.0,
+      "ended_empty_share": 0.9
+    },
+    {
+      "name": "chunk_cnn_s2",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.13521009448,
+      "mean_final_coverage": 0.048910053519999996,
+      "mean_giveback": 0.08630004096,
+      "n_big": 12,
+      "big_giveback_share": 0.24,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 29.0,
+      "ended_empty_share": 0.74
+    },
+    {
+      "name": "chunk_cnn_s3",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.1018147829,
+      "mean_final_coverage": 0.01840926144,
+      "mean_giveback": 0.08340552145999998,
+      "n_big": 11,
+      "big_giveback_share": 0.22,
+      "abrupt_share_of_big": 0.9090909090909091,
+      "median_peak_step_of_big": 23.0,
+      "ended_empty_share": 0.88
+    },
+    {
+      "name": "chunk_cnn_s4",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.16220826768,
+      "mean_final_coverage": 0.053727477780000005,
+      "mean_giveback": 0.10848078990000001,
+      "n_big": 16,
+      "big_giveback_share": 0.32,
+      "abrupt_share_of_big": 0.75,
+      "median_peak_step_of_big": 48.5,
+      "ended_empty_share": 0.72
+    },
+    {
+      "name": "chunk_cnn_s5",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.12511867068,
+      "mean_final_coverage": 0.05656512304,
+      "mean_giveback": 0.06855354763999999,
+      "n_big": 9,
+      "big_giveback_share": 0.18,
+      "abrupt_share_of_big": 0.7777777777777778,
+      "median_peak_step_of_big": 44.0,
+      "ended_empty_share": 0.8
+    },
+    {
+      "name": "chunk_cnn_s6",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.16564641986,
+      "mean_final_coverage": 0.06731743946,
+      "mean_giveback": 0.09832898040000002,
+      "n_big": 14,
+      "big_giveback_share": 0.28,
+      "abrupt_share_of_big": 1.0,
+      "median_peak_step_of_big": 33.0,
+      "ended_empty_share": 0.72
+    },
+    {
+      "name": "chunk_cnn_s7",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.07808084446,
+      "mean_final_coverage": 0.021443412739999997,
+      "mean_giveback": 0.05663743172,
+      "n_big": 8,
+      "big_giveback_share": 0.16,
+      "abrupt_share_of_big": 0.875,
+      "median_peak_step_of_big": 1.0,
+      "ended_empty_share": 0.88
+    },
+    {
+      "name": "chunk_cnn_s8",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.19708892940000003,
+      "mean_final_coverage": 0.05786617334,
+      "mean_giveback": 0.13922275606,
+      "n_big": 18,
+      "big_giveback_share": 0.36,
+      "abrupt_share_of_big": 0.7777777777777778,
+      "median_peak_step_of_big": 59.5,
+      "ended_empty_share": 0.76
+    },
+    {
+      "name": "chunk_cnn_s9",
+      "n_episodes": 50,
+      "mean_max_coverage": 0.1237967031,
+      "mean_final_coverage": 0.027181287980000003,
+      "mean_giveback": 0.09661541512,
+      "n_big": 14,
+      "big_giveback_share": 0.28,
+      "abrupt_share_of_big": 0.7142857142857143,
+      "median_peak_step_of_big": 82.0,
+      "ended_empty_share": 0.84
+    }
+  ],
+  "measures": {
+    "mean_max_coverage": {
+      "baseline_values": [
+        0.11227013076,
+        0.10160884174000001,
+        0.09072369922000002,
+        0.07192742211999999,
+        0.11706597180000002,
+        0.08543352562,
+        0.1417656125,
+        0.06456402532,
+        0.12669779834000003,
+        0.06731118654
+      ],
+      "chunk_values": [
+        0.27898974102,
+        0.10614397054,
+        0.13521009448,
+        0.1018147829,
+        0.16220826768,
+        0.12511867068,
+        0.16564641986,
+        0.07808084446,
+        0.19708892940000003,
+        0.1237967031
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 0.097936821396,
+      "chunk_mean": 0.147409842412,
+      "difference": 0.049473021016,
+      "ci95": [
+        0.014893622821650012,
+        0.08910130979405002
+      ]
+    },
+    "mean_final_coverage": {
+      "baseline_values": [
+        0.08182639175999999,
+        0.07768284862,
+        0.05042824316,
+        0.014554820719999998,
+        0.08803125728,
+        0.07593765748,
+        0.09091792863999998,
+        0.05327012324,
+        0.09323256514,
+        0.03990828372
+      ],
+      "chunk_values": [
+        0.07748999438,
+        0.01921048766,
+        0.048910053519999996,
+        0.01840926144,
+        0.053727477780000005,
+        0.05656512304,
+        0.06731743946,
+        0.021443412739999997,
+        0.05786617334,
+        0.027181287980000003
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 0.066579011976,
+      "chunk_mean": 0.044812071134,
+      "difference": -0.021766940841999996,
+      "ci95": [
+        -0.041121033113949976,
+        -0.0016526363229000115
+      ]
+    },
+    "mean_giveback": {
+      "baseline_values": [
+        0.030443739,
+        0.023925993120000003,
+        0.04029545606,
+        0.0573726014,
+        0.02903471452,
+        0.009495868139999999,
+        0.05084768386000001,
+        0.01129390208,
+        0.0334652332,
+        0.027402902820000002
+      ],
+      "chunk_values": [
+        0.20149974664000003,
+        0.08693348288,
+        0.08630004096,
+        0.08340552145999998,
+        0.10848078990000001,
+        0.06855354763999999,
+        0.09832898040000002,
+        0.05663743172,
+        0.13922275606,
+        0.09661541512
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 0.03135780942000001,
+      "chunk_mean": 0.102597771278,
+      "difference": 0.071239961858,
+      "ci95": [
+        0.048429973901050014,
+        0.09940790096289999
+      ]
+    },
+    "big_giveback_share": {
+      "baseline_values": [
+        0.06,
+        0.04,
+        0.16,
+        0.18,
+        0.1,
+        0.04,
+        0.18,
+        0.02,
+        0.12,
+        0.12
+      ],
+      "chunk_values": [
+        0.46,
+        0.26,
+        0.24,
+        0.22,
+        0.32,
+        0.18,
+        0.28,
+        0.16,
+        0.36,
+        0.28
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 0.10200000000000001,
+      "chunk_mean": 0.27599999999999997,
+      "difference": 0.17399999999999996,
+      "ci95": [
+        0.11400000000000002,
+        0.23800000000000004
+      ]
+    },
+    "abrupt_share_of_big": {
+      "baseline_values": [
+        1.0,
+        null,
+        1.0,
+        0.5555555555555556,
+        1.0,
+        null,
+        1.0,
+        null,
+        0.8333333333333334,
+        1.0
+      ],
+      "chunk_values": [
+        0.7391304347826086,
+        0.6923076923076923,
+        1.0,
+        0.9090909090909091,
+        0.75,
+        0.7777777777777778,
+        1.0,
+        0.875,
+        0.7777777777777778,
+        0.7142857142857143
+      ],
+      "baseline_used": 7,
+      "chunk_used": 10,
+      "baseline_mean": 0.9126984126984127,
+      "chunk_mean": 0.823537030602248,
+      "difference": -0.08916138209616464,
+      "ci95": [
+        -0.20734156242308416,
+        0.05597836040770803
+      ]
+    },
+    "median_peak_step_of_big": {
+      "baseline_values": [
+        1.0,
+        39.0,
+        14.5,
+        22.0,
+        44.0,
+        31.5,
+        56.0,
+        24.0,
+        47.5,
+        14.5
+      ],
+      "chunk_values": [
+        70.0,
+        46.0,
+        29.0,
+        23.0,
+        48.5,
+        44.0,
+        33.0,
+        1.0,
+        59.5,
+        82.0
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 29.4,
+      "chunk_mean": 43.6,
+      "difference": 14.200000000000003,
+      "ci95": [
+        -2.9499999999999957,
+        31.301249999999985
+      ]
+    },
+    "ended_empty_share": {
+      "baseline_values": [
+        0.56,
+        0.52,
+        0.7,
+        0.82,
+        0.54,
+        0.6,
+        0.56,
+        0.7,
+        0.62,
+        0.8
+      ],
+      "chunk_values": [
+        0.64,
+        0.9,
+        0.74,
+        0.88,
+        0.72,
+        0.8,
+        0.72,
+        0.88,
+        0.76,
+        0.84
+      ],
+      "baseline_used": 10,
+      "chunk_used": 10,
+      "baseline_mean": 0.642,
+      "chunk_mean": 0.788,
+      "difference": 0.14600000000000002,
+      "ci95": [
+        0.06400000000000006,
+        0.22599999999999998
+      ]
+    }
+  },
+  "identity_residual": 0.0,
+  "guide": {
+    "step1": "chunked networks give back more coverage than baseline networks",
+    "step2": "no clear difference in how coverage is lost"
+  },
+  "warnings": [],
+  "unverified_networks": []
+}
