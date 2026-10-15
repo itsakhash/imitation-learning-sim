@@ -11,9 +11,17 @@ import nexec_study as nx
 
 def net(name, max_cov, final, start=0.05, n=3, seed_start=10000):
     episodes = [
-        {"seed": seed_start + i, "steps": 300, "start_coverage": start, "max_coverage": max_cov,
-         "final_coverage": final, "success": False, "terminated": False, "truncated": True,
-         "coverage_trace": [max_cov]}
+        {
+            "seed": seed_start + i,
+            "steps": 300,
+            "start_coverage": start,
+            "max_coverage": max_cov,
+            "final_coverage": final,
+            "success": False,
+            "terminated": False,
+            "truncated": True,
+            "coverage_trace": [max_cov],
+        }
         for i in range(n)
     ]
     return ev.build_report(name, episodes)
@@ -23,45 +31,94 @@ def rows(max_start, final_start, step=0.002, n=10):
     return [(max_start + step * i, final_start + step * i) for i in range(n)]
 
 
-def make_cell(n_exec, cell_rows, seed_start=10000):
-    return [net(nx.network_name(i, n_exec), m, f, seed_start=seed_start) for i, (m, f) in enumerate(cell_rows)]
+def make_cell(n_exec, cell_rows, seed_start=10000, first_seed=0):
+    return [
+        net(nx.network_name(first_seed + i, n_exec), m, f, seed_start=seed_start)
+        for i, (m, f) in enumerate(cell_rows)
+    ]
 
 
-def make_baseline(cell_rows, seed_start=10000):
-    return [net(ab.network_name("baseline", ab.FULL_SIZE, i), m, f, seed_start=seed_start)
-            for i, (m, f) in enumerate(cell_rows)]
+def make_baseline(cell_rows, seed_start=10000, first_seed=0):
+    return [
+        net(
+            ab.network_name("baseline", ab.FULL_SIZE, first_seed + i),
+            m,
+            f,
+            seed_start=seed_start,
+        )
+        for i, (m, f) in enumerate(cell_rows)
+    ]
 
 
-REFERENCE_ROWS = rows(0.15, 0.04)    # giveback 0.11 in every network
+REFERENCE_ROWS = rows(0.15, 0.04)  # giveback 0.11 in every network
 BASELINE_ROWS = rows(0.10, 0.06)
 
 
+def cells_from(first_seed):
+    cells = {
+        1: make_cell(1, rows(0.14, 0.08), first_seed=first_seed),
+        8: make_cell(8, REFERENCE_ROWS, first_seed=first_seed),
+    }
+    return cells, make_baseline(BASELINE_ROWS, first_seed=first_seed)
+
+
 # ----------------------------------------------------------------- names and paths
+
 
 def test_network_names():
     assert nx.network_name(0, 8) == "chunk_cnn"
     assert nx.network_name(3, 8) == "chunk_cnn_s3"
     assert nx.network_name(0, 4) == "chunk_cnn_x4"
     assert nx.network_name(9, 1) == "chunk_cnn_s9_x1"
+    assert nx.network_name(12, 8) == "chunk_cnn_s12"
 
 
 def test_default_paths_have_ten_networks_per_condition_and_ten_baselines():
     paths = nx.default_paths(Path("r"))
     assert sorted(paths["chunk"]) == [1, 2, 4, 8]
-    assert all(len(p) == 10 for p in paths["chunk"].values()) and len(paths["baseline"]) == 10
+    assert (
+        all(len(p) == 10 for p in paths["chunk"].values())
+        and len(paths["baseline"]) == 10
+    )
     assert paths["chunk"][8][0].name == "eval_chunk_cnn.json"
     assert paths["chunk"][1][3].name == "eval_chunk_cnn_s3_x1.json"
     assert paths["chunk"][4][0].name == "eval_chunk_cnn_x4.json"
-    assert paths["baseline"][0].name == "eval_bc_cnn.json" and paths["baseline"][9].name == "eval_bc_cnn_s9.json"
+    assert (
+        paths["baseline"][0].name == "eval_bc_cnn.json"
+        and paths["baseline"][9].name == "eval_bc_cnn_s9.json"
+    )
 
 
 def test_default_paths_can_be_restricted():
     paths = nx.default_paths(Path("r"), n_execs=(2, 8), networks=3)
     assert sorted(paths["chunk"]) == [2, 8]
-    assert all(len(p) == 3 for p in paths["chunk"].values()) and len(paths["baseline"]) == 3
+    assert (
+        all(len(p) == 3 for p in paths["chunk"].values())
+        and len(paths["baseline"]) == 3
+    )
+
+
+def test_default_paths_can_start_at_another_training_seed():
+    paths = nx.default_paths(Path("r"), n_execs=(1, 8), networks=3, first_seed=10)
+    assert [p.name for p in paths["chunk"][8]] == [
+        "eval_chunk_cnn_s10.json",
+        "eval_chunk_cnn_s11.json",
+        "eval_chunk_cnn_s12.json",
+    ]
+    assert [p.name for p in paths["chunk"][1]] == [
+        "eval_chunk_cnn_s10_x1.json",
+        "eval_chunk_cnn_s11_x1.json",
+        "eval_chunk_cnn_s12_x1.json",
+    ]
+    assert [p.name for p in paths["baseline"]] == [
+        "eval_bc_cnn_s10.json",
+        "eval_bc_cnn_s11.json",
+        "eval_bc_cnn_s12.json",
+    ]
 
 
 # ------------------------------------------------------------------------ verdict
+
 
 @pytest.mark.parametrize(
     "giveback, final, expected",
@@ -69,11 +126,31 @@ def test_default_paths_can_be_restricted():
         ((-0.06, -0.04), (0.02, 0.05), "fewer executed targets help"),
         ((-0.06, -0.04), (-0.01, 0.05), "mixed or no clear effect"),
         ((-0.06, 0.01), (0.02, 0.05), "mixed or no clear effect"),
-        ((0.01, 0.05), (0.02, 0.05), "fewer executed targets hurt"),      # giveback entirely above zero
-        ((-0.06, -0.04), (-0.05, -0.01), "fewer executed targets hurt"),  # final entirely below zero
-        ((0.0, 0.05), (0.02, 0.05), "mixed or no clear effect"),           # a lower bound of 0 is not above 0
-        ((-0.06, -0.04), (0.0, 0.05), "mixed or no clear effect"),         # a lower bound of 0 is not above 0
-        ((-0.06, -0.04), (-0.05, 0.0), "mixed or no clear effect"),        # an upper bound of 0 is not below 0
+        (
+            (0.01, 0.05),
+            (0.02, 0.05),
+            "fewer executed targets hurt",
+        ),  # giveback entirely above zero
+        (
+            (-0.06, -0.04),
+            (-0.05, -0.01),
+            "fewer executed targets hurt",
+        ),  # final entirely below zero
+        (
+            (0.0, 0.05),
+            (0.02, 0.05),
+            "mixed or no clear effect",
+        ),  # a lower bound of 0 is not above 0
+        (
+            (-0.06, -0.04),
+            (0.0, 0.05),
+            "mixed or no clear effect",
+        ),  # a lower bound of 0 is not above 0
+        (
+            (-0.06, -0.04),
+            (-0.05, 0.0),
+            "mixed or no clear effect",
+        ),  # an upper bound of 0 is not below 0
         ((0.01, 0.05), (-0.05, -0.01), "fewer executed targets hurt"),
     ],
 )
@@ -82,6 +159,7 @@ def test_verdict_follows_the_pre_registered_rule(giveback, final, expected):
 
 
 # ------------------------------------------------------------- paired differences
+
 
 def test_paired_difference_known_values():
     d = nx.paired_difference([0.1, 0.2, 0.3], [0.2, 0.3, 0.4])
@@ -98,8 +176,11 @@ def test_paired_difference_interval_contains_the_mean():
 
 # --------------------------------------------------------------------- cell summary
 
+
 def test_cell_summary_known_values():
-    c = nx.cell_summary([net("a", 0.30, 0.10), net("b", 0.20, 0.04), net("c", 0.10, 0.07)])
+    c = nx.cell_summary(
+        [net("a", 0.30, 0.10), net("b", 0.20, 0.04), net("c", 0.10, 0.07)]
+    )
     assert c["networks"] == 3 and c["names"] == ["a", "b", "c"]
     assert c["mean_max_coverage"]["mean"] == pytest.approx(0.20)
     assert c["mean_final_coverage"]["mean"] == pytest.approx(0.07)
@@ -116,6 +197,7 @@ def test_a_condition_needs_networks():
 
 # ------------------------------------------------------------------------- analysis
 
+
 def test_executing_fewer_targets_helps_when_giveback_falls_and_final_coverage_rises():
     cells = {1: make_cell(1, rows(0.14, 0.08)), 8: make_cell(8, REFERENCE_ROWS)}
     r = nx.analyze(cells, make_baseline(BASELINE_ROWS))
@@ -127,7 +209,7 @@ def test_executing_fewer_targets_helps_when_giveback_falls_and_final_coverage_ri
     for metric in nx.PAIRED_METRICS:
         low, high = p[metric]["ci95"]
         assert low - 1e-12 <= p[metric]["difference"] <= high + 1e-12
-    assert sorted(r["primary"]) == [1]
+    assert sorted(r["primary"]) == [1] and r["first_seed"] == 0
 
 
 def test_executing_fewer_targets_hurts_when_final_coverage_and_giveback_get_worse():
@@ -155,7 +237,10 @@ def test_every_condition_gets_its_own_verdict():
     r = nx.analyze(cells, make_baseline(BASELINE_ROWS))
     assert sorted(r["primary"]) == [1, 2, 4] and sorted(r["cells"]) == [1, 2, 4, 8]
     assert [r["primary"][k]["verdict"] for k in (1, 2, 4)] == [
-        "fewer executed targets help", "mixed or no clear effect", "fewer executed targets hurt"]
+        "fewer executed targets help",
+        "mixed or no clear effect",
+        "fewer executed targets hurt",
+    ]
 
 
 def test_descriptive_numbers_and_the_baseline_comparison():
@@ -168,8 +253,12 @@ def test_descriptive_numbers_and_the_baseline_comparison():
     assert r["baseline"]["mean_final_coverage"] == pytest.approx(0.069)
     assert r["baseline"]["mean_giveback"] == pytest.approx(0.04)
     # chunked (8 targets) minus baseline: 0.159 - 0.109 on the peak, 0.049 - 0.069 on the end
-    assert r["versus_baseline"][8]["mean_max_coverage"]["difference"] == pytest.approx(0.05)
-    assert r["versus_baseline"][8]["mean_final_coverage"]["difference"] == pytest.approx(-0.02)
+    assert r["versus_baseline"][8]["mean_max_coverage"]["difference"] == pytest.approx(
+        0.05
+    )
+    assert r["versus_baseline"][8]["mean_final_coverage"][
+        "difference"
+    ] == pytest.approx(-0.02)
 
 
 def test_the_planned_number_of_networks_carries_no_warning():
@@ -179,15 +268,22 @@ def test_the_planned_number_of_networks_carries_no_warning():
 
 
 def test_fewer_networks_than_planned_is_labelled_a_pilot():
-    cells = {1: make_cell(1, rows(0.14, 0.08, n=5)), 8: make_cell(8, rows(0.15, 0.04, n=5))}
+    cells = {
+        1: make_cell(1, rows(0.14, 0.08, n=5)),
+        8: make_cell(8, rows(0.15, 0.04, n=5)),
+    }
     r = nx.analyze(cells, make_baseline(rows(0.10, 0.06, n=5)))
-    assert any("pilot" in w for w in r["warnings"]) and any("baseline" in w for w in r["warnings"])
+    assert any("pilot" in w for w in r["warnings"]) and any(
+        "baseline" in w for w in r["warnings"]
+    )
 
 
-def test_the_reference_conditon_and_a_second_one_are_required():
+def test_the_reference_condition_and_a_second_one_are_required():
     base = make_baseline(BASELINE_ROWS)
     with pytest.raises(cp.ComparisonError):
-        nx.analyze({1: make_cell(1, REFERENCE_ROWS), 2: make_cell(2, REFERENCE_ROWS)}, base)
+        nx.analyze(
+            {1: make_cell(1, REFERENCE_ROWS), 2: make_cell(2, REFERENCE_ROWS)}, base
+        )
     with pytest.raises(cp.ComparisonError):
         nx.analyze({8: make_cell(8, REFERENCE_ROWS)}, base)
 
@@ -208,11 +304,16 @@ def test_networks_in_the_wrong_order_are_refused():
     first = make_cell(1, rows(0.14, 0.08))
     first[0], first[1] = first[1], first[0]
     with pytest.raises(cp.ComparisonError):
-        nx.analyze({1: first, 8: make_cell(8, REFERENCE_ROWS)}, make_baseline(BASELINE_ROWS))
+        nx.analyze(
+            {1: first, 8: make_cell(8, REFERENCE_ROWS)}, make_baseline(BASELINE_ROWS)
+        )
 
 
 def test_reports_on_different_seeds_are_refused():
-    cells = {1: make_cell(1, rows(0.14, 0.08), seed_start=20000), 8: make_cell(8, REFERENCE_ROWS)}
+    cells = {
+        1: make_cell(1, rows(0.14, 0.08), seed_start=20000),
+        8: make_cell(8, REFERENCE_ROWS),
+    }
     with pytest.raises(cp.ComparisonError):
         nx.analyze(cells, make_baseline(BASELINE_ROWS))
 
@@ -221,11 +322,37 @@ def test_duplicate_network_names_are_refused():
     first = make_cell(1, rows(0.14, 0.08))
     first[1] = first[0]
     with pytest.raises(cp.ComparisonError):
-        nx.analyze({1: first, 8: make_cell(8, REFERENCE_ROWS)}, make_baseline(BASELINE_ROWS))
+        nx.analyze(
+            {1: first, 8: make_cell(8, REFERENCE_ROWS)}, make_baseline(BASELINE_ROWS)
+        )
 
 
 def test_check_pairing_accepts_the_planned_names():
-    nx.check_pairing({1: make_cell(1, rows(0.14, 0.08)), 8: make_cell(8, REFERENCE_ROWS)})
+    nx.check_pairing(
+        {1: make_cell(1, rows(0.14, 0.08)), 8: make_cell(8, REFERENCE_ROWS)}
+    )
+
+
+def test_pairing_follows_the_first_seed():
+    cells, _ = cells_from(10)
+    nx.check_pairing(cells, first_seed=10)
+    with pytest.raises(cp.ComparisonError):
+        nx.check_pairing(cells)  # seed 0 expects other names
+    with pytest.raises(cp.ComparisonError):
+        nx.check_pairing(cells, first_seed=11)
+
+
+def test_the_analysis_can_run_on_other_training_seeds():
+    cells, baseline = cells_from(10)
+    r = nx.analyze(cells, baseline, first_seed=10)
+    assert r["first_seed"] == 10
+    assert r["primary"][1]["verdict"] == "fewer executed targets help"
+    assert (
+        r["cells"][8]["names"][0] == "chunk_cnn_s10"
+        and r["cells"][1]["names"][9] == "chunk_cnn_s19_x1"
+    )
+    with pytest.raises(cp.ComparisonError):
+        nx.analyze(cells, baseline)  # the default first seed expects other names
 
 
 def test_the_result_is_json_serializable_and_records_the_evaluation():
@@ -236,27 +363,74 @@ def test_the_result_is_json_serializable_and_records_the_evaluation():
 
 
 def test_the_format_shows_every_condition_every_verdict_and_the_note():
-    cells = {1: make_cell(1, rows(0.14, 0.08)), 2: make_cell(2, REFERENCE_ROWS), 8: make_cell(8, REFERENCE_ROWS)}
+    cells = {
+        1: make_cell(1, rows(0.14, 0.08)),
+        2: make_cell(2, REFERENCE_ROWS),
+        8: make_cell(8, REFERENCE_ROWS),
+    }
     text = nx.format_study(nx.analyze(cells, make_baseline(BASELINE_ROWS)))
-    for expected in ("executed-targets study:", "10 chunked networks", "executed", "given back",
-                     "above do-nothing", "baseline networks (10):", "1 executed targets minus 8:",
-                     "2 executed targets minus 8:", "-> fewer executed targets help",
-                     "-> mixed or no clear effect", "note: three uncorrected verdicts"):
+    for expected in (
+        "executed-targets study:",
+        "10 chunked networks (training seeds 0 to 9)",
+        "given back",
+        "above do-nothing",
+        "baseline networks (10):",
+        "1 executed targets minus 8:",
+        "2 executed targets minus 8:",
+        "-> fewer executed targets help",
+        "-> mixed or no clear effect",
+        "note: two uncorrected verdicts",
+    ):
         assert expected in text
     assert "WARNING" not in text
 
 
+def test_the_note_counts_the_verdicts():
+    cells = {
+        1: make_cell(1, REFERENCE_ROWS),
+        2: make_cell(2, REFERENCE_ROWS),
+        4: make_cell(4, REFERENCE_ROWS),
+        8: make_cell(8, REFERENCE_ROWS),
+    }
+    text = nx.format_study(nx.analyze(cells, make_baseline(BASELINE_ROWS)))
+    assert "note: three uncorrected verdicts" in text
+    one = {1: make_cell(1, REFERENCE_ROWS), 8: make_cell(8, REFERENCE_ROWS)}
+    assert "note: one uncorrected verdict;" in nx.format_study(
+        nx.analyze(one, make_baseline(BASELINE_ROWS))
+    )
+
+
+def test_the_format_shows_the_training_seeds_of_a_replication():
+    cells, baseline = cells_from(10)
+    text = nx.format_study(nx.analyze(cells, baseline, first_seed=10))
+    assert "(training seeds 10 to 19)" in text
+
+
 # ----------------------------------------------------------------------- command line
+
 
 def write_all(directory, cells, baseline):
     for report in [r for reports in cells.values() for r in reports] + baseline:
         (directory / f"eval_{report['policy']}.json").write_text(json.dumps(report))
-        (directory / f"reproducibility_{report['policy']}.json").write_text(json.dumps({"reproduced": True}))
+        (directory / f"reproducibility_{report['policy']}.json").write_text(
+            json.dumps({"reproduced": True})
+        )
 
 
 def run_main(directory, *extra):
     out = directory / "study.json"
-    code = nx.main(["--report-dir", str(directory), "--n-execs", "1", "8", "--out", str(out), *extra])
+    code = nx.main(
+        [
+            "--report-dir",
+            str(directory),
+            "--n-execs",
+            "1",
+            "8",
+            "--out",
+            str(out),
+            *extra,
+        ]
+    )
     return code, out
 
 
@@ -276,9 +450,13 @@ def test_main_writes_the_study_and_prints_it(tmp_path, capsys):
 
 def test_main_refuses_a_network_without_a_passing_record(tmp_path, capsys):
     write_all(tmp_path, good_cells(), make_baseline(BASELINE_ROWS))
-    (tmp_path / "reproducibility_chunk_cnn_s3_x1.json").write_text(json.dumps({"reproduced": False}))
+    (tmp_path / "reproducibility_chunk_cnn_s3_x1.json").write_text(
+        json.dumps({"reproduced": False})
+    )
     code, out = run_main(tmp_path)
-    assert code == 1 and not out.exists() and "chunk_cnn_s3_x1" in capsys.readouterr().err
+    assert (
+        code == 1 and not out.exists() and "chunk_cnn_s3_x1" in capsys.readouterr().err
+    )
 
 
 def test_allow_unverified_analyses_anyway_and_records_it(tmp_path):
@@ -293,15 +471,68 @@ def test_allow_unverified_analyses_anyway_and_records_it(tmp_path):
 def test_main_requires_the_reference_condition_and_another_one(tmp_path, capsys):
     write_all(tmp_path, good_cells(), make_baseline(BASELINE_ROWS))
     out = str(tmp_path / "o.json")
-    assert nx.main(["--report-dir", str(tmp_path), "--n-execs", "1", "2", "--out", out]) == 1
+    assert (
+        nx.main(["--report-dir", str(tmp_path), "--n-execs", "1", "2", "--out", out])
+        == 1
+    )
     assert "--n-execs must include" in capsys.readouterr().err
     assert nx.main(["--report-dir", str(tmp_path), "--n-execs", "8", "--out", out]) == 1
-    assert nx.main(["--report-dir", str(tmp_path), "--n-execs", "1", "1", "8", "--out", out]) == 1
+    assert (
+        nx.main(
+            ["--report-dir", str(tmp_path), "--n-execs", "1", "1", "8", "--out", out]
+        )
+        == 1
+    )
 
 
 def test_main_reports_a_missing_file_as_an_error(tmp_path, capsys):
     assert run_main(tmp_path)[0] == 1
     assert "error:" in capsys.readouterr().err
+
+
+def test_main_analyses_another_block_of_training_seeds_and_names_the_output_after_them(
+    tmp_path, capsys
+):
+    cells, baseline = cells_from(10)
+    write_all(tmp_path, cells, baseline)
+    code = nx.main(
+        ["--report-dir", str(tmp_path), "--n-execs", "1", "8", "--first-seed", "10"]
+    )
+    saved_path = tmp_path / "nexec_study_s10_s19.json"
+    assert (
+        code == 0
+        and saved_path.exists()
+        and not (tmp_path / "nexec_study.json").exists()
+    )
+    assert json.loads(saved_path.read_text())["first_seed"] == 10
+    assert "(training seeds 10 to 19)" in capsys.readouterr().out
+
+
+def test_main_keeps_the_original_output_name_for_the_first_block_of_seeds(tmp_path):
+    write_all(tmp_path, good_cells(), make_baseline(BASELINE_ROWS))
+    assert nx.main(["--report-dir", str(tmp_path), "--n-execs", "1", "8"]) == 0
+    assert (tmp_path / "nexec_study.json").exists()
+
+
+def test_main_does_not_find_networks_of_another_block_of_seeds(tmp_path, capsys):
+    write_all(tmp_path, good_cells(), make_baseline(BASELINE_ROWS))
+    assert (
+        nx.main(
+            ["--report-dir", str(tmp_path), "--n-execs", "1", "8", "--first-seed", "10"]
+        )
+        == 1
+    )
+    assert "error:" in capsys.readouterr().err
+
+
+def test_main_rejects_a_negative_first_seed(tmp_path, capsys):
+    assert (
+        nx.main(
+            ["--report-dir", str(tmp_path), "--n-execs", "1", "8", "--first-seed", "-1"]
+        )
+        == 1
+    )
+    assert "--first-seed" in capsys.readouterr().err
 
 
 # ------------------------------------------------------------ the real saved reports

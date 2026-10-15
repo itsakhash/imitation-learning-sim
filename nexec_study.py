@@ -13,8 +13,8 @@ existing evaluations).
 Design fixed before any of the new evaluations existed:
   - networks: the ten chunked checkpoints of the seed study (training seeds 0 to 9), unchanged
   - conditions: 1, 2, 4 and 8 targets executed per prediction; the 8 are the existing evaluations
-  - everything else identical to the seed study: the 50-episode evaluation on seeds 10000 to 10049
-    and the two-run reproducibility check; nothing is trained
+  - everything else identical to the seed study: the 50-episode evaluation on seeds 10000 to
+    10049 and the two-run reproducibility check; nothing is trained
   - primary: for each of 1, 2 and 4 against 8, the mean over the ten networks of the paired
     per-network difference (fewer executed targets minus 8) in mean coverage given back (max minus
     final) and in mean final coverage, each with a 95% percentile bootstrap interval that resamples
@@ -41,13 +41,21 @@ Reading guide, fixed before any new evaluation existed:
     support
   - "hurt" for 1 executed target: fewer executed targets did worse, the opposite of the explanation
 
+Replication. --first-seed runs exactly the same analysis on another block of ten consecutive
+training seeds (the planned replication uses seeds 10 to 19 with --n-execs 1 4 8, which gives the two
+verdicts for 4 and for 1 executed targets against 8). Its default output file is named after the
+seeds, so the original result is never overwritten.
+
 Limits: the checkpoints were trained to be executed 8 targets at a time, so executing fewer is a
 test-time change only; every network was evaluated on the same 50 starting positions; the intervals
-describe these ten networks and this recipe; three uncorrected verdicts; with fewer networks per
-condition than planned the result is a pilot, not the pre-registered study.
+describe these ten networks and this recipe; the verdicts are not corrected for the number of
+tests; with fewer networks per condition than planned the result is a pilot, not the pre-registered
+study.
 
 Run:  python nexec_study.py
+      python nexec_study.py --first-seed 10 --n-execs 1 4 8
 """
+
 from __future__ import annotations
 
 import argparse
@@ -66,6 +74,7 @@ REFERENCE = 8
 N_EXECS = (1, 2, 4, REFERENCE)
 NETWORKS = 10
 PAIRED_METRICS = ("mean_giveback", "mean_final_coverage", "mean_max_coverage")
+COUNT_WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}
 
 
 def network_name(seed: int, n_exec: int) -> str:
@@ -75,23 +84,30 @@ def network_name(seed: int, n_exec: int) -> str:
     return base if n_exec == REFERENCE else f"{base}_x{n_exec}"
 
 
-def default_paths(report_dir=Path("reports"), n_execs=N_EXECS, networks=NETWORKS) -> dict:
-    """{"chunk": {n_exec: [evaluation report paths]}, "baseline": [evaluation report paths]}."""
+def default_paths(
+    report_dir=Path("reports"), n_execs=N_EXECS, networks=NETWORKS, first_seed=0
+) -> dict:
+    """{"chunk": {n_exec: [evaluation report paths]}, "baseline": [evaluation report paths]} for
+    `networks` consecutive training seeds starting at first_seed."""
     report_dir = Path(report_dir)
+    seeds = range(first_seed, first_seed + networks)
     chunk = {
-        n: [report_dir / f"eval_{network_name(seed, n)}.json" for seed in range(networks)]
+        n: [report_dir / f"eval_{network_name(seed, n)}.json" for seed in seeds]
         for n in n_execs
     }
-    baseline = ab.default_paths(report_dir, sizes=(ab.FULL_SIZE,), full_seeds=networks)["baseline"][ab.FULL_SIZE]
+    baseline = [
+        report_dir / f"eval_{ab.network_name('baseline', ab.FULL_SIZE, seed)}.json"
+        for seed in seeds
+    ]
     return {"chunk": chunk, "baseline": baseline}
 
 
-def check_pairing(cells: dict) -> None:
-    """Position i of every condition must be training seed i, so that the differences are
-    paired within a network."""
+def check_pairing(cells: dict, first_seed: int = 0) -> None:
+    """Position i of every condition must be training seed first_seed + i, so that the
+    differences are paired within a network."""
     for n, reports in cells.items():
         for i, report in enumerate(reports):
-            expected = network_name(i, n)
+            expected = network_name(first_seed + i, n)
             if report["policy"] != expected:
                 raise cp.ComparisonError(
                     f"{n} executed targets, position {i}: expected {expected}, got {report['policy']}"
@@ -134,9 +150,10 @@ def cell_summary(reports) -> dict:
     }
 
 
-def analyze(cells: dict, baseline) -> dict:
+def analyze(cells: dict, baseline, first_seed: int = 0) -> dict:
     """cells maps each number of executed targets to its evaluation reports (one per training
-    seed, in order); baseline holds the evaluation reports of the baseline networks."""
+    seed, in order, starting at first_seed); baseline holds the evaluation reports of the baseline
+    networks."""
     baseline = list(baseline)
     cells = {int(n): list(reports) for n, reports in cells.items()}
     if REFERENCE not in cells or len(cells) < 2:
@@ -144,12 +161,14 @@ def analyze(cells: dict, baseline) -> dict:
             f"need the {REFERENCE}-target evaluations and at least one other number of executed targets"
         )
     if len({len(reports) for reports in cells.values()}) != 1:
-        raise cp.ComparisonError("every number of executed targets needs the same networks")
+        raise cp.ComparisonError(
+            "every number of executed targets needs the same networks"
+        )
     if not baseline:
         raise cp.ComparisonError("no baseline networks given")
     flat = [r for reports in cells.values() for r in reports] + baseline
     ss.check_all_comparable(flat)
-    check_pairing(cells)
+    check_pairing(cells, first_seed)
 
     summaries = {n: cell_summary(reports) for n, reports in sorted(cells.items())}
     base_values = [ss.network_values(r) for r in baseline]
@@ -158,8 +177,13 @@ def analyze(cells: dict, baseline) -> dict:
     versus = {}
     for n, cell in summaries.items():
         versus[n] = {}
-        for metric, base in (("mean_max_coverage", base_max), ("mean_final_coverage", base_final)):
-            difference, low, high = ss.bootstrap_difference(base, cell[metric]["values"])
+        for metric, base in (
+            ("mean_max_coverage", base_max),
+            ("mean_final_coverage", base_final),
+        ):
+            difference, low, high = ss.bootstrap_difference(
+                base, cell[metric]["values"]
+            )
             versus[n][metric] = {"difference": difference, "ci95": [low, high]}
 
     reference = summaries[REFERENCE]
@@ -167,8 +191,13 @@ def analyze(cells: dict, baseline) -> dict:
     for n, cell in summaries.items():
         if n == REFERENCE:
             continue
-        entry = {m: paired_difference(reference[m]["values"], cell[m]["values"]) for m in PAIRED_METRICS}
-        entry["verdict"] = verdict(entry["mean_giveback"]["ci95"], entry["mean_final_coverage"]["ci95"])
+        entry = {
+            m: paired_difference(reference[m]["values"], cell[m]["values"])
+            for m in PAIRED_METRICS
+        }
+        entry["verdict"] = verdict(
+            entry["mean_giveback"]["ci95"], entry["mean_final_coverage"]["ci95"]
+        )
         primary[n] = entry
 
     per_cell = len(next(iter(cells.values())))
@@ -179,13 +208,19 @@ def analyze(cells: dict, baseline) -> dict:
             "not the pre-registered study"
         )
     if len(baseline) < NETWORKS:
-        warnings.append(f"{len(baseline)} baseline networks, fewer than the {NETWORKS} planned")
+        warnings.append(
+            f"{len(baseline)} baseline networks, fewer than the {NETWORKS} planned"
+        )
     first = baseline[0]["summary"]
     base_giveback = [m - f for m, f in zip(base_max, base_final)]
     return {
+        "first_seed": int(first_seed),
         "networks_per_condition": per_cell,
-        "evaluation": {"episodes": first["n_episodes"], "seed_start": first["seed_start"],
-                       "seed_end": first["seed_end"]},
+        "evaluation": {
+            "episodes": first["n_episodes"],
+            "seed_start": first["seed_start"],
+            "seed_end": first["seed_end"],
+        },
         "cells": summaries,
         "baseline": {
             "networks": len(baseline),
@@ -207,10 +242,11 @@ def _interval(entry, spec: str = "+.4f") -> str:
 def format_study(result: dict) -> str:
     e = result["evaluation"]
     n = result["networks_per_condition"]
+    start = result["first_seed"]
     lines = [
-        f"executed-targets study: {n} chunked networks (training seeds 0 to {n - 1}), each evaluated on "
-        f"{e['episodes']} episodes (seeds {e['seed_start']} to {e['seed_end']}) executing different numbers of "
-        "their 16 predicted targets per prediction; the unit is the network",
+        f"executed-targets study: {n} chunked networks (training seeds {start} to {start + n - 1}), each "
+        f"evaluated on {e['episodes']} episodes (seeds {e['seed_start']} to {e['seed_end']}) executing different "
+        "numbers of their 16 predicted targets per prediction; the unit is the network",
         f"  {'executed':>8}{'max cov.':>10}{'final cov.':>12}{'given back':>12}{'above do-nothing':>20}   "
         f"{'max minus baseline [95% CI]':<32}{'final minus baseline [95% CI]':<32}",
     ]
@@ -235,50 +271,75 @@ def format_study(result: dict) -> str:
         )
     for warning in result["warnings"]:
         lines.append(f"WARNING: {warning}")
+    count = len(result["primary"])
     lines.append(
-        "note: three uncorrected verdicts; the checkpoints were trained to be executed 8 targets at a time, so "
-        "executing fewer is a test-time change only; every network was evaluated on the same 50 starting positions"
+        f"note: {COUNT_WORDS.get(count, str(count))} uncorrected verdict{'' if count == 1 else 's'}; the "
+        "checkpoints were trained to be executed 8 targets at a time, so executing fewer is a test-time change "
+        "only; every network was evaluated on the same 50 starting positions"
     )
     return "\n".join(lines)
 
 
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Pre-registered executed-targets study")
+    parser = argparse.ArgumentParser(
+        description="Pre-registered executed-targets study"
+    )
     parser.add_argument("--report-dir", type=Path, default=Path("reports"))
     parser.add_argument("--n-execs", type=int, nargs="+", default=list(N_EXECS))
     parser.add_argument("--networks", type=int, default=NETWORKS)
+    parser.add_argument("--first-seed", type=int, default=0)
     parser.add_argument("--allow-unverified", action="store_true")
-    parser.add_argument("--out", type=Path, default=Path("reports/nexec_study.json"))
+    parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args(argv)
 
     try:
-        if REFERENCE not in args.n_execs or len(set(args.n_execs)) < 2 or len(set(args.n_execs)) != len(args.n_execs):
+        if args.first_seed < 0:
+            raise ValueError("--first-seed must not be negative")
+        if (
+            REFERENCE not in args.n_execs
+            or len(set(args.n_execs)) < 2
+            or len(set(args.n_execs)) != len(args.n_execs)
+        ):
             raise ValueError(
                 f"--n-execs must include {REFERENCE}, at least one other number, and no repeats"
             )
-        paths = default_paths(args.report_dir, args.n_execs, args.networks)
+        paths = default_paths(
+            args.report_dir, args.n_execs, args.networks, args.first_seed
+        )
         cells = {n: [cp.load_report(p) for p in ps] for n, ps in paths["chunk"].items()}
         baseline = [cp.load_report(p) for p in paths["baseline"]]
         everything = [r for reports in cells.values() for r in reports] + baseline
         unverified = [
-            r["policy"] for r in everything if ss.reproducibility_status(r, args.report_dir) is not True
+            r["policy"]
+            for r in everything
+            if ss.reproducibility_status(r, args.report_dir) is not True
         ]
         if unverified and not args.allow_unverified:
             raise cp.ComparisonError(
-                "no passing reproducibility record for: " + ", ".join(unverified)
+                "no passing reproducibility record for: "
+                + ", ".join(unverified)
                 + " (use --allow-unverified to analyse them anyway)"
             )
-        result = analyze(cells, baseline)
+        result = analyze(cells, baseline, args.first_seed)
     except (cp.ComparisonError, ValueError) as err:
         print(f"error: {err}", file=sys.stderr)
         return 1
     result["unverified_networks"] = unverified
     if unverified:
-        result["warnings"].append("without a passing reproducibility record: " + ", ".join(unverified))
-    args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(result, indent=2) + "\n")
+        result["warnings"].append(
+            "without a passing reproducibility record: " + ", ".join(unverified)
+        )
+    last = args.first_seed + args.networks - 1
+    default_name = (
+        "nexec_study.json"
+        if args.first_seed == 0
+        else f"nexec_study_s{args.first_seed}_s{last}.json"
+    )
+    out = args.out or args.report_dir / default_name
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(result, indent=2) + "\n")
     print(format_study(result))
-    print(f"saved {args.out}")
+    print(f"saved {out}")
     return 0
 
 
