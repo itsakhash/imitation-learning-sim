@@ -8,3 +8,7 @@ __pycache__/
 data/
 checkpoints/
 runs/
+
+# Second-run files used only for the reproducibility check, and hand-picked episode pictures
+reports/rerun_*.json
+reports/inspect_*.png

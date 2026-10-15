@@ -1,0 +1,96 @@
+{
+  "n_baseline": 3,
+  "n_chunk": 3,
+  "evaluation": {
+    "episodes": 50,
+    "seed_start": 10000,
+    "seed_end": 10049
+  },
+  "baseline_networks": [
+    "bc_cnn",
+    "bc_cnn_s1",
+    "bc_cnn_s2"
+  ],
+  "chunk_networks": [
+    "chunk_cnn",
+    "chunk_cnn_s1",
+    "chunk_cnn_s2"
+  ],
+  "primary": {
+    "mean_max_coverage": {
+      "baseline_values": [
+        0.11227013076,
+        0.10160884174000001,
+        0.09072369922000002
+      ],
+      "chunk_values": [
+        0.27898974102,
+        0.10614397054,
+        0.13521009448
+      ],
+      "baseline_mean": 0.10153422390666668,
+      "chunk_mean": 0.17344793534666667,
+      "baseline_range": 0.02154643153999998,
+      "chunk_range": 0.17284577048000002,
+      "difference": 0.07191371143999999,
+      "ci95": [
+        0.0046097466333333,
+        0.1739017541066667
+      ]
+    },
+    "mean_final_coverage": {
+      "baseline_values": [
+        0.08182639175999999,
+        0.07768284862,
+        0.05042824316
+      ],
+      "chunk_values": [
+        0.07748999438,
+        0.01921048766,
+        0.048910053519999996
+      ],
+      "baseline_mean": 0.06997916117999999,
+      "chunk_mean": 0.048536845186666656,
+      "baseline_range": 0.031398148599999995,
+      "chunk_range": 0.05827950672,
+      "difference": -0.02144231599333333,
+      "ci95": [
+        -0.05133486776666667,
+        0.008450235779999989
+      ]
+    }
+  },
+  "verdict": "inconclusive",
+  "secondary": {
+    "baseline": {
+      "networks": 3,
+      "above": 2,
+      "above_wilson95": [
+        0.20765960080204782,
+        0.9385080552796038
+      ],
+      "mean_difference": 0.011498619219999987,
+      "mean_difference_ci95": [
+        -0.00805229880000001,
+        0.023345849799999985
+      ]
+    },
+    "chunk": {
+      "networks": 3,
+      "above": 1,
+      "above_wilson95": [
+        0.06149194472039632,
+        0.7923403991979523
+      ],
+      "mean_difference": -0.009943696773333344,
+      "mean_difference_ci95": [
+        -0.03927005430000001,
+        0.01900945241999999
+      ]
+    }
+  },
+  "warnings": [
+    "fewer than 10 networks in a group: this is a pilot, not the pre-registered study"
+  ],
+  "unverified_networks": []
+}
