@@ -17,9 +17,9 @@ The demonstrations are not mine. They are the public `lerobot/pusht` dataset (20
 ## Policies
 
 - **Baseline (`train_bc.py`)**: a small CNN (4 convolutions, then 3 fully connected layers; 718,178 parameters) from the 96x96 image and the agent's position to one commanded target position, trained with mean squared error and Adam (lr 1e-3, batch 256, 30 epochs, about one minute on the RTX 5070). The split is by whole episodes: 165 for training (20,684 frames), 41 held out (4,966 frames). The checkpoint is always the last epoch; no epoch is selected on validation data.
-- **Action-chunking network (`train_chunk.py`)**: the same trunk with a last layer that predicts the next 16 commanded targets (725,888 parameters), trained on the same split with a loss that ignores positions padded past an episode's end. At run time it executes 8 of the 16 targets before predicting again. The 16 and 8 are taken from my memory of the Diffusion Policy PushT setup and have not been checked or tuned.
+- **Action-chunking network (`train_chunk.py`)**: the same trunk with a last layer that predicts the next 16 commanded targets (725,888 parameters), trained on the same split with a loss that ignores positions padded past an episode's end. At run time it executes 8 of the 16 targets before predicting again (the number executed can be changed at test time; see the executed-targets study). The 16 and 8 are taken from my memory of the Diffusion Policy PushT setup and have not been checked or tuned.
 - **Reference policies**: a random policy and a "do nothing" policy that commands the agent's current position.
-- Ten training seeds (0 to 9) of each network type were trained with identical settings. For the demonstration-count ablation, five training seeds of each type were also trained on random subsets of 20, 50 and 100 of the 165 training episodes (same recipe, 30 epochs).
+- Ten training seeds (0 to 9) of each network type were trained with identical settings. For the demonstration-count ablation, five training seeds of each type were also trained on random subsets of 20, 50 and 100 of the 165 training episodes (same recipe, 30 epochs). For the executed-targets study, the ten chunked checkpoints were evaluated again executing 4, 2 and 1 of their 16 predicted targets per prediction (a test-time change only; nothing was retrained).
 
 ## Evaluation protocol (fixed before any policy was evaluated)
 
@@ -28,7 +28,7 @@ The demonstrations are not mine. They are the public `lerobot/pusht` dataset (20
 - Also reported: success (the environment's own flag, coverage above 0.95 at any step) with a Wilson 95% interval, and the mean final coverage.
 - Reference numbers added after seeing the random baseline, which change no definition above: the coverage right after reset (start coverage), the gain of the maximum over it, and the do-nothing policy. Doing nothing scores exactly the start coverage (mean 0.0585 on these seeds), because the block can start partly on the target.
 - Stored coverage values are rounded to 9 decimals. This was added after seeing last-bit differences (5.55e-17) in the simulator's coverage between runs with identical states and actions. Success always comes from the environment's flag.
-- Every reported evaluation was run twice in separate processes and counts as reproduced only if all 50 episodes agree on steps and success and to within 1e-6 on coverage. All 52 evaluations reported here (the two reference policies, 20 full-data networks and 30 ablation networks) were reproduced with zero differences.
+- Every reported evaluation was run twice in separate processes and counts as reproduced only if all 50 episodes agree on steps and success and to within 1e-6 on coverage. All 82 evaluations reported here (the two reference policies, 20 full-data networks, 30 ablation networks and 30 executed-targets evaluations) were reproduced with zero differences.
 
 ## Results, training seeds 0 to 2 (50 episodes each, seeds 10000 to 10049)
 
@@ -90,7 +90,7 @@ Descriptive only (no verdict rule): 6 of 10 baseline networks end above the do-n
 - Chunked networks reach a higher peak coverage than the baseline. Both analyses agree, though the seven-network interval's lower end is only +0.0047.
 - Chunked networks end an episode with less coverage than a policy that never moves. Both analyses agree.
 - That chunked networks finish lower than the baseline is fragile: the interval excludes zero only with all ten networks, and by 0.0017.
-- I have not tested why the chunked networks finish lower. The behavior diagnostics below were written for the one-step baseline and do not yet support the chunked policy.
+- I had not tested why the chunked networks finish lower when I wrote the seed study; the executed-targets study below is the first test of one explanation. The behavior diagnostics further below were written for the one-step baseline and do not yet support the chunked policy.
 
 **Offline error on the 41 held-out demonstration episodes** (mean absolute error of the first commanded target, pixels; copying the agent's position scores 15.30, predicting the mean action 84.08): training seeds 0 to 2: baseline 12.83, 13.08, 13.69; chunked 15.17, 14.52, 15.71. Offline error was worse for the chunked networks, which matches their lower final coverage but not their higher peaks; I did not test how well it predicts simulator behavior across networks.
 
@@ -104,10 +104,11 @@ Computed from the coverage traces saved in the ten-network evaluation reports (n
 | Share of episodes giving back more than 0.1 | 0.102 | 0.276 | +0.174 [+0.114, +0.238] |
 | Of those, share with an abrupt drop (largest fall within 8 steps at least half the giveback) | 0.913 (7 networks) | 0.824 (10 networks) | -0.089 [-0.207, +0.056] |
 | Median step of the peak in those episodes | 29 | 44 | +14 [-3, +31] |
+| Share of episodes ending with coverage below 0.001 | 0.642 | 0.788 | +0.146 [+0.064, +0.226] |
 
 Three baseline networks had fewer than 3 episodes giving back more than 0.1, so they are left out of the abrupt-share row. Reading guide: step 1, the chunked networks give back more coverage; step 2 (evaluated only because step 1 held), no clear difference in how coverage is lost.
 
-When a large amount of coverage is lost, it is mostly lost quickly in both methods (91% and 82% of those episodes lose at least half of it within 8 steps); the chunked networks have such episodes 2.7 times as often (27.6% of episodes against 10.2%). This describes how coverage is lost, not why: an abrupt drop in a coverage trace can have many causes, and this analysis does not test whether executing 8 targets without looking is responsible.
+When a large amount of coverage is lost, it is mostly lost quickly in both methods (91% and 82% of those episodes lose at least half of it within 8 steps); the chunked networks have such episodes 2.7 times as often (27.6% of episodes against 10.2%). The last row needs a reference: the do-nothing policy ends with coverage below 0.001 in 0.62 of the episodes (31 of the 50 starting positions have essentially no overlap and its block never moves), and the random policy in 1.0 (counted directly from the saved evaluation reports of those two policies). The baseline networks end empty about as often as doing nothing; the chunked networks 17 points more often. This describes how coverage is lost, not why: an abrupt drop in a coverage trace can have many causes. The executed-targets study below tests one explanation.
 
 ## Demonstration-count ablation (pre-registered)
 
@@ -131,6 +132,43 @@ All four verdicts are "more data helps". The chunked final-coverage interval's l
 
 **This ablation cannot separate the effect of more data from the effect of more training.** The number of epochs is fixed at 30, so a 20-episode network takes about 330 gradient steps against about 2,400 for a 165-episode one. Several 20-episode networks were still improving at epoch 30: for example, in training seed 3 the baseline's validation error fell from 21.89 to 19.85 to 17.49 px over the last three epochs and the chunked network's from 41.68 to 33.02 to 30.58 px, and the 20-episode chunked networks ended with offline first-action errors of 24.68 to 52.50 px, against 15.30 px for copying the agent's position. A step-matched version would be a separate study.
 
+## Executed-targets study (pre-registered)
+
+Every chunked result above executed 8 of the 16 predicted targets before predicting again. The trace analysis showed that the chunked networks give back more coverage than the baseline; one untested explanation was open-loop execution, carrying out several targets without looking. This study evaluated the same ten chunked checkpoints again executing 4, 2 and 1 of their 16 targets per prediction (a test-time change only; nothing was retrained). The analysis was fixed before the new evaluations existed: for each of 1, 2 and 4 against 8, the mean over the ten networks of the paired per-network difference in mean coverage given back and in mean final coverage, with a 95% bootstrap interval that resamples the networks. Verdict per number of executed targets, checked in this order: "fewer executed targets hurt" if the giveback interval lies entirely above zero or the final-coverage interval entirely below zero; "fewer executed targets help" if the giveback interval lies entirely below zero and the final-coverage interval entirely above zero; otherwise "mixed or no clear effect". That is three verdicts, not corrected for multiple comparisons.
+
+| Executed targets | Mean max coverage | Mean final coverage | Mean coverage given back | Above do-nothing | Max minus baseline [95% CI] | Final minus baseline [95% CI] |
+|---|---|---|---|---|---|---|
+| 1 | 0.0823 | 0.0584 | 0.0238 | 5 of 10 | -0.0157 [-0.0331, +0.0014] | -0.0082 [-0.0266, +0.0116] |
+| 2 | 0.0932 | 0.0608 | 0.0324 | 3 of 10 | -0.0047 [-0.0268, +0.0188] | -0.0058 [-0.0282, +0.0200] |
+| 4 | 0.1266 | 0.0686 | 0.0580 | 5 of 10 | +0.0286 [+0.0001, +0.0613] | +0.0020 [-0.0267, +0.0325] |
+| 8 (the seed study) | 0.1474 | 0.0448 | 0.1026 | 2 of 10 | +0.0495 [+0.0149, +0.0891] | -0.0218 [-0.0411, -0.0017] |
+| Baseline (10 networks) | 0.0979 | 0.0666 | 0.0314 | 6 of 10 | | |
+
+Paired differences, n executed targets minus 8:
+
+| Executed targets | Coverage given back | Final coverage | Max coverage | Verdict |
+|---|---|---|---|---|
+| 1 | -0.0788 [-0.1118, -0.0519] | +0.0136 [+0.0034, +0.0239] | -0.0651 [-0.1007, -0.0371] | fewer executed targets help |
+| 2 | -0.0701 [-0.1013, -0.0459] | +0.0160 [+0.0047, +0.0280] | -0.0542 [-0.0812, -0.0319] | fewer executed targets help |
+| 4 | -0.0446 [-0.0693, -0.0230] | +0.0238 [+0.0067, +0.0419] | -0.0208 [-0.0328, -0.0104] | fewer executed targets help |
+
+All three verdicts are "help". The reading guide fixed in advance said that "help" for 1 executed target is consistent with open-loop execution accounting for part of the extra giveback, and is not proof, because executing one target is also a different test-time policy. What the numbers show:
+
+- Coverage given back falls steadily as fewer targets are executed, and at 2 and 1 executed targets it is at the baseline's level (0.0324 and 0.0238 against 0.0314; I did not test that comparison).
+- The fall comes with a fall in peak coverage: the mean max coverage drops from 0.1474 to 0.0823 at 1 executed target, below the baseline's 0.0979 (the difference from the baseline includes zero). So the chunked networks' extra giveback and their higher peak look tied to the same open-loop execution; this is a pattern in the means, not a tested mechanism.
+- The chunked networks' deficit in final coverage disappears: at 1, 2 and 4 executed targets the mean final coverage (0.0584 to 0.0686) is within the baseline's range and around the do-nothing level (0.0585), and none of the three differences from the baseline's final coverage is clearly nonzero. No setting reliably ends above the do-nothing level (5, 3 and 5 of 10 networks do, against 2 of 10 at 8 executed targets and 6 of 10 for the baseline).
+- Executing 4 targets keeps a peak above the baseline's (+0.0286, lower end +0.0001) while ending at the baseline's level. I noticed this after seeing the results, and choosing the best of three settings on the same 50 starting positions would be selection, so it is a lead that needs fresh networks (see the planned replication).
+
+## Planned replication (not yet run; fixed on 2026-10-15, before any of its networks exist)
+
+Ten new training seeds (10 to 19) of both network types, trained on all 165 training episodes with the same recipe as the seed study. The baseline networks and the chunked networks executing 8 targets get the usual 50-episode evaluation with the two-run reproducibility check; the chunked networks are also evaluated executing 4 and 1 targets. The new networks are evaluated on the same 50 starting positions as everything above, so this replicates across networks, not across starting positions. Hypotheses fixed in advance:
+
+1. Replication of the seed study: the same rule and bootstrap on the new networks (chunked executing 8 targets against the baseline), giving "supported", "contradicted" or "inconclusive".
+2. Confirmation of the executed-targets study: the same paired rule on the new networks, for 4 executed targets against 8 and for 1 against 8, giving "help", "hurt" or "mixed or no clear effect".
+3. Descriptive only: the chunked networks executing 4 and 1 targets against the baseline, at network level, with no verdict rule.
+
+Results will be reported whatever they are, in a separate table. The seed study and the executed-targets study above stay as they are, and the new networks are not pooled with the old ones.
+
 ## What I have found so far about the baseline (exploratory)
 
 These diagnostics use baseline training seed 0 only, were run after seeing its results, and are leads, not findings.
@@ -144,12 +182,13 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 
 ## Limitations
 
-- One training run per seed. The seed study uses ten training seeds per method, but every network was evaluated on the same 50 starting positions, so its intervals describe these starting positions, this recipe (30 epochs for both methods, chunk length 16 with 8 executed) and these training seeds. The three-seed comparison and the exploratory intervals are not corrected for multiple comparisons.
-- The seed study's "contradicted" verdict rests on an interval whose upper end is 0.0017 below zero, and the same difference (-0.0219) on seeds 3 to 9 alone has an interval that includes zero. Ten networks per method are too few to settle a difference of this size. Adding networks to this study after seeing its result would not be valid; a replication would need new training seeds and an analysis fixed in advance.
+- One training run per seed. The seed study uses ten training seeds per method, but every network was evaluated on the same 50 starting positions, so its intervals describe these starting positions, this recipe (30 epochs for both methods, chunk length 16) and these training seeds. The three-seed comparison and the exploratory intervals are not corrected for multiple comparisons.
+- The seed study's "contradicted" verdict rests on an interval whose upper end is 0.0017 below zero, and the same difference (-0.0219) on seeds 3 to 9 alone has an interval that includes zero. Ten networks per method are too few to settle a difference of this size. Adding networks to this study after seeing its result would not be valid; the planned replication uses new training seeds and an analysis fixed in advance.
 - The ablation's verdicts are four uncorrected tests with five networks per small cell, and the 165-episode cell includes training seeds 5 to 9, which have no counterpart in the smaller cells. Its fixed number of epochs confounds the size comparison (see above).
+- The executed-targets study is a test-time change of checkpoints trained to be executed 8 targets at a time, with three uncorrected verdicts, evaluated on the same 50 starting positions as everything else. Executing one target is also a different policy in other ways. Its best-looking setting (4) was picked after seeing the results.
 - Every policy scores 0 of 50 on success; the coverage metrics carry all the information.
 - The demonstrations do not store the block's pose, so replaying them in the simulator to check the data is impossible. The dataset's starting states are also not stored, so overlap between them and the evaluation seeds cannot be checked.
-- The chunk length (16) and executed length (8) come from memory of another setup and were not tuned or verified. The training recipe is the same for both networks, so the chunked networks, which learn a harder objective, may be undertrained at 30 epochs; I have not tested this.
+- The chunk length (16) and the default executed length (8) come from memory of another setup and were not tuned or verified (the executed length was varied at test time after the seed study; the chunk length was not varied). The training recipe is the same for both networks, so the chunked networks, which learn a harder objective, may be undertrained at 30 epochs; I have not tested this.
 - Validation spikes occur in training runs of both network types (the largest in chunked seed 0 at epoch 14) and are undiagnosed.
 - Seeds 0 to 2 were evaluated before the seed study was designed, so the design was informed by them; seeds 3 to 9 were trained after the analysis was fixed.
 - Start coverage is read from a private method of gym-pusht 0.1.6. "Contact" counts any touching shapes, walls included.
@@ -158,11 +197,11 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 
 ## Not done yet
 
-- An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch and which the seed study found to peak higher than the one-step baseline and to end below a policy that never moves.
-- An explanation of why the chunked networks finish lower: replay-based behavior diagnostics for the chunked policy, a systematic categorization of at least 20 failed episodes, and one targeted fix with before and after numbers. The trace analysis shows how much coverage is lost and how fast, not why.
-- A replication of the seed study on new training seeds (analysis fixed in advance), if the claim that chunked networks finish lower than the baseline is to be settled.
-- Ablations of another factor, such as the chunk length, the number of targets executed, or the training length (including a step-matched version of the demonstration-count ablation). The demonstration-count ablation itself is done.
-- A video or GIF of a success and a failure (there are no successes yet), and plots of the results.
+- An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch. It reaches a higher peak than the one-step baseline and, executing 8 targets, ends below a policy that never moves; executing fewer targets removes the deficit and most of the extra peak.
+- The planned replication on new training seeds (above), which would also confirm or contradict the executed-targets result on fresh networks.
+- A systematic categorization of at least 20 failed episodes, with replay-based behavior diagnostics for the chunked policy. The trace analysis and the executed-targets study show how much coverage is lost and that fewer executed targets reduce it, not what the agent does when it loses it.
+- Ablations of the chunk length and of the training length (including a step-matched version of the demonstration-count ablation). The demonstration count and the number of executed targets have been varied.
+- A video or GIF of a failure (there are no successes yet) and plots of the results.
 - Verification that the lock file reproduces the environment on a fresh clone.
 
 ## Reproduce
@@ -216,11 +255,15 @@ python trace_analysis.py
 # the demonstration-count ablation: 30 networks trained and evaluated twice (about one hour)
 python ablation_run.py
 python ablation_study.py
+
+# the executed-targets study: the ten chunked checkpoints evaluated with 1, 2 and 4 targets executed (about 40 minutes)
+python nexec_run.py
+python nexec_study.py
 ```
 
 ## Layout
 
 - `pusht_data.py`: dataset download, loader and statistics. `train_bc.py`, `train_chunk.py`: training. `bc_policy.py`, `chunk_policy.py`: wrap a trained network as a policy.
-- `evaluate.py`: the evaluation harness and the reference policies. `evaluate_bc.py`, `evaluate_chunk.py`: evaluate a checkpoint. `compare_policies.py`, `chunk_vs_baseline.py`, `compare_eval_runs.py`: paired comparisons and the reproducibility check. `seed_study_run.py`, `seed_study.py`: the seed study. `ablation_run.py`, `ablation_study.py`: the demonstration-count ablation. `trace_analysis.py`: how coverage is lost.
+- `evaluate.py`: the evaluation harness and the reference policies. `evaluate_bc.py`, `evaluate_chunk.py`: evaluate a checkpoint. `compare_policies.py`, `chunk_vs_baseline.py`, `compare_eval_runs.py`: paired comparisons and the reproducibility check. `seed_study_run.py`, `seed_study.py`: the seed study. `ablation_run.py`, `ablation_study.py`: the demonstration-count ablation. `nexec_run.py`, `nexec_study.py`: the executed-targets study. `trace_analysis.py`: how coverage is lost.
 - `inspect_episode.py`, `behavior_survey.py`, `timeline_survey.py`, `block_awareness.py`, `offline_progress.py`, `first_step_check.py`, `image_gap.py`, `determinism_check.py`: diagnostics.
-- `tests/`: a test file for every module above. `reports/`: every number in this README, as saved by the tools.
+- `tests/`: a test file for every module above. `reports/`: every number in this README, as saved by the tools (the do-nothing and random policies' share of episodes ending with coverage below 0.001 was counted directly from `eval_hold.json` and `eval_random.json`).
