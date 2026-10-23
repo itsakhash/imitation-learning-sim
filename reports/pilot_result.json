@@ -1,0 +1,39 @@
+{
+  "pilot_seed": 99,
+  "epochs": 370,
+  "grid": [
+    0.001,
+    0.0003,
+    0.0001
+  ],
+  "rule": "lowest first-action validation error (px) at the last epoch, EMA weights; ties to the first rate in the grid",
+  "arms": {
+    "D": {
+      "val_mae_px": {
+        "0.001": 20.542050641628702,
+        "0.0003": 14.454634483236005,
+        "0.0001": 15.313124264530055
+      },
+      "chosen_lr": 0.0003,
+      "at_edge_of_grid": false
+    },
+    "C": {
+      "val_mae_px": {
+        "0.001": 14.173440307174726,
+        "0.0003": 14.235698944226993,
+        "0.0001": 14.668198215639787
+      },
+      "chosen_lr": 0.001,
+      "at_edge_of_grid": true
+    },
+    "B": {
+      "val_mae_px": {
+        "0.001": 12.510438658660139,
+        "0.0003": 13.150728960839961,
+        "0.0001": 12.859188625229686
+      },
+      "chosen_lr": 0.001,
+      "at_edge_of_grid": true
+    }
+  }
+}
