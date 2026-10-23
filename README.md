@@ -12,7 +12,7 @@ The demonstrations are not mine. They are the public `lerobot/pusht` dataset (20
 
 - Machine: Windows desktop, WSL2 Ubuntu 24.04, RTX 5070 (12 GB).
 - Versions: Python 3.12.3, PyTorch 2.14.1+cu132, torchvision 0.29.1+cu132, numpy 2.5.2, gymnasium 1.4.0, gym-pusht 0.1.6, pymunk 6.11.1 (gym-pusht 0.1.6 breaks on pymunk 7). Full pins are in `requirements-lock.txt`.
-- Not yet verified: installing from the lock file on a fresh clone. The environment has been rebuilt once from `requirements.txt`, which reproduced every direct pin but let some background packages drift to newer versions.
+- Verified on 2026-10-22: a fresh clone at commit `d7c3149` and a new venv installed from `requirements-lock.txt` (the command under "Reproduce") gave exactly the pinned packages (the lock file and `pip freeze` are identical), `check_env.py` passed on the RTX 5070, the test suite gave 895 passed and 15 skipped (the 15 need trained checkpoints, which are not in the repository), the regenerated random and do-nothing reports and dataset statistics were byte-identical to the committed ones, and re-evaluating two checkpoints (training seed 11 of both methods) reproduced their saved evaluations with zero differing episodes. Most wheels came from the machine's pip cache, so this does not test that every pinned file is still downloadable. Retraining was not tested.
 
 ## Policies
 
@@ -264,7 +264,46 @@ Pooled counts of failed episodes:
 | Seeds 10-19 | Baseline | 181 | 223 | 23 | 72 | 457 | 499 |
 | Seeds 10-19 | Chunked | 18 | 320 | 81 | 80 | 17 | 499 |
 
-The two blocks agree. When the baseline fails, it mostly stops: about 92% of its failed episodes end with the agent barely moving, and about 36% never touch the block at all, so they look like the do-nothing policy. When the chunked network fails, it keeps moving (3% frozen) and rarely leaves the block untouched (4%); 61% to 64% of its failures move the block without improving coverage, and 16% to 20% gain coverage and then lose most of it, 3 to 4 times the baseline's share. "Improved and kept" does not differ between the methods (both intervals include zero). In both blocks the differences in the first, second, third and fifth rows exclude zero; the weakest is "moved without improving" (lower ends +0.028 and +0.080). This is consistent with the trace analysis (the chunked networks give back more) and with the baseline ending near the do-nothing level. The shares are fractions of each network's failed episodes, not rates per episode, and the categories describe the replayed trajectory, not why the policy acted as it did.
+The two blocks agree. When the baseline fails, it mostly stops: about 92% of its failed episodes end with the agent barely moving, and about 36% never touch the block at all, so they look like the do-nothing policy. When the chunked network fails, it keeps moving (3% frozen) and rarely leaves the block untouched (4%); 61% to 64% of its failures move the block without improving coverage, and 16% to 20% gain coverage and then lose most of it, 3 to 4 times the baseline's share. "Improved and kept" does not differ between the methods (both intervals include zero). In both blocks the differences in the first, second, third and fifth rows exclude zero; the weakest is "moved without improving" (lower ends +0.028 and +0.080). This is consistent with the trace analysis (the chunked networks give back more) and with the baseline ending near the do-nothing level. The shares are fractions of each network's failed episodes and the categories describe the replayed trajectory, not why the policy acted as it did. Because 1,998 of the 2,000 default-setting episodes failed, the shares are almost the same as shares of all episodes.
+
+## Failure categories when fewer targets are executed (pre-registered)
+
+The design was fixed in the docstring of `nexec_categories.py`, which was committed (`15958b2`) before the tool was run. The 20 chunked checkpoints (training seeds 0 to 19) were evaluated executing 4 and 1 of their 16 predicted targets (the executed-targets evaluations); every failed episode of those evaluations (2,000 episodes, since none was solved) was replayed and checked against its saved evaluation report, and all 2,000 replays matched. The categories, thresholds and the frozen flag are exactly those above (the code is imported from `failure_categories.py`), and the 8-target and baseline numbers are the ones above, read from the saved report. Per block of ten training seeds: each network's share at n targets minus its share at 8 (paired by training seed; the mean over the networks with a 95% bootstrap interval over the networks), the chunked networks' shares at n minus the baseline's, and the total variation distance between the chunked and the baseline category shares (half the sum over the four categories of the absolute difference; a point estimate). Descriptive only: no verdict rule, and the 40 intervals are not corrected for multiple tests.
+
+Shares of failed episodes (the baseline and the 8-target columns repeat the tables above):
+
+| Category | Seeds 0-9: baseline | 8 targets | 4 targets | 1 target | Seeds 10-19: baseline | 8 targets | 4 targets | 1 target |
+|---|---|---|---|---|---|---|---|---|
+| never moved | 0.358 | 0.042 | 0.148 | 0.398 | 0.363 | 0.036 | 0.182 | 0.394 |
+| moved without improving | 0.466 | 0.608 | 0.570 | 0.470 | 0.447 | 0.641 | 0.566 | 0.478 |
+| improved then lost | 0.060 | 0.202 | 0.122 | 0.036 | 0.046 | 0.162 | 0.088 | 0.022 |
+| improved and kept | 0.116 | 0.148 | 0.160 | 0.096 | 0.144 | 0.160 | 0.164 | 0.106 |
+| frozen at the end (flag) | 0.922 | 0.032 | 0.162 | 0.900 | 0.916 | 0.034 | 0.142 | 0.950 |
+| distance to the baseline profile | | 0.316 | 0.210 | 0.044 | | 0.327 | 0.181 | 0.062 |
+
+Paired change, n executed targets minus 8 (mean over networks [95% CI]):
+
+| Category | Seeds 0-9: 4 minus 8 | Seeds 0-9: 1 minus 8 | Seeds 10-19: 4 minus 8 | Seeds 10-19: 1 minus 8 |
+|---|---|---|---|---|
+| never moved | +0.106 [+0.072, +0.140] | +0.356 [+0.286, +0.426] | +0.146 [+0.112, +0.182] | +0.358 [+0.310, +0.406] |
+| moved without improving | -0.038 [-0.074, +0.000] | -0.138 [-0.210, -0.064] | -0.075 [-0.113, -0.035] | -0.163 [-0.217, -0.097] |
+| improved then lost | -0.080 [-0.122, -0.040] | -0.166 [-0.234, -0.106] | -0.074 [-0.108, -0.036] | -0.140 [-0.179, -0.102] |
+| improved and kept | +0.012 [-0.024, +0.048] | -0.052 [-0.102, +0.004] | +0.004 [-0.042, +0.042] | -0.054 [-0.090, -0.018] |
+| frozen at the end (flag) | +0.130 [+0.076, +0.196] | +0.868 [+0.798, +0.926] | +0.108 [+0.074, +0.140] | +0.916 [+0.882, +0.952] |
+
+Chunked networks executing n targets minus the baseline [95% CI] (the 8-target differences are in the tables above):
+
+| Category | Seeds 0-9: 4 targets | Seeds 0-9: 1 target | Seeds 10-19: 4 targets | Seeds 10-19: 1 target |
+|---|---|---|---|---|
+| never moved | -0.210 [-0.280, -0.136] | +0.040 [-0.048, +0.128] | -0.181 [-0.253, -0.100] | +0.031 [-0.049, +0.116] |
+| moved without improving | +0.104 [-0.006, +0.212] | +0.004 [-0.092, +0.096] | +0.119 [+0.001, +0.221] | +0.031 [-0.071, +0.120] |
+| improved then lost | +0.062 [+0.022, +0.102] | -0.024 [-0.046, -0.002] | +0.042 [+0.006, +0.084] | -0.024 [-0.048, +0.000] |
+| improved and kept | +0.044 [-0.014, +0.102] | -0.020 [-0.072, +0.032] | +0.020 [-0.038, +0.080] | -0.038 [-0.094, +0.020] |
+| frozen at the end (flag) | -0.760 [-0.826, -0.688] | -0.022 [-0.110, +0.058] | -0.774 [-0.836, -0.710] | +0.034 [-0.012, +0.078] |
+
+In both blocks the failure profile of the chunked networks moves steadily toward the baseline's as fewer targets are executed: from 8 to 4 to 1 targets the share of failures that end frozen rises (0.032, 0.162, 0.900 and 0.034, 0.142, 0.950), so does the share that never touch the block (0.042, 0.148, 0.398 and 0.036, 0.182, 0.394), and the share that gain coverage and lose it falls (0.202, 0.122, 0.036 and 0.162, 0.088, 0.022). With 1 executed target the profile is close to the baseline's (distance 0.044 and 0.062, against 0.316 and 0.327 with 8 targets): the intervals of the differences from the baseline include zero, except for "improved then lost", which is slightly lower than the baseline's (-0.024, with upper ends at -0.002 and +0.000). In the paired changes, never moved, improved then lost and frozen exclude zero in both blocks at both settings; moved without improving excludes zero at 1 target in both blocks and at 4 targets in the second block only (in the first block its interval touches zero at +0.000); improved and kept excludes zero only at 1 target in the second block.
+
+So executing fewer targets removes the chunked networks' characteristic way of failing (gaining coverage and then losing it) and brings back the baseline's (stalling). Together with the executed-targets study, in which final coverage ended at the baseline's level, this is a trade of one way of failing for the other, not a policy that succeeds: none of the 2,000 episodes at 4 or 1 targets was solved. One explanation that fits this and was not tested: when the one-step policy would stand still, committing to several predicted targets keeps the agent moving, which gives more chances to push the block (fewer stalls, a higher peak) and also carries the agent on after it has made progress (more coverage lost). A test would look at what the networks predict at the moments they stop. Executing one target is also a different policy in other ways, so the pattern is consistent with the explanation and does not prove it.
 
 ## Example episodes (GIFs)
 
@@ -299,10 +338,10 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 - The seed study's "contradicted" verdict rests on an interval whose upper end is 0.0017 below zero; the same difference (-0.0219) on seeds 3 to 9 alone and (-0.0224) in the replication have intervals that include zero. Ten networks per method are too few to settle a difference of this size. The replication used new training seeds and an analysis fixed in advance, and did not settle it. Adding networks to either study after seeing its result would not be valid.
 - The ablation's verdicts are four uncorrected tests with five networks per small cell, and the 165-episode cell includes training seeds 5 to 9, which have no counterpart in the smaller cells. Its fixed number of epochs confounds the size comparison (see above).
 - The executed-targets study is a test-time change of checkpoints trained to be executed 8 targets at a time, with uncorrected verdicts (three in the original block, two in the replication), evaluated on the same 50 starting positions as everything else. Executing one target is also a different policy in other ways. The best-looking setting of the original block (4) did not confirm in the replication.
-- The failure categories describe the replayed trajectory (the block's pose and the agent's position), not why the policy acted as it did. Their thresholds (1 px, 0.02 rad, 0.02, 0.1, 50 steps, 2 px) were fixed in advance and not tuned; the shares are fractions of each network's failed episodes (about 50 per network), not rates per episode; the ten comparisons per block are not corrected for multiple tests. The failed episodes of the executed-targets variants were not categorized.
+- The failure categories describe the replayed trajectory (the block's pose and the agent's position), not why the policy acted as it did. Their thresholds (1 px, 0.02 rad, 0.02, 0.1, 50 steps, 2 px) were fixed in advance and not tuned; the ten comparisons per block in the first categorization and the 40 intervals in the second are not corrected for multiple tests, and the distance to the baseline profile is a point estimate without an interval. The explanation offered for the change in the failure profile (committing to several targets keeps the agent moving) was not tested.
 - The GIFs show one episode each, picked by fixed rules; they illustrate and are not evidence about rates.
 - All but two evaluations score 0 of 50 on success (two single episodes were solved, both in the replication); the coverage metrics carry nearly all the information.
-- The demonstrations do not store the block's pose, so replaying them in the simulator to check the data is impossible. The dataset's starting states are also not stored, so overlap between them and the evaluation seeds cannot be checked.
+- The demonstrations do not store the block's pose, so replaying them in the simulator to check the data is impossible. The dataset's starting states are also not stored, so overlap between them and the evaluation seeds cannot be checked. In the dataset's own recorded fields no demonstration is flagged successful (0 of 206 episodes) and the highest recorded per-episode reward is 0.9489. The environment's reward is clip(coverage / 0.95, 0, 1) and its success is coverage above 0.95, but I did not verify how the dataset's reward was computed, so I cannot say whether the human demonstrators would have met this evaluation's success criterion.
 - The chunk length (16) and the default executed length (8) come from memory of another setup and were not tuned or verified (the executed length was varied at test time after the seed study; the chunk length was not varied). The training recipe is the same for both networks, so the chunked networks, which learn a harder objective, may be undertrained at 30 epochs; I have not tested this.
 - Validation spikes occur in training runs of both network types (the largest in chunked seed 0 at epoch 14) and are undiagnosed.
 - Seeds 0 to 2 were evaluated before the seed study was designed, so the design was informed by them; seeds 3 to 9 were trained after the analysis was fixed, and seeds 10 to 19 after the replication plan was committed.
@@ -314,8 +353,7 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 
 - An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch. Executing 8 targets it reaches a higher peak than the one-step baseline; executing one target it looks like the baseline. I found no setting in which it clearly beats the baseline on final coverage.
 - Ablations of the chunk length and of the training length (including a step-matched version of the demonstration-count ablation). The demonstration count and the number of executed targets have been varied.
-- A categorization of the failed episodes of the executed-targets variants, which would show whether executing fewer targets moves the chunked failure profile toward the baseline's.
-- Verification that the lock file reproduces the environment on a fresh clone.
+- A test of why the one-step networks stall: what they predict at the moments they stop.
 
 ## Reproduce
 
@@ -385,6 +423,9 @@ python nexec_study.py --first-seed 10 --n-execs 1 4 8
 # the pre-registered categorization of failed episodes (replays about 2,000 episodes: about 25 minutes)
 python failure_categories.py
 
+# the pre-registered categorization of the failed episodes of the 4- and 1-target evaluations (about 20 minutes)
+python nexec_categories.py
+
 # plots from the saved reports (no simulation)
 python plot_results.py
 
@@ -397,6 +438,6 @@ python make_gif.py --policy bc_cnn --checkpoint checkpoints/bc_cnn_s11.pt --repo
 ## Layout
 
 - `pusht_data.py`: dataset download, loader and statistics. `train_bc.py`, `train_chunk.py`: training. `bc_policy.py`, `chunk_policy.py`: wrap a trained network as a policy.
-- `evaluate.py`: the evaluation harness and the reference policies. `evaluate_bc.py`, `evaluate_chunk.py`: evaluate a checkpoint. `compare_policies.py`, `chunk_vs_baseline.py`, `compare_eval_runs.py`: paired comparisons and the reproducibility check. `seed_study_run.py`, `seed_study.py`: the seed study and the replication. `ablation_run.py`, `ablation_study.py`: the demonstration-count ablation. `nexec_run.py`, `nexec_study.py`: the executed-targets study (`--first-seed` selects the block of training seeds). `trace_analysis.py`: how coverage is lost. `failure_categories.py`: the categorization of failed episodes. `plot_results.py`: the figures in `reports/plots/`. `make_gif.py`: the GIFs in `reports/gifs/`.
+- `evaluate.py`: the evaluation harness and the reference policies. `evaluate_bc.py`, `evaluate_chunk.py`: evaluate a checkpoint. `compare_policies.py`, `chunk_vs_baseline.py`, `compare_eval_runs.py`: paired comparisons and the reproducibility check. `seed_study_run.py`, `seed_study.py`: the seed study and the replication. `ablation_run.py`, `ablation_study.py`: the demonstration-count ablation. `nexec_run.py`, `nexec_study.py`: the executed-targets study (`--first-seed` selects the block of training seeds). `trace_analysis.py`: how coverage is lost. `failure_categories.py`: the categorization of failed episodes. `nexec_categories.py`: the same categories when fewer targets are executed. `plot_results.py`: the figures in `reports/plots/`. `make_gif.py`: the GIFs in `reports/gifs/`.
 - `inspect_episode.py`, `behavior_survey.py`, `timeline_survey.py`, `block_awareness.py`, `offline_progress.py`, `first_step_check.py`, `image_gap.py`, `determinism_check.py`: diagnostics.
 - `tests/`: a test file for every module above. `reports/`: every number in this README, as saved by the tools (the do-nothing and random policies' share of episodes ending with coverage below 0.001, and the two solved episodes, were read directly from the saved evaluation reports).
