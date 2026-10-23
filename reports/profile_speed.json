@@ -1,0 +1,88 @@
+{
+  "machine": {
+    "cpu_count_logical": 16,
+    "python": "3.12.3",
+    "torch": "2.14.1+cu132",
+    "gymnasium": "1.4.0",
+    "gym-pusht": "0.1.6",
+    "numpy": "2.5.2",
+    "pymunk": "6.11.1"
+  },
+  "sim_step": {
+    "n": 600,
+    "median_ms": 1.554975498947897,
+    "mean_ms": 1.5717791683891846,
+    "p95_ms": 1.7171559993585106
+  },
+  "sim_reset": {
+    "n": 2,
+    "median_ms": 1.6070544988906477,
+    "mean_ms": 1.6070544988906477,
+    "p95_ms": 1.6072739999799524
+  },
+  "sim_scaling": [
+    {
+      "workers": 1,
+      "steps_per_s": 632.5794156607429,
+      "speedup": 1.0,
+      "efficiency": 1.0
+    },
+    {
+      "workers": 2,
+      "steps_per_s": 1212.0578814844441,
+      "speedup": 1.9160564689232313,
+      "efficiency": 0.9580282344616157
+    },
+    {
+      "workers": 4,
+      "steps_per_s": 2213.8417570526485,
+      "speedup": 3.499705653147507,
+      "efficiency": 0.8749264132868767
+    },
+    {
+      "workers": 8,
+      "steps_per_s": 3607.26598601599,
+      "speedup": 5.702471336738206,
+      "efficiency": 0.7128089170922758
+    }
+  ],
+  "gpu": {
+    "device": "NVIDIA GeForce RTX 5070",
+    "stand_in_parameters": 659202,
+    "train_b256_data_on_gpu": {
+      "n": 200,
+      "median_ms": 6.259162501009996,
+      "mean_ms": 6.297688829909021,
+      "p95_ms": 6.5601479982433375
+    },
+    "gpu_utilization_during_b256": {
+      "mean": 32.46153846153846,
+      "max": 92.0,
+      "samples": 13
+    },
+    "train_b256_copy_each_step": {
+      "n": 200,
+      "median_ms": 8.786948999841115,
+      "mean_ms": 8.836463760053448,
+      "p95_ms": 9.462403002544306
+    },
+    "train_b1024_data_on_gpu": {
+      "n": 200,
+      "median_ms": 23.51718850150064,
+      "mean_ms": 23.605847859980713,
+      "p95_ms": 24.40236599795753
+    },
+    "inference_b1_gpu": {
+      "n": 200,
+      "median_ms": 0.6851084999652812,
+      "mean_ms": 0.6937223649765656,
+      "p95_ms": 0.7943429991428275
+    },
+    "inference_b1_cpu_1thread": {
+      "n": 200,
+      "median_ms": 0.8318229993165005,
+      "mean_ms": 0.841610039879015,
+      "p95_ms": 0.9174500009976327
+    }
+  }
+}
