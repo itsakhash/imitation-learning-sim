@@ -43,6 +43,15 @@ For each of D, C and B, three learning rates (1e-3, 3e-4, 1e-4) are tried once o
 
 I will report whichever way H1 and H2 come out, including a negative or inconclusive result and any divergence between blocks. I will not claim any mechanism, claim success rates, call the tuned learning-rate selection optimal, or compare with the original 30-epoch networks as if the recipe were identical.
 
+## Implementation details fixed before any training (added 2026-10-23, after the text above was approved)
+
+These were not specified above. They are fixed in `diffusion_core.py` and `diffusion_model.py`, which are committed before any pilot or study network is trained. All come from my memory of published setups and none is tuned.
+
+- DDIM clips the predicted clean chunk to [-1, 1] at every step and recomputes the noise from it.
+- The 10 DDIM steps are the training-step indices 99, 88, 77, 66, 55, 44, 33, 22, 11, 0 (evenly spaced and rounded); the last step ends at signal fraction 1. Training steps are drawn uniformly from 0 to 99, and the schedule's per-step noise is capped at 0.999.
+- The training step and the noise are drawn on the CPU from a seeded generator, so a training run is repeatable up to GPU arithmetic.
+- The denoiser encodes the image and agent position once per prediction into a 256-dimensional vector; the step index goes through a 64-dimensional sinusoidal embedding and one linear layer with SiLU; both enter only through FiLM (a scale and a shift) in each of the 4 residual blocks of width 256. Nothing is zero-initialised. The parameter count is recorded in the README from the test run.
+
 ## Rules during the study
 
 - No network is added, dropped or retrained after its results are seen. A network that fails its reproducibility check is reported and stays in the study.
