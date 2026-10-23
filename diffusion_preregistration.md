@@ -52,6 +52,14 @@ These were not specified above. They are fixed in `diffusion_core.py` and `diffu
 - The training step and the noise are drawn on the CPU from a seeded generator, so a training run is repeatable up to GPU arithmetic.
 - The denoiser encodes the image and agent position once per prediction into a 256-dimensional vector; the step index goes through a 64-dimensional sinusoidal embedding and one linear layer with SiLU; both enter only through FiLM (a scale and a shift) in each of the 4 residual blocks of width 256. Nothing is zero-initialised. The parameter count is recorded in the README from the test run.
 
+### Training and evaluation details (added 2026-10-23, in `arm_train.py`, `diffusion_policy.py` and `evaluate_diffusion.py`, committed before any pilot or study network is trained)
+
+- The EMA has a constant decay of 0.999, is updated after every optimiser step, has no warm-up, and starts from the initial weights. The averaged weights are what is validated, saved and evaluated; the raw weights are not kept. Arm P has no EMA.
+- Validation is done every 10 epochs and at the last epoch (every epoch for P). For C and B it is the masked mean squared error and the first-action error in pixels. For D it is the denoising loss with step indices and noise from a generator seeded with 777 (the same every time), and the first-action error from one seeded DDIM sample per frame. These curves are descriptive. The only validation number used for a decision is the pilot's, at the last epoch.
+- Shuffling uses a generator seeded with the training seed, as in `resident_train.py`. For D the step indices and noise of the training loss come from a second CPU generator seeded with the training seed plus 1,000,003.
+- At evaluation the noise of each episode comes from a CPU generator seeded with that episode's evaluation seed, and each prediction takes the next draw. The sampling schedule used is the one stored in the checkpoint.
+- Networks are named `diff_cnn` (D), `chunk_long` (C), `bc_long` (B) and `chunk_res30` (P), with `_s{k}` appended for training seed k (none for seed 0). The pilot uses the same names with a `pilot` prefix, and a checkpoint is never overwritten without an explicit flag.
+
 ## Rules during the study
 
 - No network is added, dropped or retrained after its results are seen. A network that fails its reproducibility check is reported and stays in the study.
