@@ -1,6 +1,6 @@
 # Imitation learning on PushT in simulation (PyTorch)
 
-**Status: work in progress (last updated 2026-10-22).** Everything below is measured and can be reproduced from this repo; what is not done is listed under "Not done yet". No policy here solves the task reliably: every evaluation scores 0 successes in 50 episodes except two, in which one single episode was solved (by the baseline and the chunked network of training seed 11 in the replication).
+**Status: work in progress (last updated 2026-10-23).** Everything below is measured and can be reproduced from this repo; what is not done is listed under "Not done yet". No policy here solves the task reliably: every evaluation scores 0 successes in 50 episodes except two, in which one single episode was solved (by the baseline and the chunked network of training seed 11 in the replication).
 
 ## What this is
 
@@ -332,6 +332,14 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 - It aims toward the block at the first step (median cosine 0.70), 18 of 50 episodes end under half their starting distance from the block, and 19 never get even 20% closer.
 - For the six networks of training seeds 0 to 2, an exploratory comparison with doing nothing (uncorrected intervals) found that each reached higher coverage than at the start on 11 to 34 of the 50 starting positions and lower on none, but that none reliably ended an episode with more coverage than doing nothing; chunked seed 1 reliably ended with less.
 
+## Diffusion policy study (pre-registered, not yet run)
+
+The design, arms, hypotheses and verdict rules are in [`diffusion_preregistration.md`](diffusion_preregistration.md), which was committed before any diffusion code existed and before any pilot or study network was trained. In short: a diffusion policy written in plain PyTorch (the chunked network's convolutional trunk, an MLP denoiser with FiLM conditioning, DDPM training, 10-step DDIM sampling, 8 of 16 targets executed) is compared with an ordinarily trained chunked network that gets the same number of gradient steps (370 epochs, about 29,970 steps), the same averaging of weights and the same split, using the seed study's verdict rule on ten training seeds, with ten more planned as a replication. A one-step baseline control with the same budget and a 30-epoch check of the new training path are descriptive arms. **No diffusion network has been trained yet, so there is no diffusion result.** The architecture sizes, the noise schedule, T = 100, the 10 sampling steps and the averaging decay come from my memory of published setups and are untuned.
+
+**Why training moved to GPU-resident data (measured, one machine).** On the RTX 5070 a training step of the existing loop takes about 22.7 ms including the validation pass (1.84 s per epoch of 81 steps). Building a batch of 256 on the CPU takes about 10.9 ms, against 3.5 ms for the model's forward and backward pass; extra loader workers helped little (about 8.0 ms with 4 and 7.1 ms with 8 as medians). `resident_data.py` builds every example once, keeps them on the GPU, and checks that its batches equal `ChunkDataset`'s on the real data and that its shuffling order equals `DataLoader`'s over three epochs. `resident_train.py` is the same training loop on that data. In an anchor run (chunked network, training seed 0, 30 epochs) it took 9.9 s against 54.6 s for the original loop. Validation loss was identical to five digits at epoch 1 in the saved run, a rerun of the original loop and the resident loop (0.03440), and then the runs separated, as the original recipe does against itself: at epoch 30 the validation loss was 0.00766 (saved), 0.00956 (rerun) and 0.00792 (resident), and the largest relative difference in validation loss over the 30 epochs from the saved history was 0.90 for the rerun and 0.91 for the resident loop. The equivalence rule I fixed before the anchor run (resident within 3 times the rerun's own difference) gave "equivalent", but that rule was lenient at this noise level, so I read the result as: the resident path matches the original recipe up to the nondeterminism the original recipe already shows, not as an exact reproduction. The anchor is one rerun, on one machine, and I did not diagnose why runs separate.
+
+**Evaluation speed (measured, one machine).** One simulator step takes about 1.55 ms in one process; running 4 processes at once gave 3.5 times the throughput and 8 processes 5.7 times (efficiency 87% and 71%). The timings are in `reports/profile_speed.json` and `reports/profile_train.json`, and they describe whatever else the machine was doing.
+
 ## Limitations
 
 - One training run per seed. The seed study and the replication use ten training seeds per method each, but every network was evaluated on the same 50 starting positions, so the intervals describe these starting positions, this recipe (30 epochs for both methods, chunk length 16) and these training seeds. The three-seed comparison and the exploratory intervals are not corrected for multiple comparisons.
@@ -347,11 +355,11 @@ These diagnostics use baseline training seed 0 only, were run after seeing its r
 - Seeds 0 to 2 were evaluated before the seed study was designed, so the design was informed by them; seeds 3 to 9 were trained after the analysis was fixed, and seeds 10 to 19 after the replication plan was committed.
 - Start coverage is read from a private method of gym-pusht 0.1.6. "Contact" in the exploratory diagnostics counts any touching shapes, walls included.
 - The block-aware diagnostics have no human reference, because the demonstrations do not record the block.
-- Checkpoints are not in the repository. GPU training is not guaranteed to be bit-for-bit repeatable, so retraining may not reproduce a checkpoint exactly; `reports/` holds each run's saved history.
+- Checkpoints are not in the repository. GPU training is not guaranteed to be bit-for-bit repeatable, so retraining may not reproduce a checkpoint exactly; `reports/` holds each run's saved history. In the anchor run above, a rerun of the original loop with the same code and seed as the saved chunked network (training seed 0) matched its validation loss at epochs 1 and 2 but not later: the largest relative difference over 30 epochs was 0.90 and the final first-action error differed by 0.30 px. That is one rerun.
 
 ## Not done yet
 
-- An ACT or diffusion policy. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch. Executing 8 targets it reaches a higher peak than the one-step baseline; executing one target it looks like the baseline. I found no setting in which it clearly beats the baseline on final coverage.
+- A diffusion policy: pre-registered (see above) but not yet written or trained. An ACT policy is not planned yet. The only "stronger policy" so far is the action-chunking network above, which I wrote myself in plain PyTorch. Executing 8 targets it reaches a higher peak than the one-step baseline; executing one target it looks like the baseline. I found no setting in which it clearly beats the baseline on final coverage.
 - Ablations of the chunk length and of the training length (including a step-matched version of the demonstration-count ablation). The demonstration count and the number of executed targets have been varied.
 - A test of why the one-step networks stall: what they predict at the moments they stop.
 
@@ -426,6 +434,14 @@ python failure_categories.py
 # the pre-registered categorization of the failed episodes of the 4- and 1-target evaluations (about 20 minutes)
 python nexec_categories.py
 
+# where the time goes (about two minutes each; the first needs the simulator, both use the GPU)
+python profile_speed.py
+python profile_train.py
+
+# the GPU-resident training data: equality checks against ChunkDataset and DataLoader (about 30 seconds), then the anchor run (about 2 minutes)
+python resident_data.py --check
+python resident_train.py --anchor
+
 # plots from the saved reports (no simulation)
 python plot_results.py
 
@@ -439,5 +455,6 @@ python make_gif.py --policy bc_cnn --checkpoint checkpoints/bc_cnn_s11.pt --repo
 
 - `pusht_data.py`: dataset download, loader and statistics. `train_bc.py`, `train_chunk.py`: training. `bc_policy.py`, `chunk_policy.py`: wrap a trained network as a policy.
 - `evaluate.py`: the evaluation harness and the reference policies. `evaluate_bc.py`, `evaluate_chunk.py`: evaluate a checkpoint. `compare_policies.py`, `chunk_vs_baseline.py`, `compare_eval_runs.py`: paired comparisons and the reproducibility check. `seed_study_run.py`, `seed_study.py`: the seed study and the replication. `ablation_run.py`, `ablation_study.py`: the demonstration-count ablation. `nexec_run.py`, `nexec_study.py`: the executed-targets study (`--first-seed` selects the block of training seeds). `trace_analysis.py`: how coverage is lost. `failure_categories.py`: the categorization of failed episodes. `nexec_categories.py`: the same categories when fewer targets are executed. `plot_results.py`: the figures in `reports/plots/`. `make_gif.py`: the GIFs in `reports/gifs/`.
+- `profile_speed.py`, `profile_train.py`: timing of the simulator, a stand-in network and the real training loop. `resident_data.py`, `resident_train.py`: GPU-resident training data and the training loop on it, with the anchor run. `diffusion_preregistration.md`: the pre-registration of the diffusion study.
 - `inspect_episode.py`, `behavior_survey.py`, `timeline_survey.py`, `block_awareness.py`, `offline_progress.py`, `first_step_check.py`, `image_gap.py`, `determinism_check.py`: diagnostics.
 - `tests/`: a test file for every module above. `reports/`: every number in this README, as saved by the tools (the do-nothing and random policies' share of episodes ending with coverage below 0.001, and the two solved episodes, were read directly from the saved evaluation reports).
